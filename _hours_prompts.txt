@@ -1,0 +1,112 @@
+*** Problem Types ***
+
+1. TimeToBool: Given the name of a restuarant and an exact date and time, provide whether the restuarant is open
+    Ex:
+    {
+        "prompt": " ... Question: Will The Mac and Cheese Factory be operational on Jul 25, 2027 around 05:00AM?",
+        "output": "The Mac and Cheese Factory will not be operational on July 25, 2027, at 05:00 AM. It opens at 09:15 AM on Sundays."
+    }
+
+2. RelativeToBool: Given the name of a restuarant, a date, and a relative time, provide whether the restuarant is open
+    Ex:
+    {
+        "prompt": " ... Question: Will Sizzle & Slide Burgers be open 4 days from now at 08:52PM?",
+        "output": "Sizzle & Slide Burgers will not be open on April 20, 2026, at 08:52PM as it closes at 08:00PM on Mondays."
+    },
+
+3. TimeToHours: Given the name of a restaurant and an exact date, provide the opening hours for the day
+    Ex: 
+    {
+        "prompt": " ... Question: Please tell me the opening times for Riverfront Brasserie on the date 19-September-2026.",
+        "output": "On September 19, 2026, which falls on a Saturday, Riverfront Brasserie is open from 03:15AM to 09:00AM."
+    },
+
+4. RelativeToHours: Given the name of a restuarant, a date, and a relative date, but directly provide the opening hours for the day
+    Ex: 
+    {
+        "prompt": " ... Question: Can you tell me the opening hours for The Waffle House 4 days from now?",
+        "output": "On December 28, 2025, which is a Sunday, The Waffle House will be closed for the entire day."
+    },
+
+5. TimeToList: Given an exact date and time, provide a list of all the restaurants that are open then
+    Ex.
+    {
+        "prompt": " ... Question: The time is currently 14-08-2029 02:00. Can you list the restaurants that are still open?",
+        "output": "Currently at 2:00 AM on a Tuesday, none of the listed restaurants are open. Restaurants like The Pasta Patch, Pita Planet, The Rustic Barrel, Pomegranate Palace, and The Chicken Coop open later in the day."
+    },
+
+Each problem was given to GPT-4o 2000 times.
+
+Total Correct Responses:    7365
+---------------------------------
+    TimeToBool:             1748
+    RelativeToBool:         1328
+    TimeToHours:            1755
+    RelativeToHours:        1344
+    TimeToList:             1190
+
+
+
+*** Prompt ***
+
+Example:
+
+You are a helpful assistant in time management, especially in regards to restaurant hours.
+When answering the question, consider the following at all times:
+	1. The name of the restaurant(s),
+	2. The time offered with appropriate modification if applicable,
+	3. The day of the week 'time' is. Use only the first three letters,
+	4. The opening hours of the restaurant(s) for the day,
+	5. Whether the restaurant(s) are open.
+Your response to the final question should contain at least 20 tokens, and take your time to consider all the elements before your response.
+
+Also, note the following before receiving the question:
+Today's date: December 13, 2030
+Restaurant hours:
+
+Chili Chili Bang Bang
+Fri: 04:00AM-09:45AM, 03:45PM-07:45PM
+Mon: 04:30AM-06:45PM
+Sat: 12:30PM-10:45PM
+Sun: 01:30PM-01:45PM
+Thu: 01:15PM-11:15PM
+Tue: 12:45AM-10:30AM, 05:00PM-10:45PM
+Wed: 02:00AM-03:00AM, 03:15PM-04:15PM
+
+Blue Sky Deli
+Fri: 07:15AM-11:00AM, 09:45PM-11:45PM
+Mon: 05:00AM-07:15AM
+Sat: Closed
+Sun: 03:30AM-10:15PM
+Thu: 07:45AM-10:00AM, 07:15PM-09:00PM
+Tue: 10:45AM-09:00PM
+Wed: 01:30AM-05:45AM, 03:00PM-09:00PM
+
+Crisp Cravings
+Fri: 12:00AM-12:30AM, 02:15PM-02:30PM
+Mon: 07:00AM-11:30AM
+Sat: 04:45AM-02:30PM, 03:00PM-11:15PM
+Sun: 12:45AM-03:30AM, 03:15PM-09:30PM
+Thu: 05:45AM-11:30AM, 04:45PM-05:45PM
+Tue: 06:45AM-07:30AM, 04:15PM-10:00PM
+Wed: 07:15AM-01:15PM, 02:45PM-11:30PM
+
+Sugar Rush Cafe
+Fri: 06:30AM-11:45AM
+Mon: 06:45AM-10:15AM, 05:45PM-11:15PM
+Sat: 12:45AM-06:00AM
+Sun: 03:00AM-01:45PM
+Thu: Closed
+Tue: Closed
+Wed: 02:15AM-08:15PM
+
+Caramel Creations Bakery
+Fri: 10:45AM-03:45PM
+Mon: 02:15AM-05:30AM, 08:15PM-08:45PM
+Sat: 01:45PM-07:00PM
+Sun: 03:30AM-09:45PM
+Thu: 07:00AM-09:15AM, 05:30PM-06:45PM
+Tue: 02:15AM-12:30PM
+Wed: 02:30AM-08:00PM
+
+Question: Can you tell me the opening hours for Sugar Rush Cafe 7 days from now?

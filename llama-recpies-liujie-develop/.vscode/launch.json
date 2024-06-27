@@ -1,0 +1,48 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "llama_finetuning_hf",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/paperspace/miniconda3/envs/py10/bin/deepspeed",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "env": {
+                "PYTHONPATH": "$PYTHONPATH:/home/paperspace/chengniu/llama-recpies",
+                "CUDA_VISIBLE_DEVICES": "2,3"
+            },
+            "args": ["--num_gpus=2",
+                     "--master_port=60000", 
+                     "./llama_finetuning_hf.py",
+                     "--model_name_or_path=meta-llama/Llama-2-7b-chat-hf",
+                     "--output_dir=/home/paperspace/chengniu/exp/7b_youtube_teaser",
+                     "--do_train",
+                     "--num_train_epochs=1",
+                     "--learning_rate=2e-5",
+                     "--dataset=youtube_teaser_dataset",
+                     "--bf16=True",
+                     "--tf32=True",
+                     "--use_fast_kernels=True",
+                     "--per_device_train_batch_size=16",
+                     "--per_device_eval_batch_size=8",
+                     "--gradient_accumulation_steps=1",
+                     "--model_max_length=4096",
+                     "--gradient_checkpointing=True",
+                     "--ddp_find_unused_parameters=False",
+                     "--logging_steps=1",
+                     "--run_name=llama_7b_youtube_teaser",
+                     "--lr_scheduler=cosine",
+                     "--warmup_ratio=0.02",
+                     "--save_steps=500",
+                     "--save_total_limit=2",
+                     "--overwrite_output_dir",
+                     "--evaluation_strategy=steps",
+                     "--eval_steps=80",
+                     "--deepspeed=./configs/ds_3_hf_offload.json"]
+        }
+    ]
+}

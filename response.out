@@ -1,0 +1,17 @@
+{
+    "time": "2024-08-21 06:00AM",
+    "day_of_week": "Wed",
+    "opening_hours": {
+        "The Velvet Fork": "06:30AM-09:00AM",
+        "Rock n' Roll Sushi": "12:00AM-08:15AM",
+        "Summer Breeze Cafe": "01:00AM-08:15AM",
+        "Lemon Grass Thai": "05:15AM-02:15PM, 08:15PM-10:15PM",
+        "Pepper's Place": "12:45PM-03:15PM"
+    },
+    "is_open": [
+        "The Velvet Fork",
+        "Rock n' Roll Sushi",
+        "Summer Breeze Cafe",
+        "Lemon Grass Thai"
+    ]
+}

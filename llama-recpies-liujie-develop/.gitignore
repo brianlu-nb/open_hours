@@ -1,0 +1,14 @@
+.DS_Store
+__pycache__
+.ipynb_checkpoints
+
+ft_datasets/*.jsonl
+exp
+wandb
+hf-training-trainer
+models--garage-bAInd--Platypus2-13B
+*.zip
+/data/
+cache
+.locks
+.idea
