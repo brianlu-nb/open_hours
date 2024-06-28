@@ -1,1 +1,2229 @@
-[]
+[
+    {
+        "id": 5,
+        "prompt": {
+            "problem_type": "TO_LIST",
+            "use_delta": false,
+            "today": "March 16, 2029",
+            "opening_hours": {
+                "The Noodle Box": {
+                    "Fri": "02:45AM-09:30AM, 10:45PM-11:45PM",
+                    "Mon": "",
+                    "Sat": "01:15AM-04:45AM, 05:15PM-06:00PM",
+                    "Sun": "02:45AM-11:00AM, 06:15PM-09:45PM",
+                    "Thu": "02:15AM-03:15AM, 06:15PM-10:15PM",
+                    "Tue": "12:15AM-04:45AM",
+                    "Wed": "03:30AM-06:30AM, 05:00PM-07:45PM"
+                },
+                "Smokehouse Barbecue": {
+                    "Fri": "12:30AM-04:45AM, 07:45PM-10:00PM",
+                    "Mon": "10:00AM-04:15PM",
+                    "Sat": "06:30AM-09:00AM, 09:00PM-11:30PM",
+                    "Sun": "07:15AM-02:30PM",
+                    "Thu": "10:00AM-01:00PM",
+                    "Tue": "10:30AM-09:15PM",
+                    "Wed": "03:45AM-01:45PM"
+                },
+                "Wing It Wings and Things": {
+                    "Fri": "07:45AM-12:00PM, 04:15PM-11:30PM",
+                    "Mon": "12:45PM-01:00PM",
+                    "Sat": "04:00AM-01:15PM, 08:00PM-11:30PM",
+                    "Sun": "",
+                    "Thu": "11:30AM-02:15PM",
+                    "Tue": "03:45AM-05:45AM, 06:00PM-10:00PM",
+                    "Wed": "04:30AM-07:30PM"
+                }
+            },
+            "user_prompt": "The time is currently 16-03-2029 00:09. Can you list the restaurants that are still open?",
+            "expected_response": {
+                "time": "2029-03-16 12:09AM",
+                "day_of_week": "Fri",
+                "opening_hours": {
+                    "The Noodle Box": "02:45AM-09:30AM, 10:45PM-11:45PM",
+                    "Smokehouse Barbecue": "12:30AM-04:45AM, 07:45PM-10:00PM",
+                    "Wing It Wings and Things": "07:45AM-12:00PM, 04:15PM-11:30PM"
+                },
+                "is_open": []
+            }
+        },
+        "full_response": {
+            "time": "2029-03-16 12:09AM",
+            "day_of_week": "Fri",
+            "opening_hours": {
+                "The Noodle Box": "02:45AM-09:30AM, 10:45PM-11:45PM",
+                "Smokehouse Barbecue": "12:30AM-04:45AM, 07:45PM-10:00PM",
+                "Wing It Wings and Things": "07:45AM-12:00PM, 04:15PM-11:30PM"
+            },
+            "reasoning": {
+                "The Noodle Box": "It's currently Friday, and The Noodle Box's hours on Friday are 02:45AM-09:30AM and 10:45PM-11:45PM. It is currently before 02:45AM and hence it is closed.",
+                "Smokehouse Barbecue": "It's currently Friday, and Smokehouse Barbecue's hours on Friday are 12:30AM-04:45AM and 07:45PM-10:00PM. It is currently 12:09AM, and thus it is open.",
+                "Wing It Wings and Things": "It's currently Friday, and Wing It Wings and Things' hours on Friday are 07:45AM-12:00PM and 04:15PM-11:30PM. It is currently before 07:45AM and hence it is closed."
+            },
+            "is_open": [
+                "Smokehouse Barbecue"
+            ]
+        }
+    },
+    {
+        "id": 51,
+        "prompt": {
+            "problem_type": "TO_LIST",
+            "use_delta": false,
+            "today": "September 06, 2027",
+            "opening_hours": {
+                "The Rolling Scone Bakery": {
+                    "Fri": "08:30AM-11:15AM",
+                    "Mon": "02:00AM-02:30AM, 06:15PM-07:00PM",
+                    "Sat": "08:45PM-10:30PM",
+                    "Sun": "02:30AM-04:45AM",
+                    "Thu": "03:00PM-03:30PM",
+                    "Tue": "02:15AM-05:30AM",
+                    "Wed": "09:00AM-11:15AM"
+                },
+                "Tropic Thunder Grill": {
+                    "Fri": "01:00AM-01:15PM",
+                    "Mon": "",
+                    "Sat": "12:30AM-07:00AM, 03:15PM-11:45PM",
+                    "Sun": "02:45AM-05:00PM",
+                    "Thu": "02:00AM-04:45AM, 05:15PM-06:30PM",
+                    "Tue": "05:45AM-10:15PM",
+                    "Wed": ""
+                },
+                "Red Velvet Lounge": {
+                    "Fri": "04:00AM-04:15PM",
+                    "Mon": "12:45AM-04:00AM, 03:00PM-10:45PM",
+                    "Sat": "04:30AM-06:30AM",
+                    "Sun": "12:30PM-07:30PM",
+                    "Thu": "06:45AM-04:00PM",
+                    "Tue": "12:15PM-11:45PM",
+                    "Wed": "05:00AM-05:15PM"
+                },
+                "The Burrito Brigade": {
+                    "Fri": "10:30AM-07:00PM",
+                    "Mon": "",
+                    "Sat": "08:30AM-09:15AM, 06:00PM-10:00PM",
+                    "Sun": "06:15AM-09:30AM, 03:00PM-03:15PM",
+                    "Thu": "06:15AM-01:30PM, 07:15PM-11:15PM",
+                    "Tue": "03:15AM-07:15AM, 02:30PM-08:00PM",
+                    "Wed": "05:15AM-07:00AM, 05:15PM-11:00PM"
+                }
+            },
+            "user_prompt": "It's Sep 06, 2027, 00:20 AM, what restaurants can I go to?",
+            "expected_response": {
+                "time": "2027-09-06 12:20AM",
+                "day_of_week": "Mon",
+                "opening_hours": {
+                    "The Rolling Scone Bakery": "02:00AM-02:30AM, 06:15PM-07:00PM",
+                    "Tropic Thunder Grill": "Closed",
+                    "Red Velvet Lounge": "12:45AM-04:00AM, 03:00PM-10:45PM",
+                    "The Burrito Brigade": "Closed"
+                },
+                "is_open": []
+            }
+        },
+        "full_response": {
+            "time": "2027-09-06 00:20AM",
+            "day_of_week": "Mon",
+            "opening_hours": {
+                "The Rolling Scone Bakery": "02:00AM-02:30AM, 06:15PM-07:00PM",
+                "Tropic Thunder Grill": "Closed",
+                "Red Velvet Lounge": "12:45AM-04:00AM, 03:00PM-10:45PM",
+                "The Burrito Brigade": "Closed"
+            },
+            "reasoning": {
+                "The Rolling Scone Bakery": "The Rolling Scone Bakery opens from 02:00AM to 02:30AM and from 06:15PM to 07:00PM on Mondays, but 00:20AM is outside these hours.",
+                "Tropic Thunder Grill": "The Tropic Thunder Grill is closed on Mondays.",
+                "Red Velvet Lounge": "The Red Velvet Lounge opens from 12:45AM to 04:00AM and from 03:00PM to 10:45PM on Mondays, so it is open at 00:20AM.",
+                "The Burrito Brigade": "The Burrito Brigade is closed on Mondays."
+            },
+            "is_open": [
+                "Red Velvet Lounge"
+            ]
+        }
+    },
+    {
+        "id": 60,
+        "prompt": {
+            "problem_type": "TO_LIST",
+            "use_delta": false,
+            "today": "October 22, 2024",
+            "opening_hours": {
+                "The Peachy Pie Parlor": {
+                    "Fri": "12:00AM-10:30AM, 01:45PM-09:30PM",
+                    "Mon": "07:45AM-05:00PM",
+                    "Sat": "12:30AM-02:15AM, 05:15PM-09:30PM",
+                    "Sun": "04:30AM-10:30AM",
+                    "Thu": "07:45AM-06:00PM",
+                    "Tue": "12:30AM-08:45AM, 03:30PM-08:00PM",
+                    "Wed": "03:15AM-09:00PM"
+                },
+                "On the Rocks Seafood Grill": {
+                    "Fri": "",
+                    "Mon": "09:30AM-10:30PM",
+                    "Sat": "05:00AM-02:15PM, 04:45PM-09:30PM",
+                    "Sun": "01:00AM-11:00AM, 02:45PM-04:30PM",
+                    "Thu": "02:45AM-03:30AM",
+                    "Tue": "12:00AM-06:30AM",
+                    "Wed": ""
+                },
+                "Zen Garden Sushi": {
+                    "Fri": "02:30AM-03:00AM, 08:15PM-09:15PM",
+                    "Mon": "02:30AM-06:45AM, 01:15PM-07:15PM",
+                    "Sat": "07:45AM-01:45PM",
+                    "Sun": "04:45AM-07:15AM, 02:15PM-05:30PM",
+                    "Thu": "02:00PM-08:00PM",
+                    "Tue": "12:45AM-10:30AM, 06:45PM-11:45PM",
+                    "Wed": "12:00AM-12:45AM, 05:00PM-09:30PM"
+                },
+                "Golden Wok": {
+                    "Fri": "06:45AM-10:15AM, 05:15PM-09:45PM",
+                    "Mon": "04:00AM-10:15AM, 02:00PM-09:15PM",
+                    "Sat": "03:30AM-05:30AM, 10:00PM-11:45PM",
+                    "Sun": "11:15AM-01:15PM, 02:30PM-06:45PM",
+                    "Thu": "12:00PM-08:00PM",
+                    "Tue": "10:45AM-11:45AM, 03:00PM-06:00PM",
+                    "Wed": "01:30PM-08:30PM"
+                },
+                "Italian Indulgence": {
+                    "Fri": "04:00AM-06:15AM, 06:15PM-07:00PM",
+                    "Mon": "04:00PM-10:30PM",
+                    "Sat": "03:45PM-04:30PM",
+                    "Sun": "07:15AM-02:30PM",
+                    "Thu": "07:00PM-11:45PM",
+                    "Tue": "06:15AM-09:00AM, 05:00PM-08:45PM",
+                    "Wed": "08:00AM-02:15PM, 04:00PM-06:30PM"
+                }
+            },
+            "user_prompt": "It is currently Tuesday at 11:23 PM. Which places are open?",
+            "expected_response": {
+                "time": "2024-10-22 11:23PM",
+                "day_of_week": "Tue",
+                "opening_hours": {
+                    "The Peachy Pie Parlor": "12:30AM-08:45AM, 03:30PM-08:00PM",
+                    "On the Rocks Seafood Grill": "12:00AM-06:30AM",
+                    "Zen Garden Sushi": "12:45AM-10:30AM, 06:45PM-11:45PM",
+                    "Golden Wok": "10:45AM-11:45AM, 03:00PM-06:00PM",
+                    "Italian Indulgence": "06:15AM-09:00AM, 05:00PM-08:45PM"
+                },
+                "is_open": [
+                    "Zen Garden Sushi"
+                ]
+            }
+        },
+        "full_response": {
+            "time": "2024-10-22 11:23PM",
+            "day_of_week": "Tue",
+            "opening_hours": {
+                "The Peachy Pie Parlor": "12:30AM-08:45AM, 03:30PM-08:00PM",
+                "On the Rocks Seafood Grill": "12:00AM-06:30AM",
+                "Zen Garden Sushi": "12:45AM-10:30AM, 06:45PM-11:45PM",
+                "Golden Wok": "10:45AM-11:45AM, 03:00PM-06:00PM",
+                "Italian Indulgence": "06:15AM-09:00AM, 05:00PM-08:45PM"
+            },
+            "reasoning": {
+                "The Peachy Pie Parlor": "The restaurant closes at 08:45AM and reopens at 03:30PM, which is before 11:23PM.",
+                "On the Rocks Seafood Grill": "The restaurant closes at 06:30AM, which is before 11:23PM.",
+                "Zen Garden Sushi": "The restaurant closes at 11:45PM, which is slightly after 11:23PM.",
+                "Golden Wok": "The restaurant closes at 06:00PM, which is before 11:23PM.",
+                "Italian Indulgence": "The restaurant closes at 08:45PM, which is before 11:23PM."
+            },
+            "is_open": []
+        }
+    },
+    {
+        "id": 188,
+        "prompt": {
+            "problem_type": "TO_LIST",
+            "use_delta": false,
+            "today": "February 20, 2028",
+            "opening_hours": {
+                "Fresh From the Kettle Soup": {
+                    "Fri": "02:45AM-05:00AM, 02:45PM-10:45PM",
+                    "Mon": "",
+                    "Sat": "04:15AM-12:30PM",
+                    "Sun": "05:00AM-11:30AM",
+                    "Thu": "06:30AM-07:15AM, 10:15PM-10:30PM",
+                    "Tue": "03:15AM-03:30PM",
+                    "Wed": "04:45AM-07:30AM"
+                },
+                "Maple Syrup Cafe": {
+                    "Fri": "08:15AM-09:00AM, 02:15PM-04:30PM",
+                    "Mon": "04:45AM-07:00AM",
+                    "Sat": "07:45AM-08:30AM, 12:30PM-11:30PM",
+                    "Sun": "02:30AM-05:00AM, 04:00PM-07:45PM",
+                    "Thu": "09:15AM-12:15PM",
+                    "Tue": "04:00AM-10:30AM, 06:00PM-08:00PM",
+                    "Wed": "07:30AM-11:15AM, 03:00PM-06:30PM"
+                },
+                "Szechuan Spice House": {
+                    "Fri": "03:00PM-04:00PM",
+                    "Mon": "",
+                    "Sat": "",
+                    "Sun": "12:15AM-03:15AM, 07:15PM-11:15PM",
+                    "Thu": "01:45AM-12:15PM, 03:15PM-06:45PM",
+                    "Tue": "12:30PM-09:00PM",
+                    "Wed": "03:45AM-03:45PM"
+                }
+            },
+            "user_prompt": "The current time is 2028-02-20 01:51:00. Which restaurants are open right now?",
+            "expected_response": {
+                "time": "2028-02-20 01:51AM",
+                "day_of_week": "Sun",
+                "opening_hours": {
+                    "Fresh From the Kettle Soup": "05:00AM-11:30AM",
+                    "Maple Syrup Cafe": "02:30AM-05:00AM, 04:00PM-07:45PM",
+                    "Szechuan Spice House": "12:15AM-03:15AM, 07:15PM-11:15PM"
+                },
+                "is_open": [
+                    "Szechuan Spice House"
+                ]
+            }
+        },
+        "full_response": {
+            "time": "2028-02-20 01:51AM",
+            "day_of_week": "Mon",
+            "opening_hours": {
+                "Fresh From the Kettle Soup": "Closed",
+                "Maple Syrup Cafe": "04:45AM-07:00AM",
+                "Szechuan Spice House": "Closed"
+            },
+            "reasoning": {
+                "Fresh From the Kettle Soup": "It is closed all day on Monday.",
+                "Maple Syrup Cafe": "It is open from 04:45AM to 07:00AM on Monday, which does not include 01:51AM.",
+                "Szechuan Spice House": "It is closed all day on Monday."
+            },
+            "is_open": []
+        }
+    },
+    {
+        "id": 215,
+        "prompt": {
+            "problem_type": "TO_LIST",
+            "use_delta": false,
+            "today": "November 15, 2028",
+            "opening_hours": {
+                "Fire & Ice": {
+                    "Fri": "08:30AM-12:15PM, 06:15PM-11:15PM",
+                    "Mon": "03:00AM-09:45PM",
+                    "Sat": "01:15AM-05:30PM",
+                    "Sun": "07:00AM-07:15AM, 05:30PM-06:15PM",
+                    "Thu": "02:00AM-08:00AM, 02:45PM-05:30PM",
+                    "Tue": "",
+                    "Wed": "10:00AM-01:00PM, 04:15PM-09:15PM"
+                },
+                "The Ramen Room": {
+                    "Fri": "09:45AM-06:30PM",
+                    "Mon": "01:45AM-02:00AM",
+                    "Sat": "",
+                    "Sun": "",
+                    "Thu": "03:15AM-11:15PM",
+                    "Tue": "04:00AM-06:00AM, 08:00PM-08:30PM",
+                    "Wed": "06:15AM-06:45AM, 10:00PM-10:30PM"
+                },
+                "The Coffee Collective": {
+                    "Fri": "10:00AM-10:45PM",
+                    "Mon": "03:15AM-01:45PM",
+                    "Sat": "03:00PM-10:45PM",
+                    "Sun": "",
+                    "Thu": "04:45PM-10:45PM",
+                    "Tue": "",
+                    "Wed": "01:15AM-01:45AM, 03:30PM-07:45PM"
+                }
+            },
+            "user_prompt": "The exact time currently is 01:00:00 PM, Nov 15, 2028. Which restaurants are open now?",
+            "expected_response": {
+                "time": "2028-11-15 01:00PM",
+                "day_of_week": "Wed",
+                "opening_hours": {
+                    "Fire & Ice": "10:00AM-01:00PM, 04:15PM-09:15PM",
+                    "The Ramen Room": "06:15AM-06:45AM, 10:00PM-10:30PM",
+                    "The Coffee Collective": "01:15AM-01:45AM, 03:30PM-07:45PM"
+                },
+                "is_open": []
+            }
+        },
+        "full_response": {
+            "time": "2028-11-15 01:00PM",
+            "day_of_week": "Wed",
+            "opening_hours": {
+                "Fire & Ice": "10:00AM-01:00PM, 04:15PM-09:15PM",
+                "The Ramen Room": "06:15AM-06:45AM, 10:00PM-10:30PM",
+                "The Coffee Collective": "01:15AM-01:45AM, 03:30PM-07:45PM"
+            },
+            "reasoning": {
+                "Fire & Ice": "Fire & Ice is open today from 10:00AM to 01:00PM and from 04:15PM to 09:15PM. Since the current time 01:00PM falls within the 10:00AM to 01:00PM window, Fire & Ice is open.",
+                "The Ramen Room": "The Ramen Room is open today from 06:15AM to 06:45AM and from 10:00PM to 10:30PM. Since the current time 01:00PM does not fall within these time ranges, The Ramen Room is closed.",
+                "The Coffee Collective": "The Coffee Collective is open today from 01:15AM to 01:45AM and from 03:30PM to 07:45PM. Since the current time 01:00PM does not fall within these time ranges, The Coffee Collective is closed."
+            },
+            "is_open": [
+                "Fire & Ice"
+            ]
+        }
+    },
+    {
+        "id": 292,
+        "prompt": {
+            "problem_type": "TO_LIST",
+            "use_delta": false,
+            "today": "February 05, 2025",
+            "opening_hours": {
+                "Savory Spice": {
+                    "Fri": "05:30AM-11:30AM",
+                    "Mon": "02:30AM-10:45PM",
+                    "Sat": "06:00PM-06:30PM",
+                    "Sun": "06:45AM-12:30PM",
+                    "Thu": "12:30AM-03:15AM, 05:00PM-07:30PM",
+                    "Tue": "02:30AM-08:00PM",
+                    "Wed": "02:00AM-03:00PM"
+                },
+                "The Rustic Barrel": {
+                    "Fri": "02:45PM-03:45PM, 07:15PM-10:00PM",
+                    "Mon": "01:00AM-01:30PM",
+                    "Sat": "03:00AM-07:30AM",
+                    "Sun": "",
+                    "Thu": "12:30PM-07:00PM",
+                    "Tue": "03:30AM-12:30PM, 03:15PM-09:30PM",
+                    "Wed": "04:15AM-10:00AM"
+                },
+                "The Green Tomato": {
+                    "Fri": "05:15AM-08:15AM, 01:00PM-01:45PM",
+                    "Mon": "12:30AM-04:45AM",
+                    "Sat": "02:15AM-05:00AM, 06:45PM-11:30PM",
+                    "Sun": "01:45AM-03:30PM, 06:00PM-10:15PM",
+                    "Thu": "10:15AM-10:30AM",
+                    "Tue": "03:15AM-09:30AM, 04:15PM-07:45PM",
+                    "Wed": "10:15AM-12:00PM"
+                },
+                "Paradise Palate": {
+                    "Fri": "05:15PM-07:45PM",
+                    "Mon": "01:00AM-11:15PM",
+                    "Sat": "04:45AM-10:15AM",
+                    "Sun": "",
+                    "Thu": "02:30AM-10:15AM",
+                    "Tue": "12:30PM-01:45PM, 04:15PM-07:15PM",
+                    "Wed": "01:00AM-10:45AM, 02:30PM-04:30PM"
+                },
+                "The Savory Spoon Gastropub": {
+                    "Fri": "08:45AM-10:15AM, 06:15PM-11:00PM",
+                    "Mon": "06:15AM-10:30AM, 03:45PM-10:30PM",
+                    "Sat": "06:00AM-11:00AM, 01:30PM-09:00PM",
+                    "Sun": "10:15AM-11:00PM",
+                    "Thu": "05:00AM-07:00AM, 07:00PM-09:30PM",
+                    "Tue": "05:45AM-08:45AM, 04:15PM-09:45PM",
+                    "Wed": "03:45AM-10:15AM, 11:15AM-12:45PM"
+                }
+            },
+            "user_prompt": "Find the restaurants open at Wednesday, 05 Feb 2025 15:00:00.",
+            "expected_response": {
+                "time": "2025-02-05 03:00PM",
+                "day_of_week": "Wed",
+                "opening_hours": {
+                    "Savory Spice": "02:00AM-03:00PM",
+                    "The Rustic Barrel": "04:15AM-10:00AM",
+                    "The Green Tomato": "10:15AM-12:00PM",
+                    "Paradise Palate": "01:00AM-10:45AM, 02:30PM-04:30PM",
+                    "The Savory Spoon Gastropub": "03:45AM-10:15AM, 11:15AM-12:45PM"
+                },
+                "is_open": [
+                    "Paradise Palate"
+                ]
+            }
+        },
+        "full_response": {
+            "time": "2025-02-05 03:00PM",
+            "day_of_week": "Wed",
+            "opening_hours": {
+                "Savory Spice": "02:00AM-03:00PM",
+                "The Rustic Barrel": "04:15AM-10:00AM",
+                "The Green Tomato": "10:15AM-12:00PM",
+                "Paradise Palate": "01:00AM-10:45AM, 02:30PM-04:30PM",
+                "The Savory Spoon Gastropub": "03:45AM-10:15AM, 11:15AM-12:45PM"
+            },
+            "reasoning": {
+                "Savory Spice": "Savory Spice is open from 02:00AM to 03:00PM on Wednesday, which includes the given time of 03:00PM.",
+                "The Rustic Barrel": "The Rustic Barrel is open from 04:15AM to 10:00AM on Wednesday, which does not include the given time of 03:00PM.",
+                "The Green Tomato": "The Green Tomato is open from 10:15AM to 12:00PM on Wednesday, which does not include the given time of 03:00PM.",
+                "Paradise Palate": "Paradise Palate is open from 01:00AM to 10:45AM and again from 02:30PM to 04:30PM on Wednesday. The given time of 03:00PM falls within the second open period.",
+                "The Savory Spoon Gastropub": "The Savory Spoon Gastropub is open from 03:45AM to 10:15AM and again from 11:15AM to 12:45PM on Wednesday, which does not include the given time of 03:00PM."
+            },
+            "is_open": [
+                "Savory Spice",
+                "Paradise Palate"
+            ]
+        }
+    },
+    {
+        "id": 296,
+        "prompt": {
+            "problem_type": "TO_LIST",
+            "use_delta": false,
+            "today": "July 12, 2024",
+            "opening_hours": {
+                "Pizzeria Paradiso": {
+                    "Fri": "12:15AM-05:00AM",
+                    "Mon": "11:15AM-01:15PM, 05:15PM-10:00PM",
+                    "Sat": "08:45PM-09:30PM",
+                    "Sun": "06:30AM-03:45PM",
+                    "Thu": "06:30AM-09:30AM, 07:30PM-09:45PM",
+                    "Tue": "03:45AM-08:30AM",
+                    "Wed": "10:45AM-12:45PM, 07:15PM-10:00PM"
+                },
+                "The Harvest Table": {
+                    "Fri": "08:15AM-10:45AM",
+                    "Mon": "02:15AM-01:30PM, 07:00PM-08:30PM",
+                    "Sat": "01:15PM-06:45PM",
+                    "Sun": "04:30PM-07:00PM",
+                    "Thu": "12:15AM-09:45AM",
+                    "Tue": "03:45AM-09:45AM",
+                    "Wed": "07:15AM-07:45AM"
+                },
+                "The Zen Garden": {
+                    "Fri": "05:30AM-02:15PM",
+                    "Mon": "",
+                    "Sat": "12:00AM-12:00PM, 01:15PM-07:15PM",
+                    "Sun": "07:45PM-10:15PM",
+                    "Thu": "10:15AM-10:15PM",
+                    "Tue": "",
+                    "Wed": "03:30AM-02:00PM, 07:30PM-08:45PM"
+                }
+            },
+            "user_prompt": "Tell me the restaurants that are open at 00:00 on 12/07/2024.",
+            "expected_response": {
+                "time": "2024-07-12 12:00AM",
+                "day_of_week": "Fri",
+                "opening_hours": {
+                    "Pizzeria Paradiso": "12:15AM-05:00AM",
+                    "The Harvest Table": "08:15AM-10:45AM",
+                    "The Zen Garden": "05:30AM-02:15PM"
+                },
+                "is_open": []
+            }
+        },
+        "full_response": {
+            "time": "2024-07-12 12:00AM",
+            "day_of_week": "Fri",
+            "opening_hours": {
+                "Pizzeria Paradiso": "12:15AM-05:00AM",
+                "The Harvest Table": "08:15AM-10:45AM",
+                "The Zen Garden": "05:30AM-02:15PM"
+            },
+            "reasoning": {
+                "Pizzeria Paradiso": "Pizzeria Paradiso opens from 12:15AM to 05:00AM on Fridays, which means it is open at 12:00AM.",
+                "The Harvest Table": "The Harvest Table opens from 08:15AM to 10:45AM on Fridays, which means it is closed at 12:00AM.",
+                "The Zen Garden": "The Zen Garden opens from 05:30AM to 02:15PM on Fridays, which means it is closed at 12:00AM."
+            },
+            "is_open": [
+                "Pizzeria Paradiso"
+            ]
+        }
+    },
+    {
+        "id": 338,
+        "prompt": {
+            "problem_type": "TO_LIST",
+            "use_delta": false,
+            "today": "June 02, 2025",
+            "opening_hours": {
+                "Mocha Madness": {
+                    "Fri": "06:45AM-09:45AM, 05:00PM-05:15PM",
+                    "Mon": "08:15AM-10:15AM",
+                    "Sat": "04:45AM-10:45PM",
+                    "Sun": "",
+                    "Thu": "02:30AM-10:15AM, 07:45PM-10:00PM",
+                    "Tue": "03:00AM-11:30AM, 03:45PM-06:30PM",
+                    "Wed": "04:00AM-07:45PM"
+                },
+                "The Bakery Boutique": {
+                    "Fri": "01:30AM-01:45AM, 01:45PM-11:30PM",
+                    "Mon": "05:30AM-02:15PM, 07:15PM-08:30PM",
+                    "Sat": "06:45AM-10:15AM",
+                    "Sun": "04:30AM-09:30AM, 04:00PM-09:15PM",
+                    "Thu": "02:45AM-09:15PM",
+                    "Tue": "09:15AM-04:45PM",
+                    "Wed": "03:15AM-08:15PM"
+                },
+                "Vegan Vibe": {
+                    "Fri": "07:15AM-08:45AM, 04:00PM-10:30PM",
+                    "Mon": "",
+                    "Sat": "06:00AM-09:45AM, 03:30PM-05:30PM",
+                    "Sun": "03:00AM-04:00PM",
+                    "Thu": "08:30AM-09:00AM, 02:15PM-03:45PM",
+                    "Tue": "02:00AM-11:15AM",
+                    "Wed": "09:45PM-11:00PM"
+                },
+                "Sunrise Delights": {
+                    "Fri": "02:45AM-12:30PM, 06:00PM-11:30PM",
+                    "Mon": "04:30AM-11:15AM, 09:30PM-10:15PM",
+                    "Sat": "12:45AM-08:00AM, 06:00PM-10:15PM",
+                    "Sun": "01:15AM-05:30AM",
+                    "Thu": "10:30AM-11:00AM",
+                    "Tue": "06:30AM-08:15AM",
+                    "Wed": "05:00AM-02:30PM, 09:15PM-10:30PM"
+                },
+                "The Brass Lantern": {
+                    "Fri": "11:30AM-06:45PM",
+                    "Mon": "02:00AM-08:00AM, 07:45PM-09:30PM",
+                    "Sat": "07:00AM-12:00PM",
+                    "Sun": "03:45AM-09:00PM",
+                    "Thu": "01:15AM-11:45PM",
+                    "Tue": "04:00AM-10:30AM, 05:00PM-09:15PM",
+                    "Wed": "04:30AM-06:30PM"
+                }
+            },
+            "user_prompt": "The current time is 2025-06-02 21:00:00. Which restaurants are open right now?",
+            "expected_response": {
+                "time": "2025-06-02 09:00PM",
+                "day_of_week": "Mon",
+                "opening_hours": {
+                    "Mocha Madness": "08:15AM-10:15AM",
+                    "The Bakery Boutique": "05:30AM-02:15PM, 07:15PM-08:30PM",
+                    "Vegan Vibe": "Closed",
+                    "Sunrise Delights": "04:30AM-11:15AM, 09:30PM-10:15PM",
+                    "The Brass Lantern": "02:00AM-08:00AM, 07:45PM-09:30PM"
+                },
+                "is_open": [
+                    "The Brass Lantern"
+                ]
+            }
+        },
+        "full_response": {
+            "time": "2025-06-02 09:00PM",
+            "day_of_week": "Mon",
+            "opening_hours": {
+                "Mocha Madness": "08:15AM-10:15AM",
+                "The Bakery Boutique": "05:30AM-02:15PM, 07:15PM-08:30PM",
+                "Vegan Vibe": "Closed",
+                "Sunrise Delights": "04:30AM-11:15AM, 09:30PM-10:15PM",
+                "The Brass Lantern": "02:00AM-08:00AM, 07:45PM-09:30PM"
+            },
+            "reasoning": {
+                "Mocha Madness": "Mocha Madness is closed because it only operates from 08:15AM to 10:15AM on Mondays.",
+                "The Bakery Boutique": "The Bakery Boutique is closed because its operating hours on Monday are 05:30AM-02:15PM and 07:15PM-08:30PM, which does not include 09:00PM.",
+                "Vegan Vibe": "Vegan Vibe is closed because it does not operate on Mondays.",
+                "Sunrise Delights": "Sunrise Delights is open because it operates from 04:30AM-11:15AM and 09:30PM-10:15PM on Mondays, which includes 09:00PM.",
+                "The Brass Lantern": "The Brass Lantern is open because it operates from 02:00AM-08:00AM and 07:45PM-09:30PM on Mondays, which includes 09:00PM."
+            },
+            "is_open": [
+                "Sunrise Delights",
+                "The Brass Lantern"
+            ]
+        }
+    },
+    {
+        "id": 423,
+        "prompt": {
+            "problem_type": "TO_LIST",
+            "use_delta": false,
+            "today": "March 11, 2030",
+            "opening_hours": {
+                "The Java Jive Coffee House": {
+                    "Fri": "",
+                    "Mon": "05:30AM-10:45PM",
+                    "Sat": "01:30PM-11:15PM",
+                    "Sun": "",
+                    "Thu": "10:00AM-11:30AM, 06:45PM-10:00PM",
+                    "Tue": "02:45AM-05:15AM, 03:30PM-09:45PM",
+                    "Wed": ""
+                },
+                "The Garden Gate Cafe": {
+                    "Fri": "05:15AM-09:30AM",
+                    "Mon": "03:30AM-05:00AM, 12:15PM-06:15PM",
+                    "Sat": "07:00AM-07:00PM",
+                    "Sun": "12:30AM-06:30AM, 08:45PM-10:45PM",
+                    "Thu": "08:30AM-11:00AM, 06:30PM-07:30PM",
+                    "Tue": "",
+                    "Wed": "12:15AM-06:00PM"
+                },
+                "The Hungry Hound": {
+                    "Fri": "06:00AM-01:00PM, 03:00PM-06:15PM",
+                    "Mon": "",
+                    "Sat": "01:00AM-02:30AM",
+                    "Sun": "09:15AM-11:45PM",
+                    "Thu": "04:00AM-09:00AM, 04:45PM-08:45PM",
+                    "Tue": "",
+                    "Wed": "04:00AM-04:15PM"
+                },
+                "Wild Mushroom Market": {
+                    "Fri": "06:45AM-07:15AM, 01:30PM-09:30PM",
+                    "Mon": "05:45AM-08:15AM, 02:45PM-09:30PM",
+                    "Sat": "01:00AM-07:15AM, 06:15PM-11:00PM",
+                    "Sun": "07:30AM-04:15PM",
+                    "Thu": "01:45AM-09:15AM, 04:15PM-11:45PM",
+                    "Tue": "03:00AM-09:45AM, 03:45PM-09:45PM",
+                    "Wed": ""
+                }
+            },
+            "user_prompt": "It's Monday, March 11 at 12:16 PM and I'd like to know which restaurants are open.",
+            "expected_response": {
+                "time": "2030-03-11 12:16PM",
+                "day_of_week": "Mon",
+                "opening_hours": {
+                    "The Java Jive Coffee House": "05:30AM-10:45PM",
+                    "The Garden Gate Cafe": "03:30AM-05:00AM, 12:15PM-06:15PM",
+                    "The Hungry Hound": "Closed",
+                    "Wild Mushroom Market": "05:45AM-08:15AM, 02:45PM-09:30PM"
+                },
+                "is_open": [
+                    "The Java Jive Coffee House",
+                    "The Garden Gate Cafe"
+                ]
+            }
+        },
+        "full_response": {
+            "time": "2030-03-11 12:16PM",
+            "day_of_week": "Mon",
+            "opening_hours": {
+                "The Java Jive Coffee House": "05:30AM-10:45PM",
+                "The Garden Gate Cafe": "03:30AM-05:00AM, 12:15PM-06:15PM",
+                "The Hungry Hound": "Closed",
+                "Wild Mushroom Market": "05:45AM-08:15AM, 02:45PM-09:30PM"
+            },
+            "reasoning": {
+                "The Java Jive Coffee House": "Open hours are 05:30AM-10:45PM. The given time 12:16PM is within these hours.",
+                "The Garden Gate Cafe": "Open hours are 03:30AM-05:00AM and 12:15PM-06:15PM. The given time 12:16PM is just past 12:15PM and before 12:15PM",
+                "The Hungry Hound": "Closed on Mondays.",
+                "Wild Mushroom Market": "Open hours are 05:45AM-08:15AM and 02:45PM-09:30PM. The given time 12:16PM is outside of these hours."
+            },
+            "is_open": [
+                "The Java Jive Coffee House"
+            ]
+        }
+    },
+    {
+        "id": 430,
+        "prompt": {
+            "problem_type": "TO_LIST",
+            "use_delta": false,
+            "today": "January 17, 2025",
+            "opening_hours": {
+                "Pan Asian Palace": {
+                    "Fri": "05:45AM-07:00AM, 11:00AM-04:00PM",
+                    "Mon": "04:00AM-09:00AM",
+                    "Sat": "04:15AM-10:00AM",
+                    "Sun": "",
+                    "Thu": "",
+                    "Tue": "02:00AM-02:30AM, 02:45PM-03:30PM",
+                    "Wed": "08:15AM-11:00AM, 05:00PM-08:30PM"
+                },
+                "Brisket Heaven BBQ": {
+                    "Fri": "06:45AM-07:45AM, 03:45PM-11:30PM",
+                    "Mon": "12:00AM-09:15PM",
+                    "Sat": "05:45AM-06:15AM, 09:30PM-11:15PM",
+                    "Sun": "08:30AM-12:30PM",
+                    "Thu": "02:30AM-07:00AM, 08:30PM-11:45PM",
+                    "Tue": "",
+                    "Wed": ""
+                },
+                "The Big Break Cafe": {
+                    "Fri": "08:00PM-09:00PM",
+                    "Mon": "01:00AM-09:15AM, 12:00PM-01:15PM",
+                    "Sat": "07:45AM-02:00PM, 04:30PM-04:45PM",
+                    "Sun": "07:30AM-09:15PM",
+                    "Thu": "08:15AM-10:15AM",
+                    "Tue": "02:15AM-02:45PM, 05:15PM-08:15PM",
+                    "Wed": "04:30AM-08:00PM"
+                },
+                "The Mighty Meatball": {
+                    "Fri": "12:45AM-03:45AM, 06:15PM-10:15PM",
+                    "Mon": "02:45PM-07:45PM",
+                    "Sat": "",
+                    "Sun": "04:15AM-07:15PM",
+                    "Thu": "11:45AM-11:30PM",
+                    "Tue": "07:30AM-09:30AM, 06:45PM-07:30PM",
+                    "Wed": ""
+                },
+                "The Coconut Cove": {
+                    "Fri": "12:15AM-01:00AM, 07:00PM-10:45PM",
+                    "Mon": "06:30AM-03:45PM",
+                    "Sat": "09:15AM-04:30PM",
+                    "Sun": "",
+                    "Thu": "03:45AM-09:15AM, 11:15PM-11:30PM",
+                    "Tue": "11:45AM-04:30PM",
+                    "Wed": "06:15AM-11:15PM"
+                }
+            },
+            "user_prompt": "Given that it is currently 09:00 PM on Friday, January 17, 2025, what restaurants remain open?",
+            "expected_response": {
+                "time": "2025-01-17 09:00PM",
+                "day_of_week": "Fri",
+                "opening_hours": {
+                    "Pan Asian Palace": "05:45AM-07:00AM, 11:00AM-04:00PM",
+                    "Brisket Heaven BBQ": "06:45AM-07:45AM, 03:45PM-11:30PM",
+                    "The Big Break Cafe": "08:00PM-09:00PM",
+                    "The Mighty Meatball": "12:45AM-03:45AM, 06:15PM-10:15PM",
+                    "The Coconut Cove": "12:15AM-01:00AM, 07:00PM-10:45PM"
+                },
+                "is_open": [
+                    "Brisket Heaven BBQ",
+                    "The Mighty Meatball",
+                    "The Coconut Cove"
+                ]
+            }
+        },
+        "full_response": {
+            "time": "2025-01-17 09:00PM",
+            "day_of_week": "Fri",
+            "opening_hours": {
+                "Pan Asian Palace": "05:45AM-07:00AM, 11:00AM-04:00PM",
+                "Brisket Heaven BBQ": "06:45AM-07:45AM, 03:45PM-11:30PM",
+                "The Big Break Cafe": "08:00PM-09:00PM",
+                "The Mighty Meatball": "12:45AM-03:45AM, 06:15PM-10:15PM",
+                "The Coconut Cove": "12:15AM-01:00AM, 07:00PM-10:45PM"
+            },
+            "reasoning": {
+                "Pan Asian Palace": "The restaurant is closed because its operating hours on Friday are from 05:45AM-07:00AM and 11:00AM-04:00PM, which does not include 09:00PM.",
+                "Brisket Heaven BBQ": "The restaurant is open because its operating hours on Friday include 03:45PM-11:30PM, which covers 09:00PM.",
+                "The Big Break Cafe": "The restaurant is open because its operating hours on Friday include 08:00PM-09:00PM, which covers 09:00PM.",
+                "The Mighty Meatball": "The restaurant is open because its operating hours on Friday include 06:15PM-10:15PM, which covers 09:00PM.",
+                "The Coconut Cove": "The restaurant is open because its operating hours on Friday include 07:00PM-10:45PM, which covers 09:00PM."
+            },
+            "is_open": [
+                "Brisket Heaven BBQ",
+                "The Big Break Cafe",
+                "The Mighty Meatball",
+                "The Coconut Cove"
+            ]
+        }
+    },
+    {
+        "id": 476,
+        "prompt": {
+            "problem_type": "TO_LIST",
+            "use_delta": false,
+            "today": "April 13, 2026",
+            "opening_hours": {
+                "The Artisan Grill": {
+                    "Fri": "07:45AM-10:15AM",
+                    "Mon": "02:15PM-09:15PM",
+                    "Sat": "01:00AM-10:45AM",
+                    "Sun": "04:15AM-11:30AM, 04:30PM-10:45PM",
+                    "Thu": "01:45AM-06:45AM, 01:00PM-08:30PM",
+                    "Tue": "01:15AM-09:15AM, 05:00PM-09:45PM",
+                    "Wed": "06:00AM-06:15AM"
+                },
+                "Seafood Symphony": {
+                    "Fri": "07:45AM-10:45AM",
+                    "Mon": "07:15AM-04:30PM",
+                    "Sat": "03:00AM-05:15AM, 04:45PM-05:00PM",
+                    "Sun": "06:45AM-09:15AM, 11:15PM-11:30PM",
+                    "Thu": "07:30AM-05:00PM",
+                    "Tue": "01:45AM-10:45PM",
+                    "Wed": "05:45AM-02:15PM, 06:30PM-09:45PM"
+                },
+                "Sunshine Cafe": {
+                    "Fri": "",
+                    "Mon": "08:15PM-12:15PM, 05:00PM-11:00PM",
+                    "Sat": "04:15PM-11:15PM",
+                    "Sun": "12:30AM-02:00AM, 12:30PM-11:15PM",
+                    "Thu": "",
+                    "Tue": "04:30AM-08:00AM",
+                    "Wed": "10:45AM-11:15AM, 03:45PM-10:45PM"
+                },
+                "Bon App\u00e9tit Brasserie": {
+                    "Fri": "",
+                    "Mon": "01:00AM-06:15AM, 06:30PM-10:00PM",
+                    "Sat": "08:00PM-08:15PM",
+                    "Sun": "01:00PM-02:15PM",
+                    "Thu": "05:45AM-07:30AM",
+                    "Tue": "10:30AM-07:30PM",
+                    "Wed": "07:30AM-09:30AM, 03:30PM-04:00PM"
+                }
+            },
+            "user_prompt": "The current time is 2026-04-13 19:00:00. Which restaurants are open right now?",
+            "expected_response": {
+                "time": "2026-04-13 07:00PM",
+                "day_of_week": "Mon",
+                "opening_hours": {
+                    "The Artisan Grill": "02:15PM-09:15PM",
+                    "Seafood Symphony": "07:15AM-04:30PM",
+                    "Sunshine Cafe": "08:15PM-12:15PM, 05:00PM-11:00PM",
+                    "Bon App\u00e9tit Brasserie": "01:00AM-06:15AM, 06:30PM-10:00PM"
+                },
+                "is_open": [
+                    "The Artisan Grill",
+                    "Sunshine Cafe",
+                    "Bon App\u00e9tit Brasserie"
+                ]
+            }
+        },
+        "full_response": {
+            "time": "2026-04-13 07:00PM",
+            "day_of_week": "Mon",
+            "opening_hours": {
+                "The Artisan Grill": "02:15PM-09:15PM",
+                "Seafood Symphony": "07:15AM-04:30PM",
+                "Sunshine Cafe": "08:15PM-12:15PM, 05:00PM-11:00PM",
+                "Bon App\u00e9tit Brasserie": "01:00AM-06:15AM, 06:30PM-10:00PM"
+            },
+            "reasoning": {
+                "The Artisan Grill": "The Artisan Grill is open from 02:15PM to 09:15PM on Mondays, and the current time is within this range.",
+                "Seafood Symphony": "Seafood Symphony is open from 07:15AM to 04:30PM on Mondays, and the current time is outside this range.",
+                "Sunshine Cafe": "Sunshine Cafe opens from 08:15PM to 12:15PM and from 05:00PM to 11:00PM on Mondays, and the current time is before the first opening range.",
+                "Bon App\u00e9tit Brasserie": "Bon App\u00e9tit Brasserie is open from 01:00AM to 06:15AM and from 06:30PM to 10:00PM on Mondays, and the current time is within the evening range."
+            },
+            "is_open": [
+                "The Artisan Grill",
+                "Bon App\u00e9tit Brasserie"
+            ]
+        }
+    },
+    {
+        "id": 484,
+        "prompt": {
+            "problem_type": "TO_LIST",
+            "use_delta": false,
+            "today": "January 16, 2028",
+            "opening_hours": {
+                "The Spice Route": {
+                    "Fri": "07:30AM-10:45AM, 01:15PM-02:45PM",
+                    "Mon": "08:45AM-11:45AM, 08:15PM-09:15PM",
+                    "Sat": "03:30AM-04:00AM, 06:30PM-08:30PM",
+                    "Sun": "",
+                    "Thu": "",
+                    "Tue": "02:30AM-09:45AM, 05:00PM-08:45PM",
+                    "Wed": "10:15AM-11:45AM, 04:00PM-10:30PM"
+                },
+                "The Asian Kitchen": {
+                    "Fri": "03:30AM-06:15AM, 07:15PM-11:45PM",
+                    "Mon": "02:45AM-10:30AM",
+                    "Sat": "05:45AM-06:15AM",
+                    "Sun": "02:30AM-03:15AM, 06:15PM-10:00PM",
+                    "Thu": "01:00AM-09:30AM, 05:30PM-08:45PM",
+                    "Tue": "09:15AM-02:15PM",
+                    "Wed": "10:30AM-11:15PM"
+                },
+                "Beyond Bagels": {
+                    "Fri": "07:30AM-10:00AM, 03:45PM-10:45PM",
+                    "Mon": "01:00AM-02:45PM",
+                    "Sat": "09:15AM-11:00PM",
+                    "Sun": "02:15AM-08:00AM",
+                    "Thu": "03:30AM-06:30PM",
+                    "Tue": "06:30PM-10:45PM",
+                    "Wed": "12:00AM-02:15PM, 09:30PM-10:15PM"
+                }
+            },
+            "user_prompt": "The current time is 2028-01-16 10:00:00. Which restaurants are open right now?",
+            "expected_response": {
+                "time": "2028-01-16 10:00AM",
+                "day_of_week": "Sun",
+                "opening_hours": {
+                    "The Spice Route": "Closed",
+                    "The Asian Kitchen": "02:30AM-03:15AM, 06:15PM-10:00PM",
+                    "Beyond Bagels": "02:15AM-08:00AM"
+                },
+                "is_open": []
+            }
+        },
+        "full_response": {
+            "time": "2028-01-16 10:00AM",
+            "day_of_week": "Mon",
+            "opening_hours": {
+                "The Spice Route": "08:45AM-11:45AM, 08:15PM-09:15PM",
+                "The Asian Kitchen": "02:45AM-10:30AM",
+                "Beyond Bagels": "01:00AM-02:45PM"
+            },
+            "reasoning": {
+                "The Spice Route": "The Spice Route is open from 08:45AM to 11:45AM on Monday. The current time 10:00AM falls within this range.",
+                "The Asian Kitchen": "The Asian Kitchen is open from 02:45AM to 10:30AM on Monday. The current time 10:00AM falls within this range.",
+                "Beyond Bagels": "Beyond Bagels is open from 01:00AM to 02:45PM on Monday. The current time 10:00AM falls within this range."
+            },
+            "is_open": [
+                "The Spice Route",
+                "The Asian Kitchen",
+                "Beyond Bagels"
+            ]
+        }
+    },
+    {
+        "id": 487,
+        "prompt": {
+            "problem_type": "TO_LIST",
+            "use_delta": false,
+            "today": "January 23, 2028",
+            "opening_hours": {
+                "Sassy Salads": {
+                    "Fri": "09:45AM-10:00AM, 04:45PM-10:45PM",
+                    "Mon": "02:45PM-03:30PM",
+                    "Sat": "04:45AM-11:30AM",
+                    "Sun": "01:45AM-08:15AM",
+                    "Thu": "01:00AM-07:15AM, 05:30PM-07:30PM",
+                    "Tue": "01:00AM-04:30PM",
+                    "Wed": ""
+                },
+                "The Macaroni Mansion": {
+                    "Fri": "01:30PM-11:30PM",
+                    "Mon": "12:15AM-07:30AM, 02:45PM-07:00PM",
+                    "Sat": "01:15AM-11:15AM, 03:15PM-04:00PM",
+                    "Sun": "04:15AM-09:00PM",
+                    "Thu": "06:00PM-10:15PM",
+                    "Tue": "03:00AM-05:45AM, 05:00PM-10:45PM",
+                    "Wed": "12:00AM-01:30PM, 02:45PM-05:15PM"
+                },
+                "Fireside Flavors Bistro": {
+                    "Fri": "12:30AM-04:15PM",
+                    "Mon": "11:00AM-01:15PM",
+                    "Sat": "09:30AM-03:45PM, 06:15PM-06:30PM",
+                    "Sun": "04:15AM-06:45AM, 08:00AM-11:00AM",
+                    "Thu": "09:00AM-11:15AM, 01:15PM-08:30PM",
+                    "Tue": "12:00AM-08:45AM, 05:30PM-07:00PM",
+                    "Wed": "10:30AM-04:45PM"
+                },
+                "The Chocolate Chip Cookie": {
+                    "Fri": "06:30AM-07:30AM",
+                    "Mon": "06:45AM-08:15PM",
+                    "Sat": "05:15AM-12:00PM, 03:45PM-11:45PM",
+                    "Sun": "",
+                    "Thu": "02:15AM-04:00PM",
+                    "Tue": "01:00AM-11:00AM",
+                    "Wed": "06:15AM-11:30PM"
+                }
+            },
+            "user_prompt": "Tell me the restaurants that are open at 20:42 on 23/01/2028.",
+            "expected_response": {
+                "time": "2028-01-23 08:42PM",
+                "day_of_week": "Sun",
+                "opening_hours": {
+                    "Sassy Salads": "01:45AM-08:15AM",
+                    "The Macaroni Mansion": "04:15AM-09:00PM",
+                    "Fireside Flavors Bistro": "04:15AM-06:45AM, 08:00AM-11:00AM",
+                    "The Chocolate Chip Cookie": "Closed"
+                },
+                "is_open": [
+                    "The Macaroni Mansion"
+                ]
+            }
+        },
+        "full_response": {
+            "time": "2028-01-23 08:42PM",
+            "day_of_week": "Mon",
+            "opening_hours": {
+                "Sassy Salads": "02:45PM-03:30PM",
+                "The Macaroni Mansion": "12:15AM-07:30AM, 02:45PM-07:00PM",
+                "Fireside Flavors Bistro": "11:00AM-01:15PM",
+                "The Chocolate Chip Cookie": "06:45AM-08:15PM"
+            },
+            "reasoning": {
+                "Sassy Salads": "Sassy Salads is open from 02:45PM to 03:30PM on Mondays. Since the inquiry time is 08:42PM, the restaurant is closed.",
+                "The Macaroni Mansion": "The Macaroni Mansion is open from 12:15AM to 07:30AM and from 02:45PM to 07:00PM on Mondays. Since the inquiry time is 08:42PM, the restaurant is closed.",
+                "Fireside Flavors Bistro": "Fireside Flavors Bistro is open from 11:00AM to 01:15PM on Mondays. Since the inquiry time is 08:42PM, the restaurant is closed.",
+                "The Chocolate Chip Cookie": "The Chocolate Chip Cookie is open from 06:45AM to 08:15PM on Mondays. Since the inquiry time is 08:42PM, the restaurant is closed."
+            },
+            "is_open": []
+        }
+    },
+    {
+        "id": 540,
+        "prompt": {
+            "problem_type": "TO_LIST",
+            "use_delta": false,
+            "today": "May 08, 2030",
+            "opening_hours": {
+                "The Burrito Bowl": {
+                    "Fri": "06:15AM-09:45AM, 08:00PM-08:30PM",
+                    "Mon": "06:15PM-11:00PM",
+                    "Sat": "05:45AM-08:15PM",
+                    "Sun": "03:30AM-11:15AM, 05:00PM-09:00PM",
+                    "Thu": "03:45AM-07:00AM, 06:15PM-11:15PM",
+                    "Tue": "11:15AM-07:30PM",
+                    "Wed": "12:30PM-03:15PM, 11:15PM-11:45PM"
+                },
+                "The Tomato Terrace": {
+                    "Fri": "12:00AM-09:30AM",
+                    "Mon": "02:45PM-07:00PM",
+                    "Sat": "06:15PM-11:00PM",
+                    "Sun": "10:15AM-02:00PM",
+                    "Thu": "06:30AM-08:30AM, 06:00PM-09:30PM",
+                    "Tue": "09:15PM-11:15PM",
+                    "Wed": "03:00AM-12:30PM, 03:15PM-10:15PM"
+                },
+                "The Spicy Spoon": {
+                    "Fri": "12:30AM-03:45PM",
+                    "Mon": "04:45AM-05:00AM",
+                    "Sat": "05:45AM-08:30AM",
+                    "Sun": "",
+                    "Thu": "01:15AM-09:15AM, 01:45PM-07:30PM",
+                    "Tue": "03:30AM-08:00PM",
+                    "Wed": "08:45PM-10:30PM"
+                },
+                "The Hungry Hiker": {
+                    "Fri": "02:00AM-07:00AM, 05:30PM-11:15PM",
+                    "Mon": "02:30AM-11:30AM, 03:15PM-08:45PM",
+                    "Sat": "12:00AM-03:45AM, 05:30PM-07:15PM",
+                    "Sun": "01:30AM-09:00AM, 06:30PM-09:00PM",
+                    "Thu": "01:15AM-11:00PM",
+                    "Tue": "06:30PM-08:45PM",
+                    "Wed": "03:30AM-10:15AM, 06:30PM-10:45PM"
+                }
+            },
+            "user_prompt": "The current time is 2030-05-08 22:00:00. Which restaurants are open right now?",
+            "expected_response": {
+                "time": "2030-05-08 10:00PM",
+                "day_of_week": "Wed",
+                "opening_hours": {
+                    "The Burrito Bowl": "12:30PM-03:15PM, 11:15PM-11:45PM",
+                    "The Tomato Terrace": "03:00AM-12:30PM, 03:15PM-10:15PM",
+                    "The Spicy Spoon": "08:45PM-10:30PM",
+                    "The Hungry Hiker": "03:30AM-10:15AM, 06:30PM-10:45PM"
+                },
+                "is_open": [
+                    "The Tomato Terrace",
+                    "The Spicy Spoon",
+                    "The Hungry Hiker"
+                ]
+            }
+        },
+        "full_response": {
+            "time": "2030-05-08 10:00PM",
+            "day_of_week": "Wed",
+            "opening_hours": {
+                "The Burrito Bowl": "12:30PM-03:15PM, 11:15PM-11:45PM",
+                "The Tomato Terrace": "03:00AM-12:30PM, 03:15PM-10:15PM",
+                "The Spicy Spoon": "08:45PM-10:30PM",
+                "The Hungry Hiker": "03:30AM-10:15AM, 06:30PM-10:45PM"
+            },
+            "reasoning": {
+                "The Burrito Bowl": "The restaurant is not open at 10:00PM. It reopens at 11:15PM.",
+                "The Tomato Terrace": "The restaurant is not open at 10:00PM. It closes at 10:15PM.",
+                "The Spicy Spoon": "The restaurant is open at 10:00PM. It closes at 10:30PM.",
+                "The Hungry Hiker": "The restaurant is open at 10:00PM. It closes at 10:45PM."
+            },
+            "is_open": [
+                "The Spicy Spoon",
+                "The Hungry Hiker"
+            ]
+        }
+    },
+    {
+        "id": 541,
+        "prompt": {
+            "problem_type": "TO_LIST",
+            "use_delta": false,
+            "today": "May 24, 2026",
+            "opening_hours": {
+                "The Zesty Zucchini": {
+                    "Fri": "01:30AM-11:15AM, 02:45PM-04:45PM",
+                    "Mon": "06:45AM-11:15AM",
+                    "Sat": "",
+                    "Sun": "03:15AM-10:15AM, 12:30PM-09:30PM",
+                    "Thu": "06:00AM-03:45PM",
+                    "Tue": "07:00AM-11:00AM, 07:00PM-10:00PM",
+                    "Wed": "03:30PM-11:30PM"
+                },
+                "Rustic Roots Cafe": {
+                    "Fri": "",
+                    "Mon": "12:15AM-02:15PM",
+                    "Sat": "06:15AM-09:00PM",
+                    "Sun": "03:00AM-07:00AM, 10:15PM-11:30PM",
+                    "Thu": "11:30AM-04:45PM",
+                    "Tue": "01:30AM-05:15AM",
+                    "Wed": "08:15AM-12:15PM"
+                },
+                "Roll with It Sushi Bar": {
+                    "Fri": "",
+                    "Mon": "04:00AM-12:45PM",
+                    "Sat": "11:30AM-08:45PM",
+                    "Sun": "02:00AM-08:30AM",
+                    "Thu": "02:00AM-06:45PM",
+                    "Tue": "05:00AM-12:45PM, 06:15PM-09:45PM",
+                    "Wed": "02:00AM-06:30PM"
+                }
+            },
+            "user_prompt": "Given that it is currently 11:04 PM on Sunday, May 24, 2026, what restaurants remain open?",
+            "expected_response": {
+                "time": "2026-05-24 11:04PM",
+                "day_of_week": "Sun",
+                "opening_hours": {
+                    "The Zesty Zucchini": "03:15AM-10:15AM, 12:30PM-09:30PM",
+                    "Rustic Roots Cafe": "03:00AM-07:00AM, 10:15PM-11:30PM",
+                    "Roll with It Sushi Bar": "02:00AM-08:30AM"
+                },
+                "is_open": [
+                    "Rustic Roots Cafe"
+                ]
+            }
+        },
+        "full_response": {
+            "time": "2026-05-24 11:04PM",
+            "day_of_week": "Sun",
+            "opening_hours": {
+                "The Zesty Zucchini": "03:15AM-10:15AM, 12:30PM-09:30PM",
+                "Rustic Roots Cafe": "03:00AM-07:00AM, 10:15PM-11:30PM",
+                "Roll with It Sushi Bar": "02:00AM-08:30AM"
+            },
+            "reasoning": {
+                "The Zesty Zucchini": "The restaurant is closed because it closes at 09:30PM on Sunday.",
+                "Rustic Roots Cafe": "The restaurant is closed because it closes at 11:30PM on Sunday.",
+                "Roll with It Sushi Bar": "The restaurant is closed because it closes at 08:30AM on Sunday."
+            },
+            "is_open": []
+        }
+    },
+    {
+        "id": 544,
+        "prompt": {
+            "problem_type": "TO_LIST",
+            "use_delta": false,
+            "today": "October 14, 2027",
+            "opening_hours": {
+                "The Meatball Market": {
+                    "Fri": "07:45AM-09:30AM",
+                    "Mon": "05:15AM-08:15AM",
+                    "Sat": "",
+                    "Sun": "03:30PM-06:15PM",
+                    "Thu": "07:45AM-08:00AM",
+                    "Tue": "03:15AM-06:30AM, 06:45PM-11:30PM",
+                    "Wed": "01:00AM-05:00AM, 04:00PM-07:15PM"
+                },
+                "Mango Tango Mexican Grill": {
+                    "Fri": "02:15AM-06:00AM, 06:45PM-07:45PM",
+                    "Mon": "12:00PM-06:00PM",
+                    "Sat": "04:30AM-06:30PM",
+                    "Sun": "09:00AM-07:00PM",
+                    "Thu": "09:45AM-04:45PM",
+                    "Tue": "12:15AM-10:30AM, 03:30PM-09:45PM",
+                    "Wed": ""
+                },
+                "The Lemon Drop Cafe": {
+                    "Fri": "02:15AM-10:45AM, 02:00PM-11:00PM",
+                    "Mon": "10:30AM-03:00PM, 05:00PM-10:00PM",
+                    "Sat": "11:30AM-11:30AM, 01:30PM-07:00PM",
+                    "Sun": "10:30AM-08:45PM",
+                    "Thu": "05:30AM-12:15PM, 02:15PM-05:15PM",
+                    "Tue": "03:00PM-05:15PM",
+                    "Wed": ""
+                },
+                "Down Home Diner": {
+                    "Fri": "",
+                    "Mon": "",
+                    "Sat": "",
+                    "Sun": "11:15AM-08:30PM",
+                    "Thu": "01:15AM-05:15AM, 05:15PM-10:00PM",
+                    "Tue": "12:00AM-01:45AM, 01:15PM-06:00PM",
+                    "Wed": "07:15AM-11:45PM"
+                }
+            },
+            "user_prompt": "It's 10:00 PM on 2027-10-14. What restaurants are open at this time?",
+            "expected_response": {
+                "time": "2027-10-14 10:00PM",
+                "day_of_week": "Thu",
+                "opening_hours": {
+                    "The Meatball Market": "07:45AM-08:00AM",
+                    "Mango Tango Mexican Grill": "09:45AM-04:45PM",
+                    "The Lemon Drop Cafe": "05:30AM-12:15PM, 02:15PM-05:15PM",
+                    "Down Home Diner": "01:15AM-05:15AM, 05:15PM-10:00PM"
+                },
+                "is_open": []
+            }
+        },
+        "full_response": {
+            "time": "2027-10-14 10:00PM",
+            "day_of_week": "Thu",
+            "opening_hours": {
+                "The Meatball Market": "07:45AM-08:00AM",
+                "Mango Tango Mexican Grill": "09:45AM-04:45PM",
+                "The Lemon Drop Cafe": "05:30AM-12:15PM, 02:15PM-05:15PM",
+                "Down Home Diner": "01:15AM-05:15AM, 05:15PM-10:00PM"
+            },
+            "reasoning": {
+                "The Meatball Market": "The restaurant is closed at 10:00PM on Thursday because its opening hours are 07:45AM-08:00AM.",
+                "Mango Tango Mexican Grill": "The restaurant is closed at 10:00PM on Thursday because its opening hours are 09:45AM-04:45PM.",
+                "The Lemon Drop Cafe": "The restaurant is closed at 10:00PM on Thursday because its opening hours are 05:30AM-12:15PM and 02:15PM-05:15PM.",
+                "Down Home Diner": "The restaurant is open at 10:00PM on Thursday because its opening hours are 01:15AM-05:15AM and 05:15PM-10:00PM."
+            },
+            "is_open": [
+                "Down Home Diner"
+            ]
+        }
+    },
+    {
+        "id": 561,
+        "prompt": {
+            "problem_type": "TO_LIST",
+            "use_delta": false,
+            "today": "May 25, 2029",
+            "opening_hours": {
+                "The Red Velvet Room": {
+                    "Fri": "10:00AM-12:15PM",
+                    "Mon": "05:00AM-06:30AM, 02:15PM-07:00PM",
+                    "Sat": "04:45AM-10:30PM",
+                    "Sun": "12:00AM-03:45AM, 05:45PM-07:00PM",
+                    "Thu": "06:45AM-02:00PM, 05:45PM-06:45PM",
+                    "Tue": "12:00AM-11:00AM, 05:15PM-09:15PM",
+                    "Wed": "01:00PM-11:45PM"
+                },
+                "The Ice Cream Isle": {
+                    "Fri": "08:00AM-11:00AM, 05:30PM-10:30PM",
+                    "Mon": "05:45AM-01:15PM",
+                    "Sat": "06:00AM-06:45AM, 04:45PM-08:00PM",
+                    "Sun": "02:45AM-07:45AM, 03:15PM-06:30PM",
+                    "Thu": "04:15AM-05:30AM, 02:00PM-11:45PM",
+                    "Tue": "05:00PM-06:45PM",
+                    "Wed": "09:30AM-04:00PM"
+                },
+                "Bubbly Bistro": {
+                    "Fri": "12:45AM-09:00AM, 01:45PM-11:00PM",
+                    "Mon": "04:15AM-07:30AM",
+                    "Sat": "05:30AM-06:30AM",
+                    "Sun": "09:45AM-02:45PM",
+                    "Thu": "07:15AM-02:30PM",
+                    "Tue": "02:15AM-01:30PM, 07:30PM-10:00PM",
+                    "Wed": ""
+                },
+                "Hot Tamale Mexican Cantina": {
+                    "Fri": "04:15PM-11:30PM",
+                    "Mon": "06:00AM-03:30PM",
+                    "Sat": "09:00AM-10:15PM",
+                    "Sun": "12:15AM-10:15AM, 11:30AM-03:15PM",
+                    "Thu": "03:15AM-05:15PM",
+                    "Tue": "08:30AM-12:15PM, 05:30PM-08:00PM",
+                    "Wed": "01:15AM-10:15AM, 01:30PM-07:15PM"
+                },
+                "The Cupcake Cottage": {
+                    "Fri": "04:30AM-03:00PM, 08:15PM-08:45PM",
+                    "Mon": "05:30AM-01:15PM, 04:00PM-09:30PM",
+                    "Sat": "",
+                    "Sun": "02:00AM-03:45PM",
+                    "Thu": "",
+                    "Tue": "05:15AM-08:00PM",
+                    "Wed": "04:15PM-11:15PM"
+                }
+            },
+            "user_prompt": "The time is currently 25-05-2029 11:00. Can you list the restaurants that are still open?",
+            "expected_response": {
+                "time": "2029-05-25 11:00AM",
+                "day_of_week": "Fri",
+                "opening_hours": {
+                    "The Red Velvet Room": "10:00AM-12:15PM",
+                    "The Ice Cream Isle": "08:00AM-11:00AM, 05:30PM-10:30PM",
+                    "Bubbly Bistro": "12:45AM-09:00AM, 01:45PM-11:00PM",
+                    "Hot Tamale Mexican Cantina": "04:15PM-11:30PM",
+                    "The Cupcake Cottage": "04:30AM-03:00PM, 08:15PM-08:45PM"
+                },
+                "is_open": [
+                    "The Red Velvet Room",
+                    "The Cupcake Cottage"
+                ]
+            }
+        },
+        "full_response": {
+            "time": "2029-05-25 11:00AM",
+            "day_of_week": "Fri",
+            "opening_hours": {
+                "The Red Velvet Room": "10:00AM-12:15PM",
+                "The Ice Cream Isle": "08:00AM-11:00AM, 05:30PM-10:30PM",
+                "Bubbly Bistro": "12:45AM-09:00AM, 01:45PM-11:00PM",
+                "Hot Tamale Mexican Cantina": "04:15PM-11:30PM",
+                "The Cupcake Cottage": "04:30AM-03:00PM, 08:15PM-08:45PM"
+            },
+            "reasoning": {
+                "The Red Velvet Room": "Open from 10:00AM to 12:15PM on Friday, and the time 11:00AM falls within this range.",
+                "The Ice Cream Isle": "Open from 08:00AM to 11:00AM and again from 05:30PM to 10:30PM on Friday. The time 11:00AM is exactly at the closing time, so it is still open.",
+                "Bubbly Bistro": "Open from 12:45AM to 09:00AM and again from 01:45PM to 11:00PM on Friday. The time 11:00AM is outside these ranges, so it is closed.",
+                "Hot Tamale Mexican Cantina": "Open from 04:15PM to 11:30PM on Friday. The time 11:00AM is before this range, so it is closed.",
+                "The Cupcake Cottage": "Open from 04:30AM to 03:00PM and again from 08:15PM to 08:45PM on Friday. The time 11:00AM falls within the morning range from 04:30AM to 03:00PM."
+            },
+            "is_open": [
+                "The Red Velvet Room",
+                "The Ice Cream Isle",
+                "The Cupcake Cottage"
+            ]
+        }
+    },
+    {
+        "id": 565,
+        "prompt": {
+            "problem_type": "TO_LIST",
+            "use_delta": false,
+            "today": "February 20, 2030",
+            "opening_hours": {
+                "Wildflower Cafe": {
+                    "Fri": "03:15AM-11:00AM, 07:15PM-08:30PM",
+                    "Mon": "",
+                    "Sat": "01:00AM-01:30PM, 03:15PM-11:45PM",
+                    "Sun": "09:00AM-10:45AM, 03:15PM-05:30PM",
+                    "Thu": "03:45AM-10:00AM",
+                    "Tue": "04:45AM-07:00AM, 02:30PM-09:45PM",
+                    "Wed": "02:15AM-09:45AM, 03:00PM-04:45PM"
+                },
+                "Fiery Fajita Fiesta": {
+                    "Fri": "06:15AM-01:00PM",
+                    "Mon": "04:30AM-09:00AM, 12:30PM-10:30PM",
+                    "Sat": "12:00AM-09:30AM",
+                    "Sun": "01:00AM-04:00PM",
+                    "Thu": "12:30AM-07:30AM, 07:30PM-11:30PM",
+                    "Tue": "06:00AM-10:45PM",
+                    "Wed": ""
+                },
+                "Fresh From the Kettle Soup": {
+                    "Fri": "02:45AM-05:00AM, 02:45PM-10:45PM",
+                    "Mon": "",
+                    "Sat": "04:15AM-12:30PM",
+                    "Sun": "05:00AM-11:30AM",
+                    "Thu": "06:30AM-07:15AM, 10:15PM-10:30PM",
+                    "Tue": "03:15AM-03:30PM",
+                    "Wed": "04:45AM-07:30AM"
+                },
+                "Farmhouse Fare": {
+                    "Fri": "07:00AM-12:15PM, 03:30PM-08:45PM",
+                    "Mon": "09:15AM-11:15PM",
+                    "Sat": "02:45AM-10:45AM, 09:45PM-11:15PM",
+                    "Sun": "07:00AM-08:15AM",
+                    "Thu": "08:45AM-01:45PM",
+                    "Tue": "01:15AM-09:45AM, 03:45PM-07:45PM",
+                    "Wed": "12:45AM-04:00AM, 05:45PM-09:45PM"
+                },
+                "The Tasty Taco": {
+                    "Fri": "01:30AM-11:00AM",
+                    "Mon": "05:00AM-08:45AM",
+                    "Sat": "12:30PM-07:00PM",
+                    "Sun": "08:00AM-02:30PM, 05:30PM-11:30PM",
+                    "Thu": "01:00AM-03:45AM, 08:00PM-11:15PM",
+                    "Tue": "01:30AM-02:30AM, 08:15PM-08:45PM",
+                    "Wed": ""
+                }
+            },
+            "user_prompt": "It's 16:39:00 on Wednesday, February 20, 2030. Which restaurants should be open now?",
+            "expected_response": {
+                "time": "2030-02-20 04:39PM",
+                "day_of_week": "Wed",
+                "opening_hours": {
+                    "Wildflower Cafe": "02:15AM-09:45AM, 03:00PM-04:45PM",
+                    "Fiery Fajita Fiesta": "Closed",
+                    "Fresh From the Kettle Soup": "04:45AM-07:30AM",
+                    "Farmhouse Fare": "12:45AM-04:00AM, 05:45PM-09:45PM",
+                    "The Tasty Taco": "Closed"
+                },
+                "is_open": [
+                    "Wildflower Cafe"
+                ]
+            }
+        },
+        "full_response": {
+            "time": "2030-02-20 04:39PM",
+            "day_of_week": "Wed",
+            "opening_hours": {
+                "Wildflower Cafe": "02:15AM-09:45AM, 03:00PM-04:45PM",
+                "Fiery Fajita Fiesta": "Closed",
+                "Fresh From the Kettle Soup": "04:45AM-07:30AM",
+                "Farmhouse Fare": "12:45AM-04:00AM, 05:45PM-09:45PM",
+                "The Tasty Taco": "Closed"
+            },
+            "reasoning": {
+                "Wildflower Cafe": "The current time 04:39PM is outside the open hours 02:15AM-09:45AM and 03:00PM-04:45PM on Wednesday.",
+                "Fiery Fajita Fiesta": "The restaurant is closed on Wednesday.",
+                "Fresh From the Kettle Soup": "The current time 04:39PM is outside the open hours 04:45AM-07:30AM on Wednesday.",
+                "Farmhouse Fare": "The current time 04:39PM is outside the open hours 12:45AM-04:00AM and before the open hours 05:45PM-09:45PM on Wednesday.",
+                "The Tasty Taco": "The restaurant is closed on Wednesday."
+            },
+            "is_open": []
+        }
+    },
+    {
+        "id": 572,
+        "prompt": {
+            "problem_type": "TO_LIST",
+            "use_delta": false,
+            "today": "August 12, 2024",
+            "opening_hours": {
+                "Flaming Fajita Fiesta": {
+                    "Fri": "02:15PM-05:45PM",
+                    "Mon": "05:30AM-11:30AM, 10:15PM-10:30PM",
+                    "Sat": "12:00AM-04:15AM, 05:30PM-11:30PM",
+                    "Sun": "03:15PM-09:15PM",
+                    "Thu": "05:45AM-07:30PM",
+                    "Tue": "10:15AM-03:30PM",
+                    "Wed": "01:45AM-07:15AM"
+                },
+                "The Pickle Palace": {
+                    "Fri": "02:30PM-07:15PM",
+                    "Mon": "02:15AM-08:45AM, 03:15PM-06:15PM",
+                    "Sat": "05:15AM-05:00PM",
+                    "Sun": "04:00AM-06:00PM",
+                    "Thu": "05:30PM-11:30PM",
+                    "Tue": "04:45PM-09:45PM",
+                    "Wed": "08:45AM-11:45AM"
+                },
+                "Red Velvet Lounge": {
+                    "Fri": "04:00AM-04:15PM",
+                    "Mon": "12:45AM-04:00AM, 03:00PM-10:45PM",
+                    "Sat": "04:30AM-06:30AM",
+                    "Sun": "12:30PM-07:30PM",
+                    "Thu": "06:45AM-04:00PM",
+                    "Tue": "12:15PM-11:45PM",
+                    "Wed": "05:00AM-05:15PM"
+                }
+            },
+            "user_prompt": "It's 06:00 PM on 2024-08-12. What restaurants are open at this time?",
+            "expected_response": {
+                "time": "2024-08-12 06:00PM",
+                "day_of_week": "Mon",
+                "opening_hours": {
+                    "Flaming Fajita Fiesta": "05:30AM-11:30AM, 10:15PM-10:30PM",
+                    "The Pickle Palace": "02:15AM-08:45AM, 03:15PM-06:15PM",
+                    "Red Velvet Lounge": "12:45AM-04:00AM, 03:00PM-10:45PM"
+                },
+                "is_open": [
+                    "The Pickle Palace",
+                    "Red Velvet Lounge"
+                ]
+            }
+        },
+        "full_response": {
+            "time": "2024-08-12 06:00PM",
+            "day_of_week": "Mon",
+            "opening_hours": {
+                "Flaming Fajita Fiesta": "05:30AM-11:30AM, 10:15PM-10:30PM",
+                "The Pickle Palace": "02:15AM-08:45AM, 03:15PM-06:15PM",
+                "Red Velvet Lounge": "12:45AM-04:00AM, 03:00PM-10:45PM"
+            },
+            "reasoning": {
+                "Flaming Fajita Fiesta": "Closed because 06:00PM is not within 05:30AM-11:30AM and 10:15PM-10:30PM.",
+                "The Pickle Palace": "Closed because 06:00PM is exactly at the closing time of 06:15PM.",
+                "Red Velvet Lounge": "Open because 06:00PM is within 03:00PM-10:45PM."
+            },
+            "is_open": [
+                "Red Velvet Lounge"
+            ]
+        }
+    },
+    {
+        "id": 597,
+        "prompt": {
+            "problem_type": "TO_LIST",
+            "use_delta": false,
+            "today": "February 20, 2028",
+            "opening_hours": {
+                "Harvest Fall Cafe": {
+                    "Fri": "12:00AM-10:00AM, 01:15PM-10:45PM",
+                    "Mon": "05:45AM-08:45AM",
+                    "Sat": "04:45AM-05:30PM",
+                    "Sun": "03:15AM-11:30AM, 04:30PM-05:45PM",
+                    "Thu": "02:00AM-08:30PM",
+                    "Tue": "02:00AM-05:45AM",
+                    "Wed": "03:15AM-10:45AM, 01:00PM-08:30PM"
+                },
+                "The Baked Beanery": {
+                    "Fri": "01:30AM-09:45AM, 02:15PM-08:45PM",
+                    "Mon": "01:15AM-10:30AM, 04:15PM-10:45PM",
+                    "Sat": "12:30PM-05:00PM",
+                    "Sun": "08:00AM-12:15PM",
+                    "Thu": "10:15AM-01:45PM",
+                    "Tue": "11:15AM-10:45PM",
+                    "Wed": "06:00AM-11:00PM"
+                },
+                "Byte Me Burger Joint": {
+                    "Fri": "05:45PM-10:30PM",
+                    "Mon": "08:15AM-10:15AM, 02:30PM-04:15PM",
+                    "Sat": "04:45AM-11:45AM",
+                    "Sun": "12:15AM-10:30PM",
+                    "Thu": "01:00AM-08:15AM, 12:00PM-08:15PM",
+                    "Tue": "11:00AM-07:45PM",
+                    "Wed": "02:45PM-05:00PM"
+                },
+                "Sizzling Saffron Indian Cuisine": {
+                    "Fri": "04:30PM-07:45PM",
+                    "Mon": "12:30AM-09:00AM, 01:00PM-01:45PM",
+                    "Sat": "04:45AM-12:00PM",
+                    "Sun": "09:00AM-09:15AM, 04:45PM-06:15PM",
+                    "Thu": "12:15AM-05:45AM, 04:30PM-08:00PM",
+                    "Tue": "04:30AM-10:15AM",
+                    "Wed": "11:15AM-01:45PM, 03:15PM-09:30PM"
+                }
+            },
+            "user_prompt": "At this exact moment, it's 01:09 on 20-02-2028. Please list all the open restaurants.",
+            "expected_response": {
+                "time": "2028-02-20 01:09AM",
+                "day_of_week": "Sun",
+                "opening_hours": {
+                    "Harvest Fall Cafe": "03:15AM-11:30AM, 04:30PM-05:45PM",
+                    "The Baked Beanery": "08:00AM-12:15PM",
+                    "Byte Me Burger Joint": "12:15AM-10:30PM",
+                    "Sizzling Saffron Indian Cuisine": "09:00AM-09:15AM, 04:45PM-06:15PM"
+                },
+                "is_open": [
+                    "Byte Me Burger Joint"
+                ]
+            }
+        },
+        "full_response": {
+            "time": "2028-02-20 01:09AM",
+            "day_of_week": "Mon",
+            "opening_hours": {
+                "Harvest Fall Cafe": "05:45AM-08:45AM",
+                "The Baked Beanery": "01:15AM-10:30AM, 04:15PM-10:45PM",
+                "Byte Me Burger Joint": "08:15AM-10:15AM, 02:30PM-04:15PM",
+                "Sizzling Saffron Indian Cuisine": "12:30AM-09:00AM, 01:00PM-01:45PM"
+            },
+            "reasoning": {
+                "Harvest Fall Cafe": "Closed because the current time 01:09AM does not fall within the opening hours 05:45AM-08:45AM on Monday.",
+                "The Baked Beanery": "Closed because the current time 01:09AM does not fall within the opening hours 01:15AM-10:30AM or 04:15PM-10:45PM on Monday.",
+                "Byte Me Burger Joint": "Closed because the current time 01:09AM does not fall within the opening hours 08:15AM-10:15AM or 02:30PM-04:15PM on Monday.",
+                "Sizzling Saffron Indian Cuisine": "Open because the current time 01:09AM falls within the opening hours 12:30AM-09:00AM on Monday."
+            },
+            "is_open": [
+                "Sizzling Saffron Indian Cuisine"
+            ]
+        }
+    },
+    {
+        "id": 736,
+        "prompt": {
+            "problem_type": "TO_LIST",
+            "use_delta": false,
+            "today": "November 10, 2025",
+            "opening_hours": {
+                "The Olive Branch Mediterranean": {
+                    "Fri": "06:15AM-07:30AM, 04:45PM-09:15PM",
+                    "Mon": "05:00AM-06:00AM, 03:45PM-06:45PM",
+                    "Sat": "07:00AM-09:00PM",
+                    "Sun": "11:30AM-11:45AM, 07:30PM-11:45PM",
+                    "Thu": "07:15AM-10:15PM",
+                    "Tue": "03:00AM-04:45PM",
+                    "Wed": "09:45AM-10:15PM"
+                },
+                "The Blue Goose Tavern": {
+                    "Fri": "01:00AM-07:45PM",
+                    "Mon": "12:30AM-10:15AM, 06:00PM-08:00PM",
+                    "Sat": "02:15AM-04:15AM, 03:00PM-08:00PM",
+                    "Sun": "02:45PM-10:00PM",
+                    "Thu": "04:00PM-06:00PM",
+                    "Tue": "07:30AM-07:45AM, 07:00PM-07:45PM",
+                    "Wed": "05:15AM-06:30AM, 06:00PM-07:15PM"
+                },
+                "The Silver Spoon Bistro": {
+                    "Fri": "01:15PM-04:15PM",
+                    "Mon": "12:15AM-02:15AM",
+                    "Sat": "02:00AM-06:15AM, 02:45PM-10:00PM",
+                    "Sun": "04:45AM-06:30PM",
+                    "Thu": "02:00AM-02:30AM, 05:00PM-05:30PM",
+                    "Tue": "06:30AM-03:30PM, 04:00PM-05:00PM",
+                    "Wed": "12:15AM-06:45PM"
+                },
+                "Veggie Oasis": {
+                    "Fri": "05:30AM-10:15AM, 07:15PM-11:00PM",
+                    "Mon": "12:45AM-07:30AM, 03:45PM-07:00PM",
+                    "Sat": "12:00AM-06:30PM",
+                    "Sun": "05:15AM-08:45AM, 03:30PM-08:00PM",
+                    "Thu": "12:30AM-07:00AM",
+                    "Tue": "12:45AM-08:30AM, 12:00PM-06:15PM",
+                    "Wed": "12:30AM-03:00PM"
+                },
+                "The Apple Alcove": {
+                    "Fri": "",
+                    "Mon": "12:45AM-09:45PM",
+                    "Sat": "01:45AM-03:15PM, 04:15PM-10:00PM",
+                    "Sun": "07:30AM-09:00AM",
+                    "Thu": "12:15AM-06:15PM",
+                    "Tue": "08:15AM-09:15AM, 02:45PM-05:15PM",
+                    "Wed": "06:00AM-10:15AM, 11:00PM-11:45PM"
+                }
+            },
+            "user_prompt": "The exact time currently is 06:00:00 AM, Nov 10, 2025. Which restaurants are open now?",
+            "expected_response": {
+                "time": "2025-11-10 06:00AM",
+                "day_of_week": "Mon",
+                "opening_hours": {
+                    "The Olive Branch Mediterranean": "05:00AM-06:00AM, 03:45PM-06:45PM",
+                    "The Blue Goose Tavern": "12:30AM-10:15AM, 06:00PM-08:00PM",
+                    "The Silver Spoon Bistro": "12:15AM-02:15AM",
+                    "Veggie Oasis": "12:45AM-07:30AM, 03:45PM-07:00PM",
+                    "The Apple Alcove": "12:45AM-09:45PM"
+                },
+                "is_open": [
+                    "The Blue Goose Tavern",
+                    "Veggie Oasis",
+                    "The Apple Alcove"
+                ]
+            }
+        },
+        "full_response": {
+            "time": "2025-11-10 06:00AM",
+            "day_of_week": "Mon",
+            "opening_hours": {
+                "The Olive Branch Mediterranean": "05:00AM-06:00AM, 03:45PM-06:45PM",
+                "The Blue Goose Tavern": "12:30AM-10:15AM, 06:00PM-08:00PM",
+                "The Silver Spoon Bistro": "12:15AM-02:15AM",
+                "Veggie Oasis": "12:45AM-07:30AM, 03:45PM-07:00PM",
+                "The Apple Alcove": "12:45AM-09:45PM"
+            },
+            "reasoning": {
+                "The Olive Branch Mediterranean": "The restaurant is open from 05:00AM to 06:00AM and then from 03:45PM to 06:45PM. The current time of 06:00AM is within the first time frame.",
+                "The Blue Goose Tavern": "The restaurant is open from 12:30AM to 10:15AM and then from 06:00PM to 08:00PM. The current time of 06:00AM is within the first time frame.",
+                "The Silver Spoon Bistro": "The restaurant is open from 12:15AM to 02:15AM. The current time of 06:00AM is outside this time frame.",
+                "Veggie Oasis": "The restaurant is open from 12:45AM to 07:30AM and then from 03:45PM to 07:00PM. The current time of 06:00AM is within the first time frame.",
+                "The Apple Alcove": "The restaurant is open from 12:45AM to 09:45PM. The current time of 06:00AM is within this time frame."
+            },
+            "is_open": [
+                "The Olive Branch Mediterranean",
+                "The Blue Goose Tavern",
+                "Veggie Oasis",
+                "The Apple Alcove"
+            ]
+        }
+    },
+    {
+        "id": 753,
+        "prompt": {
+            "problem_type": "TO_LIST",
+            "use_delta": false,
+            "today": "June 17, 2030",
+            "opening_hours": {
+                "Urban Elegance": {
+                    "Fri": "01:00AM-03:15AM",
+                    "Mon": "06:45AM-11:15AM, 01:00PM-03:45PM",
+                    "Sat": "05:00AM-08:00AM",
+                    "Sun": "04:45AM-10:45AM",
+                    "Thu": "07:00AM-09:15AM, 11:00PM-11:30PM",
+                    "Tue": "07:45AM-02:15PM, 04:45PM-11:00PM",
+                    "Wed": "09:15PM-10:00PM"
+                },
+                "The Spice Rack Kitchen": {
+                    "Fri": "02:15AM-01:15PM, 03:30PM-08:45PM",
+                    "Mon": "01:30PM-11:45PM",
+                    "Sat": "02:00AM-04:30AM, 03:45PM-06:30PM",
+                    "Sun": "03:45AM-09:15AM, 07:00PM-08:15PM",
+                    "Thu": "12:00AM-11:45PM",
+                    "Tue": "02:45AM-03:45AM, 01:45PM-09:30PM",
+                    "Wed": "06:15AM-10:30AM, 06:30PM-09:30PM"
+                },
+                "Mini Mex": {
+                    "Fri": "",
+                    "Mon": "12:30PM-07:45PM",
+                    "Sat": "01:15AM-10:00AM",
+                    "Sun": "02:00AM-03:30AM, 02:45PM-03:15PM",
+                    "Thu": "04:30AM-12:00PM, 06:00PM-10:00PM",
+                    "Tue": "06:30AM-11:15AM",
+                    "Wed": "12:30PM-01:30PM, 06:45PM-10:45PM"
+                },
+                "Mojo Mixology Bar": {
+                    "Fri": "01:45AM-09:30AM, 03:30PM-07:00PM",
+                    "Mon": "03:15AM-09:00AM, 06:30PM-11:00PM",
+                    "Sat": "10:45AM-12:30PM, 06:45PM-09:30PM",
+                    "Sun": "01:00AM-06:45AM",
+                    "Thu": "08:45AM-08:00PM",
+                    "Tue": "04:30AM-05:00AM",
+                    "Wed": "12:45AM-04:45AM, 05:30PM-09:15PM"
+                },
+                "Spice Street": {
+                    "Fri": "04:15PM-09:45PM",
+                    "Mon": "12:45AM-04:30AM, 03:45PM-08:15PM",
+                    "Sat": "02:30AM-06:30AM, 12:30PM-11:15PM",
+                    "Sun": "10:15AM-05:00PM",
+                    "Thu": "02:45AM-05:30AM, 04:15PM-09:00PM",
+                    "Tue": "06:15AM-03:30PM",
+                    "Wed": "12:15AM-11:00AM, 01:00PM-07:30PM"
+                }
+            },
+            "user_prompt": "Find the restaurants open at Monday, 17 Jun 2030 15:43:00.",
+            "expected_response": {
+                "time": "2030-06-17 03:43PM",
+                "day_of_week": "Mon",
+                "opening_hours": {
+                    "Urban Elegance": "06:45AM-11:15AM, 01:00PM-03:45PM",
+                    "The Spice Rack Kitchen": "01:30PM-11:45PM",
+                    "Mini Mex": "12:30PM-07:45PM",
+                    "Mojo Mixology Bar": "03:15AM-09:00AM, 06:30PM-11:00PM",
+                    "Spice Street": "12:45AM-04:30AM, 03:45PM-08:15PM"
+                },
+                "is_open": [
+                    "Urban Elegance",
+                    "The Spice Rack Kitchen",
+                    "Mini Mex"
+                ]
+            }
+        },
+        "full_response": {
+            "time": "2030-06-17 03:43PM",
+            "day_of_week": "Mon",
+            "opening_hours": {
+                "Urban Elegance": "06:45AM-11:15AM, 01:00PM-03:45PM",
+                "The Spice Rack Kitchen": "01:30PM-11:45PM",
+                "Mini Mex": "12:30PM-07:45PM",
+                "Mojo Mixology Bar": "03:15AM-09:00AM, 06:30PM-11:00PM",
+                "Spice Street": "12:45AM-04:30AM, 03:45PM-08:15PM"
+            },
+            "reasoning": {
+                "Urban Elegance": "Urban Elegance is open on Mondays from 01:00PM to 03:45PM. Since the user time of 03:43PM is not within this range, the restaurant is closed.",
+                "The Spice Rack Kitchen": "The Spice Rack Kitchen is open on Mondays from 01:30PM to 11:45PM. Since the user time of 03:43PM is within this range, the restaurant is open.",
+                "Mini Mex": "Mini Mex is open on Mondays from 12:30PM to 07:45PM. Since the user time of 03:43PM is within this range, the restaurant is open.",
+                "Mojo Mixology Bar": "Mojo Mixology Bar is open on Mondays from 03:15AM to 09:00AM and from 06:30PM to 11:00PM. Since the user time of 03:43PM is not within these ranges, the restaurant is closed.",
+                "Spice Street": "Spice Street is open on Mondays from 12:45AM to 04:30AM and from 03:45PM to 08:15PM. Since the user time of 03:43PM is not within these ranges, the restaurant is closed. The next opening is at 03:45PM."
+            },
+            "is_open": [
+                "The Spice Rack Kitchen",
+                "Mini Mex"
+            ]
+        }
+    },
+    {
+        "id": 789,
+        "prompt": {
+            "problem_type": "TO_LIST",
+            "use_delta": false,
+            "today": "April 13, 2029",
+            "opening_hours": {
+                "The Spicy Shrimp Shack": {
+                    "Fri": "05:30AM-10:00PM",
+                    "Mon": "06:30PM-11:15PM",
+                    "Sat": "07:15AM-09:45AM, 04:15PM-06:45PM",
+                    "Sun": "05:00AM-05:15PM",
+                    "Thu": "08:00AM-10:00AM, 02:30PM-07:30PM",
+                    "Tue": "05:15AM-06:45AM",
+                    "Wed": "08:00AM-08:45AM, 09:00PM-09:45PM"
+                },
+                "The Mongolian Grill": {
+                    "Fri": "12:30PM-05:45PM",
+                    "Mon": "08:45AM-08:45PM",
+                    "Sat": "02:15AM-11:30PM",
+                    "Sun": "10:45AM-02:15PM, 08:00PM-08:15PM",
+                    "Thu": "06:30AM-11:45AM, 01:15PM-06:45PM",
+                    "Tue": "01:15AM-04:00AM, 01:45PM-04:15PM",
+                    "Wed": "09:45AM-12:30PM, 04:30PM-09:30PM"
+                },
+                "Cactus Cantina": {
+                    "Fri": "07:15AM-12:15PM",
+                    "Mon": "12:15AM-06:30AM, 03:45PM-11:45PM",
+                    "Sat": "06:45AM-12:00PM, 04:00PM-09:00PM",
+                    "Sun": "12:15AM-10:30AM, 06:30PM-10:00PM",
+                    "Thu": "03:45PM-07:00PM",
+                    "Tue": "10:45AM-11:00AM, 05:15PM-08:15PM",
+                    "Wed": "03:30AM-04:45AM"
+                },
+                "The Sizzling Skillet": {
+                    "Fri": "12:00PM-11:15PM",
+                    "Mon": "03:15AM-05:00AM, 03:00PM-06:15PM",
+                    "Sat": "05:30AM-10:30AM, 02:00PM-02:30PM",
+                    "Sun": "02:30AM-10:15AM",
+                    "Thu": "03:15AM-07:00AM, 02:45PM-08:15PM",
+                    "Tue": "",
+                    "Wed": "03:30AM-07:45PM"
+                }
+            },
+            "user_prompt": "Can you tell me the open restaurants if the time is now 22:00:00 on April 13?",
+            "expected_response": {
+                "time": "2029-04-13 10:00PM",
+                "day_of_week": "Fri",
+                "opening_hours": {
+                    "The Spicy Shrimp Shack": "05:30AM-10:00PM",
+                    "The Mongolian Grill": "12:30PM-05:45PM",
+                    "Cactus Cantina": "07:15AM-12:15PM",
+                    "The Sizzling Skillet": "12:00PM-11:15PM"
+                },
+                "is_open": [
+                    "The Sizzling Skillet"
+                ]
+            }
+        },
+        "full_response": {
+            "time": "2029-04-13 10:00PM",
+            "day_of_week": "Fri",
+            "opening_hours": {
+                "The Spicy Shrimp Shack": "05:30AM-10:00PM",
+                "The Mongolian Grill": "12:30PM-05:45PM",
+                "Cactus Cantina": "07:15AM-12:15PM",
+                "The Sizzling Skillet": "12:00PM-11:15PM"
+            },
+            "reasoning": {
+                "The Spicy Shrimp Shack": "The Spicy Shrimp Shack is open from 05:30AM to 10:00PM on Fridays, and the given time of 10:00PM falls within this range.",
+                "The Mongolian Grill": "The Mongolian Grill is open from 12:30PM to 05:45PM on Fridays. Since the given time of 10:00PM is outside this range, it is closed.",
+                "Cactus Cantina": "Cactus Cantina is open from 07:15AM to 12:15PM on Fridays. The time 10:00PM is outside this range.",
+                "The Sizzling Skillet": "The Sizzling Skillet is open from 12:00PM to 11:15PM on Fridays, and the given time of 10:00PM falls within this range."
+            },
+            "is_open": [
+                "The Spicy Shrimp Shack",
+                "The Sizzling Skillet"
+            ]
+        }
+    },
+    {
+        "id": 792,
+        "prompt": {
+            "problem_type": "TO_LIST",
+            "use_delta": false,
+            "today": "October 11, 2030",
+            "opening_hours": {
+                "Wholesome Waves": {
+                    "Fri": "01:00AM-06:45AM",
+                    "Mon": "09:30AM-08:45PM",
+                    "Sat": "12:15PM-07:30PM",
+                    "Sun": "04:45AM-06:15AM, 03:00PM-10:15PM",
+                    "Thu": "05:30AM-11:30AM, 10:00PM-11:30PM",
+                    "Tue": "",
+                    "Wed": "03:00AM-02:30PM"
+                },
+                "Divine Flavor": {
+                    "Fri": "07:15AM-09:45AM, 11:15PM-11:30PM",
+                    "Mon": "",
+                    "Sat": "07:15PM-07:45PM",
+                    "Sun": "07:15PM-10:30PM",
+                    "Thu": "",
+                    "Tue": "",
+                    "Wed": "05:15AM-01:30PM, 07:45PM-10:15PM"
+                },
+                "The Seafood Spot": {
+                    "Fri": "11:45AM-12:15PM, 03:15PM-06:00PM",
+                    "Mon": "01:30AM-03:15PM, 04:45PM-09:15PM",
+                    "Sat": "08:30AM-12:30PM, 04:45PM-07:00PM",
+                    "Sun": "02:00AM-04:45AM, 03:30PM-07:45PM",
+                    "Thu": "12:30AM-08:00AM, 04:15PM-06:45PM",
+                    "Tue": "12:45AM-05:15AM",
+                    "Wed": "05:30AM-03:15PM"
+                }
+            },
+            "user_prompt": "Tell me the restaurants that are open at 01:00 on 11/10/2030.",
+            "expected_response": {
+                "time": "2030-10-11 01:00AM",
+                "day_of_week": "Fri",
+                "opening_hours": {
+                    "Wholesome Waves": "01:00AM-06:45AM",
+                    "Divine Flavor": "07:15AM-09:45AM, 11:15PM-11:30PM",
+                    "The Seafood Spot": "11:45AM-12:15PM, 03:15PM-06:00PM"
+                },
+                "is_open": [
+                    "Wholesome Waves"
+                ]
+            }
+        },
+        "full_response": {
+            "time": "2030-10-11 01:00AM",
+            "day_of_week": "Sat",
+            "opening_hours": {
+                "Wholesome Waves": "12:15PM-07:30PM",
+                "Divine Flavor": "07:15PM-07:45PM",
+                "The Seafood Spot": "08:30AM-12:30PM, 04:45PM-07:00PM"
+            },
+            "reasoning": {
+                "Wholesome Waves": "The restaurant is only open from 12:15PM to 07:30PM on Saturdays, so it is closed at 01:00AM.",
+                "Divine Flavor": "The restaurant is only open from 07:15PM to 07:45PM on Saturdays, so it is closed at 01:00AM.",
+                "The Seafood Spot": "The restaurant is only open from 08:30AM to 12:30PM and 04:45PM to 07:00PM on Saturdays, so it is closed at 01:00AM."
+            },
+            "is_open": []
+        }
+    },
+    {
+        "id": 862,
+        "prompt": {
+            "problem_type": "TO_LIST",
+            "use_delta": false,
+            "today": "January 09, 2028",
+            "opening_hours": {
+                "Taste of Tranquility": {
+                    "Fri": "03:45PM-08:45PM",
+                    "Mon": "08:30AM-09:00PM",
+                    "Sat": "02:15AM-03:00AM, 01:00PM-05:15PM",
+                    "Sun": "04:30AM-06:15AM, 03:00PM-11:15PM",
+                    "Thu": "12:00PM-07:15PM",
+                    "Tue": "03:15AM-04:00AM",
+                    "Wed": "07:30AM-09:30AM, 11:15AM-02:45PM"
+                },
+                "Delish Deli": {
+                    "Fri": "03:15AM-12:30PM, 05:45PM-08:00PM",
+                    "Mon": "05:00PM-10:00PM",
+                    "Sat": "05:45PM-07:00PM",
+                    "Sun": "02:15PM-04:30PM",
+                    "Thu": "03:15AM-07:15PM",
+                    "Tue": "01:15AM-12:30PM",
+                    "Wed": ""
+                },
+                "Veggie Haven": {
+                    "Fri": "07:30AM-09:30PM",
+                    "Mon": "12:45AM-04:30PM",
+                    "Sat": "03:45PM-05:15PM",
+                    "Sun": "05:45AM-08:15AM, 05:00PM-11:45PM",
+                    "Thu": "03:00AM-08:00AM",
+                    "Tue": "05:15AM-10:00PM",
+                    "Wed": "02:30AM-01:00PM, 03:45PM-06:30PM"
+                },
+                "Watermelon Wishes": {
+                    "Fri": "02:15PM-03:45PM",
+                    "Mon": "04:45AM-08:45AM",
+                    "Sat": "01:45AM-02:30AM, 11:15AM-12:30PM",
+                    "Sun": "",
+                    "Thu": "09:15AM-09:00PM",
+                    "Tue": "01:30AM-08:30AM, 02:30PM-06:30PM",
+                    "Wed": "07:00AM-08:30AM, 03:00PM-04:15PM"
+                }
+            },
+            "user_prompt": "Can you tell me the open restaurants if the time is now 09:00:00 on January 09?",
+            "expected_response": {
+                "time": "2028-01-09 09:00AM",
+                "day_of_week": "Sun",
+                "opening_hours": {
+                    "Taste of Tranquility": "04:30AM-06:15AM, 03:00PM-11:15PM",
+                    "Delish Deli": "02:15PM-04:30PM",
+                    "Veggie Haven": "05:45AM-08:15AM, 05:00PM-11:45PM",
+                    "Watermelon Wishes": "Closed"
+                },
+                "is_open": []
+            }
+        },
+        "full_response": {
+            "time": "2028-01-09 09:00AM",
+            "day_of_week": "Sun",
+            "opening_hours": {
+                "Taste of Tranquility": "04:30AM-06:15AM, 03:00PM-11:15PM",
+                "Delish Deli": "02:15PM-04:30PM",
+                "Veggie Haven": "05:45AM-08:15AM, 05:00PM-11:45PM",
+                "Watermelon Wishes": "Closed"
+            },
+            "reasoning": {
+                "Taste of Tranquility": "The restaurant is open from 04:30AM to 06:15AM and from 03:00PM to 11:15PM on Sundays. 09:00AM is outside these hours.",
+                "Delish Deli": "The restaurant is open from 02:15PM to 04:30PM on Sundays. 09:00AM is before opening hours.",
+                "Veggie Haven": "The restaurant is open from 05:45AM to 08:15AM and from 05:00PM to 11:45PM on Sundays. 09:00AM is between these hours.",
+                "Watermelon Wishes": "The restaurant is closed on Sundays."
+            },
+            "is_open": [
+                "Veggie Haven"
+            ]
+        }
+    },
+    {
+        "id": 875,
+        "prompt": {
+            "problem_type": "TO_LIST",
+            "use_delta": false,
+            "today": "July 17, 2026",
+            "opening_hours": {
+                "The Pasta Paradise": {
+                    "Fri": "12:00AM-06:45AM, 02:45PM-08:00PM",
+                    "Mon": "04:45PM-05:00PM",
+                    "Sat": "03:30AM-05:15PM",
+                    "Sun": "12:00PM-01:00PM, 06:00PM-11:15PM",
+                    "Thu": "02:15AM-05:45AM, 06:30PM-07:00PM",
+                    "Tue": "09:30AM-09:00PM",
+                    "Wed": "03:30AM-07:00AM, 10:45PM-11:45PM"
+                },
+                "The Gingerbread House": {
+                    "Fri": "01:00AM-02:30AM, 12:15PM-03:30PM",
+                    "Mon": "03:45AM-10:15AM",
+                    "Sat": "05:00AM-12:45PM",
+                    "Sun": "",
+                    "Thu": "06:30AM-10:00AM, 06:30PM-07:15PM",
+                    "Tue": "02:30AM-04:30AM, 04:45PM-07:30PM",
+                    "Wed": "12:45AM-06:45PM"
+                },
+                "Wok This Way": {
+                    "Fri": "01:00AM-05:00AM",
+                    "Mon": "02:45AM-09:15AM",
+                    "Sat": "",
+                    "Sun": "11:15AM-02:15PM",
+                    "Thu": "",
+                    "Tue": "02:30AM-08:45AM",
+                    "Wed": ""
+                }
+            },
+            "user_prompt": "It's Jul 17, 2026, 14:03 PM, what restaurants can I go to?",
+            "expected_response": {
+                "time": "2026-07-17 02:03PM",
+                "day_of_week": "Fri",
+                "opening_hours": {
+                    "The Pasta Paradise": "12:00AM-06:45AM, 02:45PM-08:00PM",
+                    "The Gingerbread House": "01:00AM-02:30AM, 12:15PM-03:30PM",
+                    "Wok This Way": "01:00AM-05:00AM"
+                },
+                "is_open": [
+                    "The Gingerbread House"
+                ]
+            }
+        },
+        "full_response": {
+            "time": "2026-07-17 02:03PM",
+            "day_of_week": "Thu",
+            "opening_hours": {
+                "The Pasta Paradise": "02:15AM-05:45AM, 06:30PM-07:00PM",
+                "The Gingerbread House": "06:30AM-10:00AM, 06:30PM-07:15PM",
+                "Wok This Way": "Closed"
+            },
+            "reasoning": {
+                "The Pasta Paradise": "The restaurant is open from 02:15AM to 05:45AM, and from 06:30PM to 07:00PM. Since it's currently 02:03PM, it is closed.",
+                "The Gingerbread House": "The restaurant is open from 06:30AM to 10:00AM, and from 06:30PM to 07:15PM. Since it's currently 02:03PM, it is closed.",
+                "Wok This Way": "The restaurant is closed on Thursdays."
+            },
+            "is_open": []
+        }
+    },
+    {
+        "id": 966,
+        "prompt": {
+            "problem_type": "TO_LIST",
+            "use_delta": false,
+            "today": "January 31, 2026",
+            "opening_hours": {
+                "The Jubilee Juice Bar": {
+                    "Fri": "07:30AM-09:15PM",
+                    "Mon": "12:30AM-06:30AM, 07:15PM-11:30PM",
+                    "Sat": "01:30AM-10:00AM, 08:00PM-10:30PM",
+                    "Sun": "03:30AM-05:30AM, 04:30PM-11:45PM",
+                    "Thu": "08:00AM-08:00PM",
+                    "Tue": "12:15AM-03:30AM",
+                    "Wed": "05:15AM-07:15AM, 08:45PM-10:45PM"
+                },
+                "The Urban Spoon": {
+                    "Fri": "01:45AM-10:00AM, 04:45PM-09:30PM",
+                    "Mon": "01:45AM-02:15AM, 03:30PM-11:30PM",
+                    "Sat": "05:00AM-05:30AM, 04:00PM-11:00PM",
+                    "Sun": "03:15AM-08:30AM",
+                    "Thu": "12:00AM-11:00AM, 06:30PM-10:30PM",
+                    "Tue": "03:45AM-02:00PM, 08:30PM-11:15PM",
+                    "Wed": "10:15AM-11:30AM, 01:30PM-03:15PM"
+                },
+                "Vegan Valley": {
+                    "Fri": "06:30AM-08:30AM, 10:15PM-11:00PM",
+                    "Mon": "06:00AM-02:30PM, 05:00PM-11:30PM",
+                    "Sat": "12:15AM-08:00AM",
+                    "Sun": "02:45AM-04:00AM, 06:00PM-08:30PM",
+                    "Thu": "",
+                    "Tue": "07:45AM-10:00PM",
+                    "Wed": "12:00AM-03:45AM, 01:45PM-07:00PM"
+                },
+                "Wholesome Kitchen": {
+                    "Fri": "05:45AM-07:30AM, 03:00PM-08:00PM",
+                    "Mon": "08:30AM-04:45PM",
+                    "Sat": "10:15PM-11:45PM",
+                    "Sun": "01:15AM-09:30AM",
+                    "Thu": "03:15AM-06:00PM",
+                    "Tue": "",
+                    "Wed": "12:00AM-07:15PM"
+                },
+                "Orchid Garden Cafe": {
+                    "Fri": "03:30AM-07:15AM, 06:45PM-07:15PM",
+                    "Mon": "05:00AM-12:00PM",
+                    "Sat": "08:30AM-01:45PM",
+                    "Sun": "05:30AM-11:30AM, 03:00PM-08:45PM",
+                    "Thu": "06:15PM-07:15PM",
+                    "Tue": "",
+                    "Wed": "12:15PM-03:00PM"
+                }
+            },
+            "user_prompt": "At this exact moment, it's 05:35 on 31-01-2026. Please list all the open restaurants.",
+            "expected_response": {
+                "time": "2026-01-31 05:35AM",
+                "day_of_week": "Sat",
+                "opening_hours": {
+                    "The Jubilee Juice Bar": "01:30AM-10:00AM, 08:00PM-10:30PM",
+                    "The Urban Spoon": "05:00AM-05:30AM, 04:00PM-11:00PM",
+                    "Vegan Valley": "12:15AM-08:00AM",
+                    "Wholesome Kitchen": "10:15PM-11:45PM",
+                    "Orchid Garden Cafe": "08:30AM-01:45PM"
+                },
+                "is_open": [
+                    "The Jubilee Juice Bar",
+                    "Vegan Valley"
+                ]
+            }
+        },
+        "full_response": {
+            "time": "2026-01-31 05:35AM",
+            "day_of_week": "Fri",
+            "opening_hours": {
+                "The Jubilee Juice Bar": "07:30AM-09:15PM",
+                "The Urban Spoon": "01:45AM-10:00AM, 04:45PM-09:30PM",
+                "Vegan Valley": "06:30AM-08:30AM, 10:15PM-11:00PM",
+                "Wholesome Kitchen": "05:45AM-07:30AM, 03:00PM-08:00PM",
+                "Orchid Garden Cafe": "03:30AM-07:15AM, 06:45PM-07:15PM"
+            },
+            "reasoning": {
+                "The Jubilee Juice Bar": "The current time is 05:35AM on Friday. The Jubilee Juice Bar opens at 07:30AM on Fridays, so it is currently closed.",
+                "The Urban Spoon": "The current time is 05:35AM on Friday. The Urban Spoon opens from 01:45AM to 10:00AM on Fridays, so it is currently open.",
+                "Vegan Valley": "The current time is 05:35AM on Friday. Vegan Valley opens at 06:30AM on Fridays, so it is currently closed.",
+                "Wholesome Kitchen": "The current time is 05:35AM on Friday. Wholesome Kitchen opens at 05:45AM on Fridays, so it is currently closed.",
+                "Orchid Garden Cafe": "The current time is 05:35AM on Friday. Orchid Garden Cafe opens from 03:30AM to 07:15AM on Fridays, so it is currently open."
+            },
+            "is_open": [
+                "The Urban Spoon",
+                "Orchid Garden Cafe"
+            ]
+        }
+    },
+    {
+        "id": 971,
+        "prompt": {
+            "problem_type": "TO_LIST",
+            "use_delta": false,
+            "today": "February 07, 2028",
+            "opening_hours": {
+                "Velvet Cake Co.": {
+                    "Fri": "09:30AM-11:30AM, 10:00PM-11:30PM",
+                    "Mon": "01:00AM-02:00AM, 01:00PM-08:30PM",
+                    "Sat": "",
+                    "Sun": "12:30AM-03:45AM, 07:30PM-10:45PM",
+                    "Thu": "",
+                    "Tue": "02:15AM-10:00AM, 06:45PM-11:15PM",
+                    "Wed": "05:15AM-09:00AM, 10:15PM-11:30PM"
+                },
+                "The Garden of Eats": {
+                    "Fri": "04:00PM-06:45PM",
+                    "Mon": "12:45AM-05:30AM",
+                    "Sat": "04:15AM-10:30AM, 03:30PM-05:30PM",
+                    "Sun": "09:15AM-11:15AM, 12:15PM-11:00PM",
+                    "Thu": "02:15AM-02:45PM",
+                    "Tue": "10:45AM-09:00PM",
+                    "Wed": "02:30AM-10:00AM, 08:15PM-08:30PM"
+                },
+                "Fresh Fish Fry": {
+                    "Fri": "04:30AM-06:30AM, 12:30PM-08:00PM",
+                    "Mon": "",
+                    "Sat": "01:30AM-02:00AM, 05:45PM-11:45PM",
+                    "Sun": "07:45AM-06:45PM",
+                    "Thu": "12:00PM-04:45PM",
+                    "Tue": "01:45PM-05:30PM",
+                    "Wed": "03:00AM-11:30AM, 05:15PM-07:45PM"
+                },
+                "Salted Caramel Cafe": {
+                    "Fri": "01:15AM-01:30AM",
+                    "Mon": "04:45AM-06:45AM, 12:45PM-05:45PM",
+                    "Sat": "04:30AM-10:45AM, 06:15PM-11:30PM",
+                    "Sun": "03:30AM-05:00AM, 06:30PM-11:45PM",
+                    "Thu": "05:45AM-01:45PM",
+                    "Tue": "",
+                    "Wed": "02:45AM-05:00AM, 01:30PM-02:30PM"
+                },
+                "Unfussy Eats": {
+                    "Fri": "03:30AM-04:30AM, 03:45PM-09:15PM",
+                    "Mon": "",
+                    "Sat": "08:30PM-09:00PM",
+                    "Sun": "07:15AM-02:45PM, 05:15PM-08:00PM",
+                    "Thu": "05:00AM-11:45AM, 02:15PM-06:45PM",
+                    "Tue": "02:15AM-04:15PM",
+                    "Wed": ""
+                }
+            },
+            "user_prompt": "It's 05:57 PM on 2028-02-07. What restaurants are open at this time?",
+            "expected_response": {
+                "time": "2028-02-07 05:57PM",
+                "day_of_week": "Mon",
+                "opening_hours": {
+                    "Velvet Cake Co.": "01:00AM-02:00AM, 01:00PM-08:30PM",
+                    "The Garden of Eats": "12:45AM-05:30AM",
+                    "Fresh Fish Fry": "Closed",
+                    "Salted Caramel Cafe": "04:45AM-06:45AM, 12:45PM-05:45PM",
+                    "Unfussy Eats": "Closed"
+                },
+                "is_open": [
+                    "Velvet Cake Co."
+                ]
+            }
+        },
+        "full_response": {
+            "time": "2028-02-07 05:57PM",
+            "day_of_week": "Mon",
+            "opening_hours": {
+                "Velvet Cake Co": "01:00AM-02:00AM, 01:00PM-08:30PM",
+                "The Garden of Eats": "12:45AM-05:30AM",
+                "Fresh Fish Fry": "Closed",
+                "Salted Caramel Cafe": "04:45AM-06:45AM, 12:45PM-05:45PM",
+                "Unfussy Eats": "Closed"
+            },
+            "reasoning": {
+                "Velvet Cake Co": "Open between 01:00PM-08:30PM, and 05:57PM falls within this range.",
+                "The Garden of Eats": "Open from 12:45AM-05:30AM, but 05:57PM is outside of this range.",
+                "Fresh Fish Fry": "Closed all day on Monday.",
+                "Salted Caramel Cafe": "Open from 04:45AM-06:45AM, and from 12:45PM-05:45PM, but 05:57PM is outside of these ranges.",
+                "Unfussy Eats": "Closed all day on Monday."
+            },
+            "is_open": [
+                "Velvet Cake Co"
+            ]
+        }
+    }
+]

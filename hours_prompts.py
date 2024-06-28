@@ -90,6 +90,16 @@ class Prompt:
         return out
     
     def evaluate_response(self, response: dict) -> float:
+        if self.type == ptype.TO_LIST and 'is_open' in response:
+            out = 0.0
+            for name in self.hours:
+                if (
+                    name in self.expected_response['is_open'] and name in response['is_open'] or
+                    name not in self.expected_response['is_open'] and name not in response['is_open']
+                ):
+                    out += 1.0 
+            return out / len(self.hours)
+        
         for key, val in self.expected_response.items():
             if key not in response or response[key] != val:
                 return 0
@@ -101,7 +111,7 @@ class Prompt:
         if self.type == ptype.TO_LIST and 'is_open' in response:
             out = 0.0
             for name in self.hours:
-                if (name in self.expected_response['is_open']) and name in response['is_open']:
+                if name in self.expected_response['is_open'] and name in response['is_open']:
                     out += 1.0 
             return out
         return 0

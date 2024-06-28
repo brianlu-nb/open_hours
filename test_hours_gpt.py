@@ -2,6 +2,8 @@ import numpy as np
 from openai import OpenAI
 from datasets import load_dataset
 from tqdm import tqdm
+from dotenv import load_dotenv
+import os
 import json
 import hours_prompts
 from hours_prompts import Prompt, generate_prompts
@@ -11,25 +13,25 @@ from huggingface_hub import InferenceClient
 
 
 def query(qa: dict) -> str:
-    with open("test_hours/hours_system_prompt.txt", 'r') as file:
-        system_prompt = file.read()
-    with open("test_hours/hours_user_prompt.txt", 'r') as file:
-        user_prompt = file.read().format(
-            opening_hours=qa['opening_hours'],
-            today=f"{qa['today']:%B %d, %Y}",
-            user_prompt=qa['user_prompt'],
-        )
+    # with open("test_hours/hours_system_prompt.txt", 'r') as file:
+    #     system_prompt = file.read()
+    # with open("test_hours/hours_user_prompt.txt", 'r') as file:
+    #     user_prompt = file.read().format(
+    #         opening_hours=qa['opening_hours'],
+    #         today=f"{qa['today']:%B %d, %Y}",
+    #         user_prompt=qa['user_prompt'],
+    #     )
         
-    response = client.chat.completions.create(
-        model=MODEL,
-        response_format={ "type": "json_object" },
-        messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt}
-        ],
-        temperature=TEMPERATURE,
-    )
-    return response.choices[0].message.content
+    # response = client.chat.completions.create(
+    #     model=MODEL,
+    #     response_format={ "type": "json_object" },
+    #     messages=[
+    #         {"role": "system", "content": system_prompt},
+    #         {"role": "user", "content": user_prompt}
+    #     ],
+    #     temperature=TEMPERATURE,
+    # )
+    # return response.choices[0].message.content
     
     # schema = {
     #     "type": "json",
@@ -54,25 +56,25 @@ def query(qa: dict) -> str:
     #         "required": ["time", "day_of_week", "opening_hours", "is_open"]
     #     }
     # }
-    # with open("test_hours/prompt.txt", 'r') as file:
-    #     prompt = file.read().format(
-    #         opening_hours=qa['opening_hours'],
-    #         today=qa['today'],
-    #         user_prompt=qa['user_prompt'],
-    #     )
-    # output_text = client.text_generation(
-    #     prompt,
-    #     max_new_tokens=1000,
-    #     do_sample=True,
-    #     temperature=0.01,
-    #     repetition_penalty=1,
-    #     top_p=0.95,
-    #     top_k=40,
-    #     details=True,
-    #     grammar=schema
-    # ).generated_text
+    with open("test_hours/prompt.txt", 'r') as file:
+        prompt = file.read().format(
+            opening_hours=qa['opening_hours'],
+            today=qa['today'],
+            user_prompt=qa['user_prompt'],
+        )
+    output_text = client.text_generation(
+        prompt,
+        max_new_tokens=1000,
+        do_sample=True,
+        temperature=1.0,
+        repetition_penalty=1,
+        top_p=0.95,
+        top_k=40,
+        details=True,
+        # grammar=schema
+    ).generated_text
     
-    # return output_text
+    return output_text
 
 def is_correct(response_dict: dict, output: dict) -> bool:
     for key in output:
@@ -81,7 +83,7 @@ def is_correct(response_dict: dict, output: dict) -> bool:
     return True
 
 def evaluate(id: int, response: str, prompt: Prompt, correct_ds: list, incorrect_ds: list) -> tuple[float, float, float, float, float]:
-    with open('test_hours/response.out', 'w') as file:
+    with open('test_hours/response-2.out', 'w') as file:
         file.write(response)
     
     res_str = response
@@ -183,10 +185,11 @@ def run_one_prompt(prompt_type: ptype, use_delta: bool, num_trials: int, num_com
 
 MODEL = "gpt-4o"
 TEMPERATURE = 1.0
-client = OpenAI(
-  api_key='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'
-)
-# client = InferenceClient(model="http://172.83.13.53:9001")
+
+load_dotenv()
+# api_key = os.getenv('OPENAI_API_KEY')
+# client = OpenAI()
+client = InferenceClient(model="http://0.0.0.0:8080")
 
 with open(f"test_hours/_correct-2.json", 'w') as file:
     file.write('[]')
@@ -196,8 +199,8 @@ with open(f"test_hours/_hours-2.out", 'w') as file:
     file.write('')
 
 
-# run_one_prompt(ptype.TO_LIST, False, 1000, 0)
+run_one_prompt(ptype.TO_LIST, False, 1000, 0)
 
-prompts = generate_prompts(prompt_type=ptype.TO_LIST, use_delta=False, num_trials=10000)
-with open("test_hours/data.jsonl", 'w') as file:
-    file.writelines([f"{json.dumps(prompt.to_dict_presentable())}\n" for prompt in prompts])
+# prompts = generate_prompts(prompt_type=ptype.TO_LIST, use_delta=False, num_trials=10000)
+# with open("test_hours/data-2.jsonl", 'w') as file:
+#     file.writelines([f"{json.dumps(prompt.to_dict_presentable())}\n" for prompt in prompts])

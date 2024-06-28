@@ -82,10 +82,10 @@ def get_prompt(problem_type: PromptType, res_name: str, final_time: datetime, us
             f"Tell me the restaurants that are open at {final_time:%H:%M on %d/%m/%Y}.",
             f"It is currently {final_time:%A at %I:%M %p}. Which places are open?",
             f"It's {final_time:%b %d, %Y, %H:%M %p}, what restaurants can I go to?",
-            f"It’s {final_time:%H:%M:%S on %A, %B %d, %Y}. Which restaurants should be open now?",
+            f"It's {final_time:%H:%M:%S on %A, %B %d, %Y}. Which restaurants should be open now?",
             f"The time is currently {final_time:%d-%m-%Y %H:%M}. Can you list the restaurants that are still open?",
             f"Find the restaurants open at {final_time:%A, %d %b %Y %H:%M:%S}.",
-            f"It’s {final_time:%I:%M %p on %Y-%m-%d}. What restaurants are open at this time?"
+            f"It's {final_time:%I:%M %p on %Y-%m-%d}. What restaurants are open at this time?"
         ])
         
     if problem_type == PromptType.TO_LIST and use_timedelta:

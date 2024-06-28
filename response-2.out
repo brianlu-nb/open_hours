@@ -1,0 +1,19 @@
+{
+    "time": "2027-03-10 01:37PM",
+    "day_of_week": "Wed",
+    "opening_hours": {
+        "The Waffle House": "05:45AM-09:30AM, 01:45PM-08:00PM",
+        "Savory Soups & Salads": "08:15AM-08:30AM, 03:15PM-05:15PM",
+        "The Sandwich Spot": "05:00AM-11:45AM, 03:15PM-07:30PM",
+        "The Nutmeg Nook Bakery": "10:45AM-11:15AM",
+        "The Cozy Kitchen": "03:00AM-09:30AM"
+    },
+    "reasoning": {
+        "The Waffle House": "The Waffle House opens from 05:45AM to 09:30AM and then from 01:45PM to 08:00PM on Wednesdays. Since it is currently 01:37PM, it is not within their hours.",
+        "Savory Soups & Salads": "Savory Soups & Salads opens from 08:15AM to 08:30AM and then from 03:15PM to 05:15PM on Wednesdays. Since it is currently 01:37PM, it is not within their hours.",
+        "The Sandwich Spot": "The Sandwich Spot opens from 05:00AM to 11:45AM and then from 03:15PM to 07:30PM on Wednesdays. Since it is currently 01:37PM, it is not within their hours.",
+        "The Nutmeg Nook Bakery": "The Nutmeg Nook Bakery opens from 10:45AM to 11:15AM on Wednesdays. Since it is currently 01:37PM, it is outside their hours.",
+        "The Cozy Kitchen": "The Cozy Kitchen opens from 03:00AM to 09:30AM on Wednesdays. Since it is currently 01:37PM, it is outside their hours."
+    },
+    "is_open": []
+} 

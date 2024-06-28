@@ -1,17 +1,17 @@
 {
-    "time": "2024-08-21 06:00AM",
-    "day_of_week": "Wed",
+    "time": "2025-03-29 08:59PM",
+    "day_of_week": "Sat",
     "opening_hours": {
-        "The Velvet Fork": "06:30AM-09:00AM",
-        "Rock n' Roll Sushi": "12:00AM-08:15AM",
-        "Summer Breeze Cafe": "01:00AM-08:15AM",
-        "Lemon Grass Thai": "05:15AM-02:15PM, 08:15PM-10:15PM",
-        "Pepper's Place": "12:45PM-03:15PM"
+        "Pasta Paradise": "Closed",
+        "The Wok n' Roll": "04:00AM-01:45PM, 04:15PM-07:15PM",
+        "The Peachy Pie Parlor": "12:30AM-02:15AM, 05:15PM-09:30PM"
+    },
+    "reasoning": {
+        "Pasta Paradise": "The restaurant is closed on Saturdays as there are no stated operating hours for this day.",
+        "The Wok n' Roll": "The restaurant's operating hours on Saturday are 04:00AM-01:45PM and 04:15PM-07:15PM. As of 08:59PM, it is outside these hours.",
+        "The Peachy Pie Parlor": "The restaurant's operating hours on Saturday are 12:30AM-02:15AM and 05:15PM-09:30PM. As of 08:59PM, it is within this latter time slot."
     },
     "is_open": [
-        "The Velvet Fork",
-        "Rock n' Roll Sushi",
-        "Summer Breeze Cafe",
-        "Lemon Grass Thai"
+        "The Peachy Pie Parlor"
     ]
 }
