@@ -1,12 +1,12 @@
-import logging
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s - %(filename)s[line:%(lineno)d] - %(levelname)s: %(message)s')
-logger = logging.getLogger(__name__)
+# import logging
+# logging.basicConfig(level=logging.DEBUG,
+#                     format='%(asctime)s - %(filename)s[line:%(lineno)d] - %(levelname)s: %(message)s')
+# logger = logging.getLogger(__name__)
 
 
 def get_by_limit_len(text: str, limit: int):
     if text is None:
-        logger.warning("text is None in get_by_limit_len")
+        # logger.warning("text is None in get_by_limit_len")
         return ""
     text_split = text.split(" ")
     return " ".join(text_split[: limit])

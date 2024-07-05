@@ -8,7 +8,7 @@ import json
 import os
 import time
 import concurrent.futures
-import logging
+# import logging
 import shortuuid
 from tqdm import tqdm
 
@@ -120,7 +120,7 @@ def get_answer(question, model, num_choices, max_tokens, answer_file):
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
+    # logging.basicConfig(level=logging.INFO)
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--bench-name",

@@ -1,17 +1,15 @@
 {
-    "time": "2025-03-29 08:59PM",
-    "day_of_week": "Sat",
+    "time": "2027-01-11 01:00AM",
+    "day_of_week": "Mon",
     "opening_hours": {
-        "Pasta Paradise": "Closed",
-        "The Wok n' Roll": "04:00AM-01:45PM, 04:15PM-07:15PM",
-        "The Peachy Pie Parlor": "12:30AM-02:15AM, 05:15PM-09:30PM"
+        "Spicy Noodle House": "06:45AM-08:45AM, 12:45PM-08:30PM",
+        "Fresh Start Cafe": "12:30PM-06:45PM",
+        "Fresh Catch Grill": "12:45PM-03:45PM, 08:15PM-11:15PM"
     },
     "reasoning": {
-        "Pasta Paradise": "The restaurant is closed on Saturdays as there are no stated operating hours for this day.",
-        "The Wok n' Roll": "The restaurant's operating hours on Saturday are 04:00AM-01:45PM and 04:15PM-07:15PM. As of 08:59PM, it is outside these hours.",
-        "The Peachy Pie Parlor": "The restaurant's operating hours on Saturday are 12:30AM-02:15AM and 05:15PM-09:30PM. As of 08:59PM, it is within this latter time slot."
+        "Spicy Noodle House": "Closed because it is not within the operating hours of 06:45AM-08:45AM or 12:45PM-08:30PM.",
+        "Fresh Start Cafe": "Closed because it is not within the operating hours of 12:30PM-06:45PM.",
+        "Fresh Catch Grill": "Closed because it is not within the operating hours of 12:45PM-03:45PM or 08:15PM-11:15PM."
     },
-    "is_open": [
-        "The Peachy Pie Parlor"
-    ]
+    "is_open": []
 }

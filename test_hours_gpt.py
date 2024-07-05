@@ -1,6 +1,5 @@
 import numpy as np
 from openai import OpenAI
-from datasets import load_dataset
 from tqdm import tqdm
 from dotenv import load_dotenv
 import os
@@ -8,55 +7,34 @@ import json
 import hours_prompts
 from hours_prompts import Prompt, generate_prompts
 from hours_prompts_db import PromptType as ptype
+import generate_hours
 from huggingface_hub import InferenceClient
 
 
 
-def query(qa: dict) -> str:
-    # with open("test_hours/hours_system_prompt.txt", 'r') as file:
-    #     system_prompt = file.read()
-    # with open("test_hours/hours_user_prompt.txt", 'r') as file:
-    #     user_prompt = file.read().format(
-    #         opening_hours=qa['opening_hours'],
-    #         today=f"{qa['today']:%B %d, %Y}",
-    #         user_prompt=qa['user_prompt'],
-    #     )
-        
-    # response = client.chat.completions.create(
-    #     model=MODEL,
-    #     response_format={ "type": "json_object" },
-    #     messages=[
-    #         {"role": "system", "content": system_prompt},
-    #         {"role": "user", "content": user_prompt}
-    #     ],
-    #     temperature=TEMPERATURE,
-    # )
-    # return response.choices[0].message.content
+def query(qa: dict, use_openai: bool) -> str:
+    if use_openai:
+        with open("test_hours/hours_system_prompt.txt", 'r') as file:
+            system_prompt = file.read()
+        with open("test_hours/hours_user_prompt.txt", 'r') as file:
+            user_prompt = file.read().format(
+                opening_hours=qa['opening_hours'],
+                today=f"{qa['today']:%B %d, %Y}",
+                user_prompt=qa['user_prompt'],
+            )
+            
+        response = client.chat.completions.create(
+            model=MODEL,
+            response_format={ "type": "json_object" },
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ],
+            temperature=TEMPERATURE,
+        )
+        return response.choices[0].message.content
     
-    # schema = {
-    #     "type": "json",
-    #     "value": {
-    #         "properties": {
-    #             "time": {
-    #                 "type": "string"
-    #             },
-    #             "day_of_week": {
-    #                 "type": "string"
-    #             },
-    #             "opening_hours": {
-    #                 "type": "string"
-    #             },
-    #             "is_open": {
-    #                 "type": "array",
-    #                 "items": {
-    #                     "type": "string"
-    #                 }
-    #             }
-    #         },
-    #         "required": ["time", "day_of_week", "opening_hours", "is_open"]
-    #     }
-    # }
-    with open("test_hours/prompt.txt", 'r') as file:
+    with open("test_hours/prompt_without_reason.txt", 'r') as file:
         prompt = file.read().format(
             opening_hours=qa['opening_hours'],
             today=qa['today'],
@@ -66,21 +44,42 @@ def query(qa: dict) -> str:
         prompt,
         max_new_tokens=1000,
         do_sample=True,
-        temperature=1.0,
-        repetition_penalty=1,
+        temperature=0.01,
+        repetition_penalty=1.3,
         top_p=0.95,
         top_k=40,
-        details=True,
-        # grammar=schema
+        details=True
     ).generated_text
     
-    return output_text
+    return output_text[output_text.find('{'):output_text.rfind('}') + 1]
 
-def is_correct(response_dict: dict, output: dict) -> bool:
-    for key in output:
-        if key not in response_dict or response_dict[key] != output[key]:
-            return False
-    return True
+def print_report(title: str, tp: int, fp: int, fn: int, tn: int, err: int):
+    total = tp + tn + fp + fn
+    ep = tp + fn
+    en = fp + tn
+    rp = tp + fp
+    rn = tn + fn
+    pprec = -1 if rp == 0 else tp / rp * 100
+    precl = -1 if ep == 0 else tp / ep * 100
+    nprec = -1 if rn == 0 else tn / rn * 100
+    nrecl = -1 if en == 0 else tn / en * 100
+    pf1 = 2/(1/(pprec+1e-10)+1/(precl+1e-10))
+    nf1 = 2/(1/(nprec+1e-10)+1/(nrecl+1e-10))
+    acc = -1 if total == 0 else (tp + tn) / total * 100
+
+    out = ''
+    with open("test_hours/report_template.txt", 'r') as file:
+        out = file.read().format(
+            title=title,
+            tp=tp, tn=tn, fp=fp, fn=fn, total=total,
+            ep=ep, en=en, rp=rp, rn=rn,
+            pprec=pprec, nprec=nprec, precl=precl, nrecl=nrecl,
+            pf1=pf1, nf1=nf1,
+            acc=acc, err=err,
+        )
+
+    with open("test_hours/_report.out", 'w') as file:
+        file.write(out)
 
 def evaluate(id: int, response: str, prompt: Prompt, correct_ds: list, incorrect_ds: list) -> tuple[float, float, float, float, float]:
     with open('test_hours/response-2.out', 'w') as file:
@@ -88,9 +87,7 @@ def evaluate(id: int, response: str, prompt: Prompt, correct_ds: list, incorrect
     
     res_str = response
     correct = 0
-    num_tp = 0
-    num_positives = 0
-    num_expected_positives = prompt.num_expected_positives()
+    tp, fp, fn, tn = 0, 0, 0, 0
     num_errors = 0
     try:
         response_dict = json.loads(response)
@@ -98,16 +95,14 @@ def evaluate(id: int, response: str, prompt: Prompt, correct_ds: list, incorrect
         # print(f"prompt: {user_prompt}")
         # print(f"response: {response}")
         # print(f"{is_correct}")
-        
-        num_tp = prompt.num_true_positives(response_dict)
-        num_positives = prompt.num_reported_positives(response_dict)
         res_str = response_dict
+        tp, fp, fn, tn = prompt.output_report(response_dict)
     except:
-        num_errors += 1
+        num_errors = 1
         
     
-    precision = num_tp / num_positives if num_positives != 0 else ''
-    recall = num_tp / num_expected_positives if num_expected_positives != 0 else ''
+    precision = tp / (tp + fp) if (tp + fp) != 0 else ''
+    recall = tp / (tp + fn) if (tp + fn) != 0 else ''
     prec_str = 'NaN' if precision == '' else f"{precision:.2f}"
     rec_str = 'NaN' if recall == '' else f"{recall:.2f}"
     
@@ -120,61 +115,84 @@ def evaluate(id: int, response: str, prompt: Prompt, correct_ds: list, incorrect
     
     with open('test_hours/_hours-2.out', 'a') as file:
         file.write(f'Run {id}: {{Accuracy: {correct:.2f}, Precision: {prec_str}, Recall: {rec_str}}}\n')
-    return correct, num_tp, num_positives, num_expected_positives, num_errors
+    return correct, tp, fp, fn, tn, num_errors
 
 def report(num_trials: int, num_correct: int, correct_ds: list, incorrect_ds: list):
-    with open(f"test_hours/_correct-2.json", 'w') as f_correct:
+    with open(f"test_hours/_correct.json", 'w') as f_correct:
         json.dump(correct_ds, f_correct, indent=4)
     
-    with open(f"test_hours/_incorrect-2.json", 'w') as f_incorrect:
+    with open(f"test_hours/_incorrect.json", 'w') as f_incorrect:
         json.dump(incorrect_ds, f_incorrect, indent=4)
     
-    with open(f'test_hours/_hours-2.out', 'a') as file:
+    with open(f'test_hours/_hours.out', 'a') as file:
         file.write(f'----------------{num_correct}/{num_trials}----------------\n\n')
         
 def run_one_prompt(prompt_type: ptype, use_delta: bool, num_trials: int, num_completed: int):
     print(f'Type: {prompt_type}, Delta: {use_delta}')
     correct_ds = []
-    with open(f"test_hours/_correct-2.json", 'r') as file:
+    with open(f"test_hours/_correct.json", 'r') as file:
         correct_ds = json.load(file)
     
     incorrect_ds = []
-    with open(f"test_hours/_incorrect-2.json", 'r') as file:
+    with open(f"test_hours/_incorrect.json", 'r') as file:
         incorrect_ds = json.load(file)
 
-    prompt_list = generate_prompts(prompt_type, use_delta, num_trials)
+    prompt_list = generate_prompts(hours_dict, prompt_type, use_delta, num_trials)
+    # all_prompts = generate_hours.generate_data(prompt_type, use_delta, num_trials, (0.8, 0.1, 0.1))
     
+    # for prompts, split in zip(all_prompts, ("train", "test", "eval")):
     num_correct = 0
     num_accurate = 0
     true_positives = 0
     reported_positives = 0
     expected_positives = 0
+    tot_tp, tot_fp, tot_fn, tot_tn = 0, 0, 0, 0
     num_errors = 0
 
-    with tqdm(desc=f"Querying", total=num_trials) as t:
-        for i in range(num_trials):
+    with tqdm(desc=f"Querying", total=len(prompt_list)) as t:
+    # with tqdm(desc=f"Querying {split}", total=len(prompts)) as t:
+        # with open(f'{generate_hours.current_path()}/{split}.json', 'w') as file:
+        #     file.write("[]")
+        for i in range(len(prompt_list)):
             prompt = prompt_list[i]
-            response = query(prompt.to_dict())
+            # prompt = prompts[i]
+            response = query(prompt.to_dict(), False)
             
-            accuracy, num_tp, num_p, num_ep, num_err = evaluate(i + num_completed, response, prompt, correct_ds, incorrect_ds)
+            for _ in range(10):
+                accuracy, tp, fp, fn, tn, num_err = evaluate(i + num_completed, response, prompt, correct_ds, incorrect_ds)
+                num_errors += num_err * 0.1
+                if num_err == 0:
+                    break
+            
             num_accurate += accuracy
+            
             if accuracy == 1:
                 num_correct += 1
+                # with open(f'{generate_hours.current_path()}/{split}.json', 'r') as file:
+                #     recent = json.load(file)
+                # with open(f'{generate_hours.current_path()}/{split}.json', 'w') as file:
+                #     recent.append(correct_ds[-1])
+                #     json.dump(recent, file, indent=4)  
 
-            true_positives += num_tp
-            reported_positives += num_p
-            expected_positives += num_ep
-            num_errors += num_err
+            true_positives += tp
+            reported_positives += tp + fp
+            expected_positives += tp + fn
+            
+            tot_tp += tp
+            tot_fp += fp
+            tot_fn += fn
+            tot_tn += tn
+            print_report("Output", tot_tp, tot_fp, tot_fn, tot_tn, num_errors)
 
             if (i + 1) % 10 == 0:
                 report(i + 1, num_correct, correct_ds, incorrect_ds)
 
             t.postfix = (
                 f"# Correct: {num_correct}, "
-                f"# Error: {num_errors}, "
-                f"Accuracy: {(num_accurate / (i + 1) * 100):.2f}%, "
-                f"Precision: {(true_positives / (reported_positives + 1e-10) * 100):.2f}%, "
-                f"Recall: {(true_positives / (expected_positives + 1e-10) * 100):.2f}%"
+                f"# Error: {num_errors:.0f}, "
+                f"Accuracy: {((tot_tp + tot_tn + 1e-10) / (sum([tot_tp, tot_fp, tot_fn, tot_tn]) + 1e-10) * 100):.2f}%, "
+                f"Precision: {((tot_tp + 1e-10) / (tot_tp + tot_fp + 1e-10) * 100):.2f}%, "
+                f"Recall: {((tot_tp + 1e-10) / (tot_tp + tot_fn + 1e-10) * 100):.2f}%"
             )
             t.update()
 
@@ -186,19 +204,20 @@ def run_one_prompt(prompt_type: ptype, use_delta: bool, num_trials: int, num_com
 MODEL = "gpt-4o"
 TEMPERATURE = 1.0
 
-load_dotenv()
+# load_dotenv()
 # api_key = os.getenv('OPENAI_API_KEY')
 # client = OpenAI()
 client = InferenceClient(model="http://0.0.0.0:8080")
 
-with open(f"test_hours/_correct-2.json", 'w') as file:
+with open(f"test_hours/_correct.json", 'w') as file:
     file.write('[]')
-with open(f"test_hours/_incorrect-2.json", 'w') as file:
+with open(f"test_hours/_incorrect.json", 'w') as file:
     file.write('[]')
-with open(f"test_hours/_hours-2.out", 'w') as file:
+with open(f"test_hours/_hours.out", 'w') as file:
     file.write('')
 
-
+with open(f"{generate_hours.current_path()}/hours.json", 'r') as file:
+    hours_dict = json.load(file)
 run_one_prompt(ptype.TO_LIST, False, 1000, 0)
 
 # prompts = generate_prompts(prompt_type=ptype.TO_LIST, use_delta=False, num_trials=10000)

@@ -44,15 +44,15 @@ if [ "${job}" == "llama3_content_quality" ]; then
 elif [ "${job}" == "llama3_multitask" ]; then
   echo "run job llama3_open_hours"
   WANDB_API_KEY=c93344ef5b6572250edee53ca8ee0a765ce1b48a \
-  CUDA_VISIBLE_DEVICES=1,2,3,4,6,7 torchrun --nnodes 1 --nproc_per_node 6 --master_port 29600 llama_finetuning_hf.py \
-  --model_name_or_path meta-llama/Meta-Llama-3-8B \
+  CUDA_VISIBLE_DEVICES=2,3,4,5,6,7 torchrun --nnodes 1 --nproc_per_node 6 --master_port 29600 llama_finetuning_hf.py \
+  --model_name_or_path meta-llama/Meta-Llama-3-8B-Instruct \
   --output_dir exp/llama3_open_hours \
   --do_train \
   --num_train_epochs 1 \
   --learning_rate 2e-5 \
   --dataset open_hours_dataset \
-  --train_file /root/brianlu/test_hours/train.jsonl \
-  --eval_file /root/brianlu/test_hours/test.jsonl \
+  --train_file /root/brianlu/test_hours/data/Current_Run_07-02-2024T18-22-48/train.jsonl \
+  --eval_file /root/brianlu/test_hours/data/Current_Run_07-02-2024T18-22-48/test.jsonl \
   --bf16 True \
   --tf32 True \
   --use_flashatt_2 True \

@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from datasets import load_dataset
 from hours_prompts_db import get_prompt
 from hours_prompts_db import PromptType as ptype
+import os
 
 ENABLE_DEBUG = False
 
@@ -94,8 +95,8 @@ class Prompt:
             out = 0.0
             for name in self.hours:
                 if (
-                    name in self.expected_response['is_open'] and name in response['is_open'] or
-                    name not in self.expected_response['is_open'] and name not in response['is_open']
+                    (name in self.expected_response['is_open'] and name in response['is_open']) or
+                    (name not in self.expected_response['is_open'] and name not in response['is_open'])
                 ):
                     out += 1.0 
             return out / len(self.hours)
@@ -140,6 +141,14 @@ class Prompt:
                 return len(self.expected_response['is_open'])
             case _:
                 return 0
+            
+    def output_report(self, response: dict):
+        total = len(self.hours) if self.type == ptype.TO_LIST else 1
+        tp = self.num_true_positives(response)
+        fp = self.num_reported_positives(response) - tp
+        fn = self.num_expected_positives() - tp
+        tn = total - tp - fp - fn
+        return (tp, fp, fn, tn)
 
 # Dictionary Util
 
@@ -186,28 +195,14 @@ def in_hours(time: datetime, hours: str) -> bool:
     return False
 
 # Generation!
-
-def load_hours_dict() -> dict:
-    file = "test_hours/hours.json"
-    # print(f"loading {file}...")
-    dataset = load_dataset("json", data_files=file)['train']
-    hours_dict = {}
-    for row in dataset:
-        name = row['name']
-        hours = row['hours']
-        hours_dict[name] = hours
-    return hours_dict
-
-hours_dict = load_hours_dict()
-
 def get_data(hours_dict: dict) -> dict:
     data = np.random.choice(list(hours_dict.keys()), np.random.randint(3,6))
     return {name: hours_dict[name] for name in data}
 
-def generate_prompts(prompt_type: str, use_delta: bool, num_trials: int) -> list[Prompt]:
+def generate_prompts(hours_data: dict, prompt_type: str, use_delta: bool, num_trials: int) -> list[Prompt]:
     prompt_list = []
     for _ in range(num_trials):
-        data = get_data(hours_dict)
+        data = get_data(hours_data)
         prompt_list.append(Prompt(data, prompt_type, use_delta))
     return prompt_list 
 

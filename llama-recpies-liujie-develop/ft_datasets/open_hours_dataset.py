@@ -9,6 +9,8 @@ B_SYS, E_SYS = "<<SYS>>\n", "\n<</SYS>>\n\n"
 S_HEADER, E_HEADER = "<|start_header_id|>", "<|end_header_id|>"
 EOT = "<|eot_id|>"
 
+GIVE_REASON = True
+
 #-----------------------------------^^^---WAS DONE---^^^-----------------------------------#
 
 # st_template = (
@@ -26,7 +28,14 @@ def process_dialog_to_single_turn(data, tokenizer):
     today = data["today"]
     user_prompt = data["user_prompt"]
 
-    with open('/root/brianlu/test_hours/prompt.txt', 'r') as file:
+    if GIVE_REASON:
+        path = '/root/brianlu/test_hours/prompt.txt'
+    else:
+        path = '/root/brianlu/test_hours/prompt_without_reason.txt'
+        if "reasoning" in data["expected_response"]:
+            del data["expected_response"]["reasoning"]
+
+    with open(path, 'r') as file:
         prompt = file.read().format(opening_hours=json.dumps(opening_hours, indent=4), today=today, user_prompt=user_prompt)
     output = json.dumps(data["expected_response"], indent=4)
     return process_dialog([prompt, output], tokenizer, min_turn_idx=0)
