@@ -9,7 +9,7 @@ B_SYS, E_SYS = "<<SYS>>\n", "\n<</SYS>>\n\n"
 S_HEADER, E_HEADER = "<|start_header_id|>", "<|end_header_id|>"
 EOT = "<|eot_id|>"
 
-GIVE_REASON = True
+GIVE_REASON = False
 
 #-----------------------------------^^^---WAS DONE---^^^-----------------------------------#
 

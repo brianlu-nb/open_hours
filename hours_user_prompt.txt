@@ -3,12 +3,11 @@ While doing so, consider the following:
 1. "time": the actual date and time in the user inquiry
 2. "day_of_week": the exact day of the week that "time" would be
 3. "opening_hours": the opening hours of the restaurants in "day_of_week"
-4. "is_open": a list of the names of the restaurants that are open in "time", according to "opening_hours"
-5. "reasoning": your reasoning for all of your response
+4. "is_open": whether each of the restaurants are open, "true" if a restaurant is open at the "time" in the "opening_hours"
+Below are the data for the opening hours of restaurants, today's date, and the user question:
 
 In the response, copy all the names exactly. Note that the durations from the hours are inlusive on the left and exclusive on the right.
 
-Below are the data for the opening hours of restaurants, today's date, and the user question:
 Opening Hours: {opening_hours}
 Today is {today}
 User Question: {user_prompt}
@@ -22,10 +21,9 @@ Please output in the following json format:
         "Restaurant Name 3": "Closed",
         ...
     }},
-    "is_open": [
-        "Open Restaurant Name 1",
+    "is_open": {{
+        "Restaurant Name 1": true/false,
         ...
-    ],
-    "reasoning": "xxx"
+    }}
 }}
 Please give your response below: 

@@ -12,15 +12,17 @@ from huggingface_hub import InferenceClient
 
 
 
-def query(qa: dict, use_openai: bool) -> str:
+def query(prompt: dict, use_openai: bool) -> str:
     if use_openai:
         with open("test_hours/hours_system_prompt.txt", 'r') as file:
             system_prompt = file.read()
         with open("test_hours/hours_user_prompt.txt", 'r') as file:
-            user_prompt = file.read().format(
-                opening_hours=qa['opening_hours'],
-                today=f"{qa['today']:%B %d, %Y}",
-                user_prompt=qa['user_prompt'],
+            user_prompt = file.read()
+            # print(prompt)
+            user_prompt = user_prompt.format(
+                opening_hours=prompt['opening_hours'],
+                today=f"{prompt['today']:%B %d, %Y}",
+                user_prompt=prompt['user_prompt'],
             )
             
         response = client.chat.completions.create(
@@ -36,9 +38,9 @@ def query(qa: dict, use_openai: bool) -> str:
     
     with open("test_hours/prompt_without_reason.txt", 'r') as file:
         prompt = file.read().format(
-            opening_hours=qa['opening_hours'],
-            today=qa['today'],
-            user_prompt=qa['user_prompt'],
+            opening_hours=prompt['opening_hours'],
+            today=prompt['today'],
+            user_prompt=prompt['user_prompt'],
         )
     output_text = client.text_generation(
         prompt,
@@ -151,8 +153,8 @@ def run_one_prompt(prompt_type: ptype, use_delta: bool, num_trials: int, num_com
 
     with tqdm(desc=f"Querying", total=len(prompt_list)) as t:
     # with tqdm(desc=f"Querying {split}", total=len(prompts)) as t:
-        # with open(f'{generate_hours.current_path()}/{split}.json', 'w') as file:
-        #     file.write("[]")
+    #     with open(f'{generate_hours.current_path()}/{split}.json', 'w') as file:
+    #         file.write("[]")
         for i in range(len(prompt_list)):
             prompt = prompt_list[i]
             # prompt = prompts[i]

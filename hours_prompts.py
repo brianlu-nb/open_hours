@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from datasets import load_dataset
 from hours_prompts_db import get_prompt
 from hours_prompts_db import PromptType as ptype
+import generate_hours
 import os
 
 ENABLE_DEBUG = False
@@ -44,10 +45,12 @@ class Prompt:
             hours = format_hours(hours)
         else:
             hours = {}
-            open = []
+            # open = []
+            open = {}
             for key, val in self.hours.items():
-                if in_hours(self.q_time, val[day]):
-                    open.append(key)
+                # if in_hours(self.q_time, val[day]):
+                #     open.append(key)
+                open[key] = in_hours(self.q_time, val[day])
                 hours[key] = format_hours(val[day])
         
         out['time'] = f"{self.q_time:%Y-%m-%d %I:%M%p}"
@@ -95,8 +98,9 @@ class Prompt:
             out = 0.0
             for name in self.hours:
                 if (
-                    (name in self.expected_response['is_open'] and name in response['is_open']) or
-                    (name not in self.expected_response['is_open'] and name not in response['is_open'])
+                    # (name in self.expected_response['is_open'] and name in response['is_open']) or
+                    # (name not in self.expected_response['is_open'] and name not in response['is_open'])
+                    name in response['is_open'] and response['is_open'][name] == self.expected_response['is_open'][name]
                 ):
                     out += 1.0 
             return out / len(self.hours)
@@ -112,7 +116,8 @@ class Prompt:
         if self.type == ptype.TO_LIST and 'is_open' in response:
             out = 0.0
             for name in self.hours:
-                if name in self.expected_response['is_open'] and name in response['is_open']:
+                # if name in self.expected_response['is_open'] and name in response['is_open']:
+                if self.expected_response['is_open'][name] and name in response['is_open'] and response['is_open'][name]:
                     out += 1.0 
             return out
         return 0
@@ -127,7 +132,7 @@ class Prompt:
             case ptype.TO_HOURS:
                 return int(elem_equal(d1, d2, "opening_hours"))
             case ptype.TO_LIST:
-                return 0.0 if 'is_open' not in response else len(response['is_open'])
+                return 0.0 if 'is_open' not in response else sum([val for _, val in response['is_open'].items()]) # len(response['is_open'])
             case _:
                 return 0
     
@@ -138,7 +143,7 @@ class Prompt:
             case ptype.TO_HOURS:
                 return 1
             case ptype.TO_LIST:
-                return len(self.expected_response['is_open'])
+                return sum([val for _, val in self.expected_response['is_open'].items()]) # len(self.expected_response['is_open'])
             case _:
                 return 0
             
@@ -209,7 +214,9 @@ def generate_prompts(hours_data: dict, prompt_type: str, use_delta: bool, num_tr
 # Main
 
 if __name__ == "__main__":
-    prompts = generate_prompts(ptype.TO_LIST, True, 20)
+    with open(f"{generate_hours.current_path()}/hours.json", 'r') as file:
+        hours_dict = json.load(file)
+    prompts = generate_prompts(hours_dict, ptype.TO_LIST, False, 1)
     # new_data = []
     # for prompt in prompts:
     #     new_data.append({
@@ -221,4 +228,4 @@ if __name__ == "__main__":
     # with open("data.jsonl", 'w') as file:
     #     file.writelines(f"{json.dumps(row)}\n" for row in new_data)
     for prompt in prompts:
-        print(prompt.user_prompt)
+        print(json.dumps(prompt.to_dict_presentable(), indent=4))
