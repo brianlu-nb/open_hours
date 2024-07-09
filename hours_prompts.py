@@ -31,7 +31,20 @@ class Prompt:
         
         self.user_prompt = get_prompt(self.type, self.name, self.q_time, self.use_delta, self.delta)
         self.expected_response = self._generate_expected_response()
-            
+      
+    @staticmethod  
+    def wrap_dict(input: dict):
+        output = Prompt(
+            opening_hours=input['opening_hours'],
+            type=ptype[input['problem_type']],
+            use_delta=input['use_delta']
+        )
+        output.today=datetime.strptime(input['today'], "%B %d, %Y")
+        output.q_time=output.today
+        output.user_prompt=input['user_prompt']
+        output.expected_response=input['expected_response']
+        return output
+       
     def _get_items_debug(self) -> dict:
         def format_hours(val: str):
             return "Closed" if val == "" else val
@@ -147,13 +160,71 @@ class Prompt:
             case _:
                 return 0
             
+    '''
+    Flow chart:
+    first, check the number of positives and negatives expected (those can be logged immediately)
+    there are 3 situations for what comes next: correct, incorrect, or it errored out
+    table:
+    tp - true positive
+    tn - true negative
+    fp - false positive
+    fn - false negative
+    nfp - positive (did not find value)
+    nfn - negative (did not find value)
+    
+    how to find all of them:
+    for key, exp_val in dict:
+        if key not in response:
+            nfp += 1 if exp_val else nfn += 1
+        elif response[key]:
+            tp += 1 if exp_val else fp += 1
+        else:
+            tn += 1 if exp_val else fn += 1
+    
+    
+    along with that, we can also track how many keys are there that are not in the list and their results.
+    
+    '''
+            
     def output_report(self, response: dict):
-        total = len(self.hours) if self.type == ptype.TO_LIST else 1
+        tp, fp, fn, tn, nfp, nfn = 0, 0, 0, 0, 0, 0
+        isopen = response['is_open']
+        if self.type == ptype.TO_LIST:
+            for key, exp_val in self.expected_response['is_open'].items():
+                
+                if exp_val == True:
+                    if key not in isopen:
+                        nfp += 1
+                    elif isopen[key] == True:
+                        tp += 1
+                    else:
+                        fn += 1
+                else:
+                    if key not in isopen:
+                        nfn += 1
+                    elif isopen[key] == True:
+                        fp += 1
+                    else:
+                        tn += 1
+            return (tp, fp, fn, tn, nfp, nfn)
+        
+        total = 1
         tp = self.num_true_positives(response)
         fp = self.num_reported_positives(response) - tp
         fn = self.num_expected_positives() - tp
         tn = total - tp - fp - fn
-        return (tp, fp, fn, tn)
+        
+        return (tp, fp, fn, tn, nfp, nfn)
+
+    def new_keys(self, response: dict):
+        if self.type != ptype.TO_LIST or 'is_open' not in response:
+            return 0, 0
+            
+        out = [0, 0]
+        for name, val in response['is_open'].items():
+            if name not in self.expected_response['is_open']:
+                out[0 if val else 1] += 1
+        return out
 
 # Dictionary Util
 

@@ -1,18 +1,18 @@
 {
-    "time": "2029-08-14 05:05PM",
-    "day_of_week": "Tue",
+    "time": "2029-08-12 05:00PM",
+    "day_of_week": "Sun",
     "opening_hours": {
-        "The Flavor Dome": "Closed",
-        "Cypress Garden": "Closed",
-        "Cuisine Connoisseurs": "01:45AM-02:00AM, 06:30PM-07:00PM",
-        "Harvest Moon Cafe": "06:00AM-06:30PM",
-        "Essence Eateries": "03:00PM-06:30PM"
+        "Charming Plates": "12:00AM-05:00AM, 12:00PM-03:30PM",
+        "Opulent Oasis": "Closed",
+        "Garnet Grille": "12:30PM-09:00PM",
+        "Horizon Grill": "Closed",
+        "Tasty Retreats": "06:00AM-08:30AM, 12:00PM-07:00PM"
     },
     "is_open": {
-        "The Flavor Dome": false,
-        "Cypress Garden": false,
-        "Cuisine Connoisseurs": false,
-        "Harvest Moon Cafe": true,
-        "Essence Eateries": true
+        "Charming Plates": false,
+        "Opulent Oasis": false,
+        "Garnet Grille": true,
+        "Horizon Grill": false,
+        "Tasty Retreats": true
     }
 }

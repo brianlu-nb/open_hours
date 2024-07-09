@@ -15,8 +15,8 @@ if [ "${job}" == "llama3_content_quality" ]; then
   --model_name_or_path meta-llama/Meta-Llama-3-8B \
   --output_dir exp/llama3_v4 \
   --do_train \
-  --num_train_epochs 1 \
-  --learning_rate 2e-5 \
+  --num_train_epochs 2 \
+  --learning_rate 5e-6 \
   --dataset content_quality_dataset \
   --train_file /mnt/share16t/liujie/code_workspace/dataset/content_quality_dataset/train.jsonl \
   --eval_file /mnt/share16t/liujie/code_workspace/dataset/content_quality_dataset/test.jsonl \
@@ -44,11 +44,11 @@ if [ "${job}" == "llama3_content_quality" ]; then
 elif [ "${job}" == "llama3_multitask" ]; then
   echo "run job llama3_open_hours"
   WANDB_API_KEY=c93344ef5b6572250edee53ca8ee0a765ce1b48a \
-  CUDA_VISIBLE_DEVICES=2,3,4,5 torchrun --nnodes 1 --nproc_per_node 4 --master_port 29600 llama_finetuning_hf.py \
+  CUDA_VISIBLE_DEVICES=2,3,4,5,6,7 torchrun --nnodes 1 --nproc_per_node 6 --master_port 29600 llama_finetuning_hf.py \
   --model_name_or_path meta-llama/Meta-Llama-3-8B-Instruct \
   --output_dir exp/llama3_open_hours \
   --do_train \
-  --num_train_epochs 1 \
+  --num_train_epochs 2 \
   --learning_rate 5e-6 \
   --dataset open_hours_dataset \
   --train_file /root/brianlu/test_hours/data/Current_Run_07-05-2024T20-39-56/train.jsonl \

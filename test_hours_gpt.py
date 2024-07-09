@@ -50,17 +50,19 @@ def query(prompt: dict, use_openai: bool) -> str:
         repetition_penalty=1.3,
         top_p=0.95,
         top_k=40,
-        details=True
+        details=True,
     ).generated_text
     
     return output_text[output_text.find('{'):output_text.rfind('}') + 1]
 
-def print_report(title: str, tp: int, fp: int, fn: int, tn: int, err: int):
-    total = tp + tn + fp + fn
-    ep = tp + fn
-    en = fp + tn
-    rp = tp + fp
-    rn = tn + fn
+def print_report(title: str, tp: int, fp: int, fn: int, tn: int, nfp: int, nfn: int, nkp: int, nkn: int, err: int):
+    total = tp + tn + fp + fn + nfp + nfn
+    ep = tp + fn + nfp
+    en = fp + tn + nfn
+    rp = tp + fp + nkp
+    rn = tn + fn + nkn
+    rnf = nfp + nfn
+    tnk = nkp + nkn
     pprec = -1 if rp == 0 else tp / rp * 100
     precl = -1 if ep == 0 else tp / ep * 100
     nprec = -1 if rn == 0 else tn / rn * 100
@@ -75,8 +77,10 @@ def print_report(title: str, tp: int, fp: int, fn: int, tn: int, err: int):
             title=title,
             tp=tp, tn=tn, fp=fp, fn=fn, total=total,
             ep=ep, en=en, rp=rp, rn=rn,
+            nfp=nfp, nfn=nfn, rnf=rnf,
             pprec=pprec, nprec=nprec, precl=precl, nrecl=nrecl,
             pf1=pf1, nf1=nf1,
+            nkp=nkp, nkn=nkn, tnk=tnk,
             acc=acc, err=err,
         )
 
@@ -84,27 +88,33 @@ def print_report(title: str, tp: int, fp: int, fn: int, tn: int, err: int):
         file.write(out)
 
 def evaluate(id: int, response: str, prompt: Prompt, correct_ds: list, incorrect_ds: list) -> tuple[float, float, float, float, float]:
+    if isinstance(prompt, dict):
+        prompt = Prompt.wrap_dict(prompt)
     with open('test_hours/response-2.out', 'w') as file:
         file.write(response)
     
     res_str = response
     correct = 0
-    tp, fp, fn, tn = 0, 0, 0, 0
+    tp, fp, fn, tn, nfp, nfn = 0, 0, 0, 0, 0, 0
+    nkp, nkn = 0, 0
     num_errors = 0
     try:
         response_dict = json.loads(response)
-        correct = prompt.evaluate_response(response_dict)
+        # correct = prompt.evaluate_response(response_dict)
         # print(f"prompt: {user_prompt}")
         # print(f"response: {response}")
         # print(f"{is_correct}")
         res_str = response_dict
-        tp, fp, fn, tn = prompt.output_report(response_dict)
+        tp, fp, fn, tn, nfp, nfn = prompt.output_report(response_dict)
+        nkp, nkn = prompt.new_keys(response_dict)
+        correct = (tp + tn) / sum([tp, fp, fn, tn, nfp, nfn])
+        # print(tp + tn, sum([tp, fp, fn, tn, nfp, nfn]), correct)
     except:
         num_errors = 1
         
     
-    precision = tp / (tp + fp) if (tp + fp) != 0 else ''
-    recall = tp / (tp + fn) if (tp + fn) != 0 else ''
+    precision = tp / (tp + fp + nkp) if (tp + fp + nkp) != 0 else ''
+    recall = tp / (tp + fn + nfp) if (tp + fn + nfp) != 0 else ''
     prec_str = 'NaN' if precision == '' else f"{precision:.2f}"
     rec_str = 'NaN' if recall == '' else f"{recall:.2f}"
     
@@ -117,7 +127,7 @@ def evaluate(id: int, response: str, prompt: Prompt, correct_ds: list, incorrect
     
     with open('test_hours/_hours-2.out', 'a') as file:
         file.write(f'Run {id}: {{Accuracy: {correct:.2f}, Precision: {prec_str}, Recall: {rec_str}}}\n')
-    return correct, tp, fp, fn, tn, num_errors
+    return correct, tp, fp, fn, tn, nfp, nfn, nkp, nkn, num_errors
 
 def report(num_trials: int, num_correct: int, correct_ds: list, incorrect_ds: list):
     with open(f"test_hours/_correct.json", 'w') as f_correct:
@@ -139,8 +149,11 @@ def run_one_prompt(prompt_type: ptype, use_delta: bool, num_trials: int, num_com
     with open(f"test_hours/_incorrect.json", 'r') as file:
         incorrect_ds = json.load(file)
 
-    prompt_list = generate_prompts(hours_dict, prompt_type, use_delta, num_trials)
+    # prompt_list = generate_prompts(hours_dict, prompt_type, use_delta, num_trials)
     # all_prompts = generate_hours.generate_data(prompt_type, use_delta, num_trials, (0.8, 0.1, 0.1))
+    
+    with open(f"{generate_hours.current_path()}/prompts_eval.json", 'r') as file:
+        prompt_list = json.load(file)
     
     # for prompts, split in zip(all_prompts, ("train", "test", "eval")):
     num_correct = 0
@@ -148,7 +161,8 @@ def run_one_prompt(prompt_type: ptype, use_delta: bool, num_trials: int, num_com
     true_positives = 0
     reported_positives = 0
     expected_positives = 0
-    tot_tp, tot_fp, tot_fn, tot_tn = 0, 0, 0, 0
+    tot_tp, tot_fp, tot_fn, tot_tn, tot_nfp, tot_nfn = 0, 0, 0, 0, 0, 0
+    tot_nkp, tot_nkn = 0, 0
     num_errors = 0
 
     with tqdm(desc=f"Querying", total=len(prompt_list)) as t:
@@ -158,10 +172,11 @@ def run_one_prompt(prompt_type: ptype, use_delta: bool, num_trials: int, num_com
         for i in range(len(prompt_list)):
             prompt = prompt_list[i]
             # prompt = prompts[i]
-            response = query(prompt.to_dict(), False)
+            # response = query(prompt.to_dict(), False)
+            response = query(prompt, False)
             
             for _ in range(10):
-                accuracy, tp, fp, fn, tn, num_err = evaluate(i + num_completed, response, prompt, correct_ds, incorrect_ds)
+                accuracy, tp, fp, fn, tn, nfp, nfn, nkp, nkn, num_err = evaluate(i + num_completed, response, prompt, correct_ds, incorrect_ds)
                 num_errors += num_err * 0.1
                 if num_err == 0:
                     break
@@ -184,7 +199,11 @@ def run_one_prompt(prompt_type: ptype, use_delta: bool, num_trials: int, num_com
             tot_fp += fp
             tot_fn += fn
             tot_tn += tn
-            print_report("Output", tot_tp, tot_fp, tot_fn, tot_tn, num_errors)
+            tot_nfp += nfp
+            tot_nfn += nfn
+            tot_nkp += nkp
+            tot_nkn += nkn
+            print_report("Output", tot_tp, tot_fp, tot_fn, tot_tn, tot_nfp, tot_nfn, tot_nkp, tot_nkn, num_errors)
 
             if (i + 1) % 10 == 0:
                 report(i + 1, num_correct, correct_ds, incorrect_ds)
