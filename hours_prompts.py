@@ -7,8 +7,6 @@ from hours_prompts_db import PromptType as ptype
 import generate_hours
 import os
 
-ENABLE_DEBUG = False
-
 class Prompt:
     def __init__(self, opening_hours: dict, type: ptype, use_delta: bool):
         self.hours = opening_hours
@@ -45,7 +43,7 @@ class Prompt:
         output.expected_response=input['expected_response']
         return output
        
-    def _get_items_debug(self) -> dict:
+    def _generate_expected_response(self):
         def format_hours(val: str):
             return "Closed" if val == "" else val
         
@@ -74,25 +72,10 @@ class Prompt:
             out["is_open"] = open
         
         return out
-        
-    def _generate_expected_response(self):
-        out = self._get_items_debug()
-        #del keys here
-        return out
     
     def __repr__(self):
         return json.dumps(self.to_dict_presentable(), indent=4)
     
-    def to_dict_presentable(self):
-        return {
-            "problem_type": self.type.name,
-            "use_delta": self.use_delta,
-            "today": f"{self.today:%B %d, %Y}",
-            "opening_hours": self.hours,
-            "user_prompt": self.user_prompt,
-            "expected_response": self.expected_response,
-        }
-        
     def to_dict(self):
         out = {
             "problem_type": self.type,
@@ -102,19 +85,18 @@ class Prompt:
             "user_prompt": self.user_prompt,
             "expected_response": self.expected_response,
         }
-        if ENABLE_DEBUG:
-            out["items_debug"] = self._get_items_debug()
         return out
     
+    def to_dict_presentable(self):
+        out = self.to_dict()
+        out["today"] = f"{self.today:%B %d, %Y}"
+        return out
+        
     def evaluate_response(self, response: dict) -> float:
         if self.type == ptype.TO_LIST and 'is_open' in response:
             out = 0.0
             for name in self.hours:
-                if (
-                    # (name in self.expected_response['is_open'] and name in response['is_open']) or
-                    # (name not in self.expected_response['is_open'] and name not in response['is_open'])
-                    name in response['is_open'] and response['is_open'][name] == self.expected_response['is_open'][name]
-                ):
+                if name in response['is_open'] and response['is_open'][name] == self.expected_response['is_open'][name]:
                     out += 1.0 
             return out / len(self.hours)
         
@@ -159,32 +141,6 @@ class Prompt:
                 return sum([val for _, val in self.expected_response['is_open'].items()]) # len(self.expected_response['is_open'])
             case _:
                 return 0
-            
-    '''
-    Flow chart:
-    first, check the number of positives and negatives expected (those can be logged immediately)
-    there are 3 situations for what comes next: correct, incorrect, or it errored out
-    table:
-    tp - true positive
-    tn - true negative
-    fp - false positive
-    fn - false negative
-    nfp - positive (did not find value)
-    nfn - negative (did not find value)
-    
-    how to find all of them:
-    for key, exp_val in dict:
-        if key not in response:
-            nfp += 1 if exp_val else nfn += 1
-        elif response[key]:
-            tp += 1 if exp_val else fp += 1
-        else:
-            tn += 1 if exp_val else fn += 1
-    
-    
-    along with that, we can also track how many keys are there that are not in the list and their results.
-    
-    '''
             
     def output_report(self, response: dict):
         tp, fp, fn, tn, nfp, nfn = 0, 0, 0, 0, 0, 0
