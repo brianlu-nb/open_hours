@@ -11,6 +11,17 @@ Reported Negatives | {fn:^21} | {tn:^21} | {nkn:^21} | {rn:^17}
 -------------------+-----------------------+-----------------------+-----------------------+--------------------
 .     Total        | {ep:^21} | {en:^21} | {tnk:^21} | {total:^17}
 
+Accuracy: {acc:8.4f}%
+Error: {err}
+
+.             |   Precision  |    Recall   |   F1 Score
+--------------+--------------+-------------+-------------
+.  Positives  |  {pprec:8.4f}%   |  {precl:8.4f}%  |  {pf1:8.4f}%
+--------------+--------------+-------------+-------------
+.  Negatives  |  {nprec:8.4f}%   |  {nrecl:8.4f}%  |  {nf1:8.4f}%
+
+
+
 Note: Final Total = Total Expected Positives + Total Expected Negatives
 
 Key Not Found: A key was not found in the resultant dictionary (expect all names from input to be part of the result)
@@ -20,13 +31,3 @@ New Invented Key: A key was found in the resultant dictionary, but not the origi
  * [+/-] determined by the resultant dictionary's result, counts towards precision
 
 Note: 'Key Not Found' and 'New Invented Key' may appear at the same time due to to a typo (thus, a 'new key' was created and an old one is 'not found')
-
-Accuracy: {acc:8.4f}%
-Error: {err}
-
-
-.             |   Precision  |    Recall   |   F1 Score
---------------+--------------+-------------+-------------
-.  Positives  |  {pprec:8.4f}%   |  {precl:8.4f}%  |  {pf1:8.4f}%
---------------+--------------+-------------+-------------
-.  Negatives  |  {nprec:8.4f}%   |  {nrecl:8.4f}%  |  {nf1:8.4f}%

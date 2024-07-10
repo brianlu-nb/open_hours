@@ -1,14 +1,26 @@
 Output
 
+
 .                  |   Expected Positives  |   Expected Negatives  |    New Invented Key   |       Total       
 -------------------+-----------------------+-----------------------+-----------------------+--------------------
-Reported Positives |          486 (True +) |           0 (False +) |          84           |        570        
+Reported Positives |         1185          |           3           |           0           |       1188        
 -------------------+-----------------------+-----------------------+-----------------------+--------------------
-Reported Negatives |           0 (False -) |         1053 (True -) |          185          |       1238        
+Reported Negatives |           1           |         2673          |           5           |       2679        
 -------------------+-----------------------+-----------------------+-----------------------+--------------------
-.  Key Not Found   |          68           |          170          |          ---          |        238        
+.  Key Not Found   |           0           |           5           |          ---          |         5         
 -------------------+-----------------------+-----------------------+-----------------------+--------------------
-.     Total        |          554          |         1223          |          269          |       1777       
+.     Total        |         1186          |         2681          |           5           |       3867       
+
+Accuracy:  99.7673%
+Error: 13.999999999999966
+
+.             |   Precision  |    Recall   |   F1 Score
+--------------+--------------+-------------+-------------
+.  Positives  |   99.7475%   |   99.9157%  |   99.8315%
+--------------+--------------+-------------+-------------
+.  Negatives  |   99.7760%   |   99.7016%  |   99.7388%
+
+
 
 Note: Final Total = Total Expected Positives + Total Expected Negatives
 
@@ -19,17 +31,3 @@ New Invented Key: A key was found in the resultant dictionary, but not the origi
  * [+/-] determined by the resultant dictionary's result, counts towards precision
 
 Note: 'Key Not Found' and 'New Invented Key' may appear at the same time due to to a typo (thus, a 'new key' was created and an old one is 'not found')
-
-Accuracy:  86.6066%
-Error: 44
-Total # of Prompts: 501
-Total # Prompts w/o Error: 457
-
-
-.             |   Precision  |    Recall   |   F1 Score
---------------+--------------+-------------+-------------
-.  Positives  |   85.2632%   |   87.7256%  |   86.4769%
---------------+--------------+-------------+-------------
-.  Negatives  |   85.0565%   |   86.0998%  |   85.5750%
-
-Note: the only problem with this current model is that there are grammatical mistakes (no false positives or negatives), or making up and removing information.

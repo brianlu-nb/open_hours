@@ -1,18 +1,18 @@
 {
-    "time": "2029-08-12 05:00PM",
-    "day_of_week": "Sun",
+    "time": "2029-06-07 12:00AM",
+    "day_of_week": "Thu",
     "opening_hours": {
-        "Charming Plates": "12:00AM-05:00AM, 12:00PM-03:30PM",
-        "Opulent Oasis": "Closed",
-        "Garnet Grille": "12:30PM-09:00PM",
-        "Horizon Grill": "Closed",
-        "Tasty Retreats": "06:00AM-08:30AM, 12:00PM-07:00PM"
+        "Lush Leaves": "08:00PM-10:30PM",
+        "Maple Street Kitchen": "03:30AM-11:00PM",
+        "Gourmet Glimmer": "02:45AM-10:00AM, 02:30PM-11:30PM",
+        "Epicurean Garden": "Closed",
+        "Deluxe Dine": "07:00AM-09:30AM, 05:30PM-06:00PM"
     },
     "is_open": {
-        "Charming Plates": false,
-        "Opulent Oasis": false,
-        "Garnet Grille": true,
-        "Horizon Grill": false,
-        "Tasty Retreats": true
+        "Lush Leaves": false,
+        "Maple Street Kitchen": false,
+        "Gourmet Glimmer": false,
+        "Epicurean Garden": false,
+        "Deluxe Dine": false
     }
 }
