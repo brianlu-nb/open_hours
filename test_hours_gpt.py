@@ -10,8 +10,6 @@ from hours_prompts_db import PromptType as ptype
 import generate_hours
 from huggingface_hub import InferenceClient
 
-
-
 def query(prompt: dict, use_openai: bool) -> str:
     if use_openai:
         with open("test_hours/hours_system_prompt.txt", 'r') as file:
@@ -89,7 +87,7 @@ def print_report(title: str, tp: int, fp: int, fn: int, tn: int, nfp: int, nfn: 
 
 def evaluate(id: int, response: str, prompt: Prompt, correct_ds: list, incorrect_ds: list) -> tuple[float, float, float, float, float]:
     if isinstance(prompt, dict):
-        prompt = Prompt.wrap_dict(prompt)
+        prompt = Prompt.from_dict(prompt)
     with open('test_hours/response-2.out', 'w') as file:
         file.write(response)
     
@@ -185,11 +183,6 @@ def run_one_prompt(prompt_type: ptype, use_delta: bool, num_trials: int, num_com
             
             if accuracy == 1:
                 num_correct += 1
-                # with open(f'{generate_hours.current_path()}/{split}.json', 'r') as file:
-                #     recent = json.load(file)
-                # with open(f'{generate_hours.current_path()}/{split}.json', 'w') as file:
-                #     recent.append(correct_ds[-1])
-                #     json.dump(recent, file, indent=4)  
 
             true_positives += tp
             reported_positives += tp + fp

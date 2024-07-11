@@ -1,14 +1,14 @@
-from dotenv import load_dotenv
 import os
 import shutil
-from openai import OpenAI
 import json
 from datetime import datetime, timedelta, time
-from tqdm import tqdm
 import random
+from dotenv import load_dotenv
+from openai import OpenAI
+from tqdm import tqdm
 import numpy as np
 import hours_prompts
-from hours_prompts_db import PromptType as ptype
+from hours_prompts import PromptType as ptype
 
 def current_path():
     contents = os.listdir('test_hours/data')

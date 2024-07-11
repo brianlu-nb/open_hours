@@ -1,0 +1,98 @@
+{
+    "TO_BOOL": [
+        "Does {restaurant_name} serve customers at {time:%Y-%m-%d} {random_time_format} GMT?",
+        "If I visit {restaurant_name} at {time:%B %d, %Y %H:%M} {random_time_format}, will it be open?",
+        "If I go to {restaurant_name} on {time:%b %d, %Y} at {random_time_format}, will it be open?",
+        "Is {restaurant_name} open on {time:%A, %B %d, %Y} at {random_time_format}?",
+        "Can I visit {restaurant_name} on {time:%Y-%m-%d} at {random_time_format}?",
+        "Checking if {restaurant_name} is open on {time:%d %B %Y} at {random_time_format}.",
+        "Will {restaurant_name} be operational on {time:%b %d, %Y} around {random_time_format}?",
+        "I'd like to know if {restaurant_name} will be open at {random_time_format} on {time:%b %d, %Y}?",
+        "Can I swing by {restaurant_name} on {time:%Y/%m/%d} at {random_time_format}? Will it be open?",
+        "It's currently {random_datetime_format}. Is {restaurant_name} still open?"
+    ],
+    "TO_BOOL_DELTA": {
+        "1": [
+            "Will {restaurant_name} be open tomorrow at {random_time_format}?"
+        ],
+        "2": [
+            "Would {restaurant_name} be open if I went there the day after tomorrow at {random_time_format}?"
+        ],
+        "7": [
+            "Will {restaurant_name} be open in a week at {random_time_format}?"
+        ],
+        "-1": [
+            "Can I visit {restaurant_name} in {days} days at {random_time_format}?",
+            "Will {restaurant_name} be open {days} days from now at {random_time_format}?",
+            "In {days} days, I want to dine at {restaurant_name}. Will it be open around {random_time_format}?",
+            "Could you check if {restaurant_name} will be open {days} days from now at {random_time_format}?"
+        ]
+    },
+    "TO_HOURS": [
+        "What are the opening hours for {restaurant_name} on {time:%Y-%m-%d}?",
+        "Can you tell me the opening hours of {restaurant_name} for the date {time:%B %d, %Y}?",
+        "Please provide the operating hours for {restaurant_name} on {time:%A, %B %d, %Y}.",
+        "I need to know the business hours of {restaurant_name} for {time:%m/%d/%Y}.",
+        "What time does {restaurant_name} open and close on {time:%m-%d-%Y}?",
+        "On {time:%d %B %Y}, what are the opening hours of {restaurant_name}?",
+        "For the date {time:%Y-%m-%d}, what are the hours of operation for {restaurant_name}?",
+        "Could you list the opening and closing times of {restaurant_name} on {time:%A, %Y-%m-%d}?",
+        "I am looking for the business hours of {restaurant_name} for the date {time:%Y/%m/%d}.",
+        "Please tell me the opening times for {restaurant_name} on the date {time:%d-%B-%Y}.",
+        "What are the hours of operation at {restaurant_name} on {time:%A, %B %d, %Y}?",
+        "On {time:%B %d}, what are the working hours for {restaurant_name}?",
+        "For {time:%Y-%m-%d}, what are the open and close times of {restaurant_name}?",
+        "What are the hours {restaurant_name} operates on {time:%A, %m/%d/%Y}?"
+    ],
+    "TO_HOURS_DELTA": {
+        "1": [
+            "What are the opening hours for {restaurant_name} tomorrow?"
+        ],
+        "-1": [
+            "Can you tell me the opening hours for {restaurant_name} {days} days from now?",
+            "Please provide the operating hours for {restaurant_name} {days} days later.",
+            "What time does {restaurant_name} open and close on {days} days later?",
+            "What are the business hours for {restaurant_name} {days} days in the future?",
+            "What are the opening hours for {restaurant_name} {days} days later?"
+        ]
+    },
+    "TO_LIST": [
+        "The current time is {time:%Y-%m-%d %H:%M:%S}. Which restaurants are open right now?",
+        "It's {time:%A, %B %d at %I:%M %p} and I'd like to know which restaurants are open.",
+        "If the time is {time:%m/%d/%Y %H:%M} right now, can you list the restaurants that are currently open?",
+        "Given that it is currently {time:%I:%M %p on %A, %B %d, %Y}, what restaurants remain open?",
+        "At this exact moment, it's {time:%H:%M on %d-%m-%Y}. Please list all the open restaurants.",
+        "The exact time currently is {time:%I:%M:%S %p, %b %d, %Y}. Which restaurants are open now?",
+        "Can you tell me the open restaurants if the time is now {time:%H:%M:%S} on {time:%B %d}?",
+        "Tell me the restaurants that are open at {time:%H:%M on %d/%m/%Y}.",
+        "It is currently {time:%A at %I:%M %p}. Which places are open?",
+        "It's {time:%b %d, %Y, %H:%M %p}, what restaurants can I go to?",
+        "It's {time:%H:%M:%S on %A, %B %d, %Y}. Which restaurants should be open now?",
+        "The time is currently {time:%d-%m-%Y %H:%M}. Can you list the restaurants that are still open?",
+        "Find the restaurants open at {time:%A, %d %b %Y %H:%M:%S}.",
+        "It's {time:%I:%M %p on %Y-%m-%d}. What restaurants are open at this time?"
+    ],
+    "TO_LIST_DELTA": {
+        "1": [
+            "Which restaurants are open tomorrow at {random_time_format}?",
+            "Can you list the restaurants available tomorrow at {time:%-I:%M%p}?",
+            "Tell me the restaurants operating tomorrow at {time:%-I:%M%p}.",
+            "What restaurants will be serving tomorrow at {time:%-I:%M%p}?",
+            "Could you show the restaurants open tomorrow at {time:%-I:%M%p}?",
+            "Please list out the restaurants open tomorrow at {time:%-I:%M%p}.",
+            "Which food spots will be available tomorrow at {time:%-I:%M%p}?"
+        ],
+        "-1": [
+            "Which restaurants are open {days} days from now at {random_time_format}?",
+            "Can you find out which restaurants are available {days} days later at {random_time_format}?",
+            "Please list all the dining options open {days} days from the current time at {random_time_format}.",
+            "Tell me which places to eat are operating {days} days in the future at {random_time_format}.",
+            "Identify all the restaurants that will be open {days} days ahead at {random_time_format}.",
+            "What eating establishments will be open {days} days from today at {random_time_format}?",
+            "Find all open restaurants {days} days from now exactly at {random_time_format}.",
+            "Which eateries can I visit {days} days from the current date at {random_time_format}?",
+            "Give me a list of all restaurants that would be open {days} days from now at {random_time_format}.",
+            "Check which restaurants are up and running {days} days from the present at {random_time_format}."
+        ]
+    }
+}
