@@ -12,7 +12,13 @@ Reported Negatives | {fn:^21} | {tn:^21} | {nkn:^21} | {rn:^17}
 .     Total        | {ep:^21} | {en:^21} | {tnk:^21} | {total:^17}
 
 Accuracy: {acc:8.4f}%
-Error: {err}
+
+# Trials: {num_trials}
+# Correct: {correct}
+# Error: {err}
+
+% Correct: {correctp:8.4f}%
+% Error: {errp:8.4f}%
 
 .             |   Precision  |    Recall   |   F1 Score
 --------------+--------------+-------------+-------------
@@ -26,6 +32,7 @@ Note: Final Total = Total Expected Positives + Total Expected Negatives
 
 Key Not Found: A key was not found in the resultant dictionary (expect all names from input to be part of the result)
  * [+/-] determined by the original dictionary's result, counts towards recall
+ * If there is an error in the json formatting, all of the expected keys are then not found
 
 New Invented Key: A key was found in the resultant dictionary, but not the original
  * [+/-] determined by the resultant dictionary's result, counts towards precision

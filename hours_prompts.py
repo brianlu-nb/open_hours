@@ -3,7 +3,6 @@ import json
 from enum import Enum
 from typing import Optional, Literal
 import numpy as np
-import generate_hours
 
 PROMPTS_FILE_PATH = 'test_hours/hours_prompts.json'
 
@@ -69,7 +68,7 @@ def truncate_time(t: datetime, precision: Literal['year', 'month', 'day', 'hour'
     }
     
     if precision not in precision_map:
-        raise ValueError(f"Invalid precision: {precision}")
+        raise ValueError(f'Invalid precision: {precision}')
     
     return precision_map[precision]
 
@@ -87,16 +86,16 @@ def in_hours(time: datetime, hours: str) -> bool:
     if not hours:
         return False
 
-    for time_range in hours.split(", "):
+    for time_range in hours.split(', '):
         try:
-            start_time_str, end_time_str = time_range.split("-")
-            start_time = datetime.combine(time.date(), datetime.strptime(start_time_str, "%I:%M%p").time())
-            end_time = datetime.combine(time.date(), datetime.strptime(end_time_str, "%I:%M%p").time())
+            start_time_str, end_time_str = time_range.split('-')
+            start_time = datetime.combine(time.date(), datetime.strptime(start_time_str, '%I:%M%p').time())
+            end_time = datetime.combine(time.date(), datetime.strptime(end_time_str, '%I:%M%p').time())
             if start_time <= time < end_time:
                 return True
         except ValueError:
             # Handle the case where the time_range format is incorrect
-            raise ValueError(f"Invalid time range format: {time_range}")
+            raise ValueError(f'Invalid time range format: {time_range}')
     return False
 
 def load_prompt_data() -> dict:
@@ -109,7 +108,7 @@ def load_prompt_data() -> dict:
     Raises:
         NoValidPromptsError: If the prompts file does not contain valid data.
     """
-    with open(PROMPTS_FILE_PATH, 'r') as file:
+    with open(PROMPTS_FILE_PATH, 'r', encoding='utf-8') as file:
         prompts_db = json.load(file)
     if not prompts_db:
         raise NoValidPromptsError('The prompts file must contain valid data.')
@@ -225,7 +224,7 @@ class Prompt:
         self.type = type
         self.use_delta = use_delta
         
-        self.name = ""
+        self.name = ''
         if self.type != PromptType.TO_LIST:
             self.name = np.random.choice(list(self.hours.keys()))
         
@@ -254,7 +253,7 @@ class Prompt:
             type=PromptType[input['problem_type']],
             use_delta=input['use_delta']
         )
-        output.today=datetime.strptime(input['today'], "%B %d, %Y")
+        output.today=datetime.strptime(input['today'], '%B %d, %Y')
         output.q_time=output.today
         output.user_prompt=input['user_prompt']
         output.expected_response=input['expected_response']
@@ -268,9 +267,9 @@ class Prompt:
             dict: The expected response.
         """
         def format_hours(val: str) -> str:
-            return "Closed" if val == "" else val
+            return 'Closed' if val == '' else val
         
-        day = f"{self.q_time:%a}"
+        day = f'{self.q_time:%a}'
         out = {}
         
         if self.name:
@@ -283,13 +282,13 @@ class Prompt:
             open = {key: in_hours(self.q_time, val[day]) for key, val in self.hours.items()}
         
         out.update({
-            'time': f"{self.q_time:%Y-%m-%d %I:%M%p}",
+            'time': f'{self.q_time:%Y-%m-%d %I:%M%p}',
             'day_of_week': day,
             'opening_hours': hours,
         })
         
         if self.type != PromptType.TO_HOURS:
-            out["is_open"] = open
+            out['is_open'] = open
         
         return out
     
@@ -351,9 +350,9 @@ class Prompt:
                 return int('opening_hours' in response and (response['opening_hours'] == self.expected_response['opening_hours']) == actual_val)
             return int(expected_val)
         
-        if self.type == PromptType.TO_LIST and 'is_open' in response:
+        if self.type == PromptType.TO_LIST:
             if reported:
-                return sum(1 for val in response['is_open'].values() if val == actual_val)
+                return sum(1 for val in response['is_open'].values() if val == actual_val) if 'is_open' in response else 0
             return sum(1 for val in self.expected_response['is_open'].values() if val == expected_val)
         
         return 0
@@ -430,7 +429,7 @@ class Prompt:
         """
         return self._calculate_values(response, actual_val=False, reported=True)
 
-    def expected_positives(self) -> int:
+    def expected_positives(self, response: Optional[dict] = None) -> int:
         """
         Count the number of expected positives.
 
@@ -439,7 +438,7 @@ class Prompt:
         """
         return self._calculate_values({}, expected_val=True)
 
-    def expected_negatives(self) -> int:
+    def expected_negatives(self, response: Optional[dict] = None) -> int:
         """
         Count the number of expected negatives.
 
@@ -447,6 +446,26 @@ class Prompt:
             int: The number of expected negatives.
         """
         return self._calculate_values({}, expected_val=False)
+
+    def correct(self, response: dict) -> bool:
+        """
+        Determines whether the response is completely correct.
+
+        Args:
+            response (dict): The user response.
+
+        Returns:
+            bool: True if the response is completely correct (in its results), and False otherwise.
+        """
+        if self.type == PromptType.TO_HOURS:
+            try:
+                return self.expected_response['opening_hours'] == response['opening_hours']
+            except:
+                return False
+        try:
+            return self.expected_response['is_open'] == response['is_open']
+        except:
+            return False
 
     def to_dict(self) -> dict:
         """
@@ -483,7 +502,7 @@ class Prompt:
         Returns:
             str: The JSON string representation.
         """
-        return json.dumps(self.to_dict_presentable(), indent=4)
+        return json.dumps(self.to_dict_presentable(), indent=4, ensure_ascii=False)
     
 def get_data(hours_dict: dict, min_entries: int, max_entries: int) -> dict:
     """
@@ -498,7 +517,7 @@ def get_data(hours_dict: dict, min_entries: int, max_entries: int) -> dict:
         dict: A dictionary with a random subset of restaurant hours.
     """
     if min_entries < 1 or max_entries < min_entries:
-        raise ValueError("Invalid min_entries or max_entries values")
+        raise ValueError('Invalid min_entries or max_entries values')
 
     selected_keys = np.random.choice(list(hours_dict.keys()), np.random.randint(min_entries, max_entries + 1), replace=False)
     return {name: hours_dict[name] for name in selected_keys}
@@ -523,10 +542,3 @@ def generate_prompts(hours_data: dict, prompt_type: PromptType, use_delta: bool,
         data = get_data(hours_data, min_entries, max_entries)
         prompt_list.append(Prompt(data, prompt_type, use_delta))
     return prompt_list
-
-if __name__ == "__main__":
-    with open(f"{generate_hours.current_path()}/hours.json", 'r') as file:
-        hours_dict = json.load(file)
-    prompts = generate_prompts(hours_dict, PromptType.TO_LIST, False, 3, 5, 10)
-    for prompt in prompts:
-        print(json.dumps(prompt.to_dict_presentable(), indent=4))

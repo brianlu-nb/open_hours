@@ -1,24 +1,30 @@
-Output
+New Form of Output
 
 
 .                  |   Expected Positives  |   Expected Negatives  |    New Invented Key   |       Total       
 -------------------+-----------------------+-----------------------+-----------------------+--------------------
-Reported Positives |         1185          |           3           |           0           |       1188        
+Reported Positives |          119          |          25           |           0           |        144        
 -------------------+-----------------------+-----------------------+-----------------------+--------------------
-Reported Negatives |           1           |         2673          |           5           |       2679        
+Reported Negatives |           9           |          243          |           0           |        252        
 -------------------+-----------------------+-----------------------+-----------------------+--------------------
-.  Key Not Found   |           0           |           5           |          ---          |         5         
+.  Key Not Found   |           0           |           0           |          ---          |         0         
 -------------------+-----------------------+-----------------------+-----------------------+--------------------
-.     Total        |         1186          |         2681          |           5           |       3867       
+.     Total        |          128          |          268          |           0           |        396       
 
-Accuracy:  99.7673%
-Error: 13.999999999999966
+Accuracy:  91.4141%
+
+# Trials: 100
+# Correct: 78
+# Error: 0
+
+% Correct:  78.0000%
+% Error:   0.0000%
 
 .             |   Precision  |    Recall   |   F1 Score
 --------------+--------------+-------------+-------------
-.  Positives  |   99.7475%   |   99.9157%  |   99.8315%
+.  Positives  |   82.6389%   |   92.9688%  |   87.5000%
 --------------+--------------+-------------+-------------
-.  Negatives  |   99.7760%   |   99.7016%  |   99.7388%
+.  Negatives  |   96.4286%   |   90.6716%  |   93.4615%
 
 
 
@@ -26,6 +32,7 @@ Note: Final Total = Total Expected Positives + Total Expected Negatives
 
 Key Not Found: A key was not found in the resultant dictionary (expect all names from input to be part of the result)
  * [+/-] determined by the original dictionary's result, counts towards recall
+ * If there is an error in the json formatting, all of the expected keys are then not found
 
 New Invented Key: A key was found in the resultant dictionary, but not the original
  * [+/-] determined by the resultant dictionary's result, counts towards precision
