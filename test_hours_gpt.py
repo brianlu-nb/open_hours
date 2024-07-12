@@ -5,31 +5,33 @@ from tqdm import tqdm
 from dotenv import load_dotenv
 import os
 import json
-import hours_prompts
 from hours_prompts import Prompt, generate_prompts, PromptType as ptype
 import generate_hours
 from huggingface_hub import InferenceClient
+import prompt_templates
+from datetime import datetime
 
 USE_GPT = True
-DEBUG = False
+DEBUG = True
 
-load_dotenv()
-api_key = os.getenv('OPENAI_API_KEY')
-client = OpenAI()
-MODEL = 'gpt-4o'
-TEMPERATURE = 1.0
+if USE_GPT:
+    load_dotenv()
+    API_KEY = os.getenv('OPENAI_API_KEY')
+    client = OpenAI()
+    MODEL = 'gpt-4o'
+else:
+    client = InferenceClient(model="http://0.0.0.0:8080")
+
 
 def query(prompt: dict) -> str:
     if USE_GPT:
         with open('test_hours/hours_system_prompt.txt', 'r', encoding='utf-8') as file:
             system_prompt = file.read()
-        with open('test_hours/hours_user_prompt.txt', 'r', encoding='utf-8') as file:
-            user_prompt = file.read()
-            user_prompt = user_prompt.format(
+        user_prompt = prompt_templates.templates[prompt['problem_type']].format(
                 opening_hours=prompt['opening_hours'],
                 today=f"{prompt['today']:%B %d, %Y}",
                 user_prompt=prompt['user_prompt'],
-            )
+        )
             
         response = client.chat.completions.create(
             model=MODEL,
@@ -38,7 +40,6 @@ def query(prompt: dict) -> str:
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt}
             ],
-            temperature=TEMPERATURE,
         )
         return response.choices[0].message.content
     
@@ -129,7 +130,7 @@ def print_report(title: str, tally: dict, prompt: Prompt, response: Optional[dic
     if DEBUG:
         with open('test_hours/report_template.txt', 'r', encoding='utf-8') as file:
             out = file.read().format(
-                title = title,
+                title = f'Output as of {datetime.now():%B %d, %Y at %H:%M:%S}',
                 tp = tally['true_positives'],
                 tn = tally['true_negatives'],
                 fp = tally['false_positives'],
@@ -201,21 +202,9 @@ def run_prompts(prompts: list[Prompt]):
 
 with open(f'{generate_hours.current_path()}/hours.json', 'r', encoding='utf-8') as file:
     data = json.load(file)
-    prompts = generate_prompts(data, ptype.TO_LIST, False, 3, 5, 100)
-    run_prompts(prompts)
-# client = InferenceClient(model='http://0.0.0.0:8080')
-
-# with open(f'test_hours/_correct.json', 'w', encoding='utf-8') as file:
-#     file.write('[]')
-# with open(f'test_hours/_incorrect.json', 'w', encoding='utf-8') as file:
-#     file.write('[]')
-# with open(f'test_hours/_hours.out', 'w', encoding='utf-8') as file:
-#     file.write('')
-
-# with open(f'{generate_hours.current_path()}/hours.json', 'r', encoding='utf-8') as file:
-#     hours_dict = json.load(file)
-# run_one_prompt(ptype.TO_LIST, False, 1000, 0)
-
-# prompts = generate_prompts(prompt_type=ptype.TO_LIST, use_delta=False, num_trials=10000)
-# with open('test_hours/data-2.jsonl', 'w', encoding='utf-8') as file:
-#     file.writelines([f'{json.dumps(prompt.to_dict_presentable(), ensure_ascii=False)}\n' for prompt in prompts])
+    prompt_lists = [generate_prompts(data, ptype.TO_HOURS, False, 3, 5, 10)]
+    prompt_lists += [generate_prompts(data, ptype.TO_LIST, False, 3, 5, 10)]
+    prompt_lists += [generate_prompts(data, ptype.TO_BOOL, False, 3, 5, 10)]
+    # print(prompts[0].expected_response)
+    for prompts in prompt_lists:
+        run_prompts(prompts)
