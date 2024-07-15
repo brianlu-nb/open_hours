@@ -522,7 +522,7 @@ def get_data(hours_dict: dict, min_entries: int, max_entries: int) -> dict:
     selected_keys = np.random.choice(list(hours_dict.keys()), np.random.randint(min_entries, max_entries + 1), replace=False)
     return {name: hours_dict[name] for name in selected_keys}
 
-def generate_prompts(hours_data: dict, prompt_type: PromptType, use_delta: bool, min_entries: int, max_entries: int, num_trials: int) -> list[Prompt]:
+def generate_prompts(hours_data: dict, prompt_type: Optional[PromptType] = None, use_delta: Optional[bool] = None, min_entries: int = 1, max_entries: int = 1, num_trials: int = 1) -> list[Prompt]:
     """
     Generate a list of Prompt instances based on the given parameters.
 
@@ -537,8 +537,14 @@ def generate_prompts(hours_data: dict, prompt_type: PromptType, use_delta: bool,
     Returns:
         list[Prompt]: A list of generated Prompt instances.
     """
+    random_prompt_type = prompt_type is None
+    random_delta = use_delta is None
     prompt_list = []
     for _ in range(num_trials):
         data = get_data(hours_data, min_entries, max_entries)
+        if random_prompt_type:
+            prompt_type = list(PromptType)[np.random.randint(0, 3)]
+        if random_delta:
+            use_delta = np.random.rand() < 0.5
         prompt_list.append(Prompt(data, prompt_type, use_delta))
     return prompt_list

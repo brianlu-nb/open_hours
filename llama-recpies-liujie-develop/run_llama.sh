@@ -51,8 +51,8 @@ elif [ "${job}" == "llama3_multitask" ]; then
   --num_train_epochs 2 \
   --learning_rate 5e-6 \
   --dataset open_hours_dataset \
-  --train_file /root/brianlu/test_hours/data/Current_Run_07-05-2024T20-39-56/train.jsonl \
-  --eval_file /root/brianlu/test_hours/data/Current_Run_07-05-2024T20-39-56/test.jsonl \
+  --train_file /root/brianlu/test_hours/data/Current_Run_2024_07_12_23_54_43/train.jsonl \
+  --eval_file /root/brianlu/test_hours/data/Current_Run_2024_07_12_23_54_43/test.jsonl \
   --bf16 True \
   --tf32 True \
   --use_flashatt_2 True \

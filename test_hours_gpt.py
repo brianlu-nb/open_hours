@@ -11,7 +11,7 @@ from huggingface_hub import InferenceClient
 import prompt_templates
 from datetime import datetime
 
-USE_GPT = True
+USE_GPT = False
 DEBUG = True
 
 if USE_GPT:
@@ -27,7 +27,12 @@ def query(prompt: dict) -> str:
     if USE_GPT:
         with open('test_hours/hours_system_prompt.txt', 'r', encoding='utf-8') as file:
             system_prompt = file.read()
-        user_prompt = prompt_templates.templates[prompt['problem_type']].format(
+            
+        if prompt['use_delta']:
+            user_prompt_template = prompt_templates.templates_timed[prompt['problem_type']]
+        else:
+            user_prompt_template = prompt_templates.templates[prompt['problem_type']]
+        user_prompt = user_prompt_template.format(
                 opening_hours=prompt['opening_hours'],
                 today=f"{prompt['today']:%B %d, %Y}",
                 user_prompt=prompt['user_prompt'],
@@ -130,7 +135,7 @@ def print_report(title: str, tally: dict, prompt: Prompt, response: Optional[dic
     if DEBUG:
         with open('test_hours/report_template.txt', 'r', encoding='utf-8') as file:
             out = file.read().format(
-                title = f'Output as of {datetime.now():%B %d, %Y at %H:%M:%S}',
+                title = title,
                 tp = tally['true_positives'],
                 tn = tally['true_negatives'],
                 fp = tally['false_positives'],
@@ -155,9 +160,9 @@ def print_report(title: str, tally: dict, prompt: Prompt, response: Optional[dic
                 acc = accuracy * 100,
                 num_trials = tally['count'],
                 correct = tally['correct'],
-                err = tally['individual_errors'],
+                err = tally['prompt_errors'],
                 correctp = tally['correct'] / tally['count'] * 100,
-                errp = tally['individual_errors'] / tally['count'] * 100,
+                errp = tally['prompt_errors'] / tally['count'] * 100,
             )
 
         with open('test_hours/report.out', 'w', encoding='utf-8') as file:
@@ -191,7 +196,7 @@ def run_prompts(prompts: list[Prompt]):
                 response_dict = json.loads(response)
             except json.JSONDecodeError as _:
                 response_dict = None
-            print_report('New Form of Output', tally, prompt, response_dict)
+            print_report(f'Output as of {datetime.now():%B %d, %Y at %H:%M:%S}', tally, prompt, response_dict)
             pbar.set_postfix(tally['postfix'])
             pbar.update()
         
@@ -202,9 +207,7 @@ def run_prompts(prompts: list[Prompt]):
 
 with open(f'{generate_hours.current_path()}/hours.json', 'r', encoding='utf-8') as file:
     data = json.load(file)
-    prompt_lists = [generate_prompts(data, ptype.TO_HOURS, False, 3, 5, 10)]
-    prompt_lists += [generate_prompts(data, ptype.TO_LIST, False, 3, 5, 10)]
-    prompt_lists += [generate_prompts(data, ptype.TO_BOOL, False, 3, 5, 10)]
+    prompt_lists = [generate_prompts(data, min_entries=3, max_entries=5, num_trials=100)]
     # print(prompts[0].expected_response)
     for prompts in prompt_lists:
         run_prompts(prompts)

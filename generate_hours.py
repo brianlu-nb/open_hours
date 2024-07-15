@@ -9,6 +9,7 @@ from tqdm import tqdm
 import numpy as np
 import hours_prompts
 from hours_prompts import PromptType as ptype
+from typing import Optional
 
 # Constants
 PROMPTS_FILE_PATH = 'test_hours/hours_prompts.json'
@@ -162,7 +163,7 @@ def generate_hours(num_entries: int) -> dict:
             pbar.update()
     return hours_dict
 
-def generate_data(problem_type: ptype, use_delta: bool, num_entries: int, splits: tuple[float, float, float]) -> list:
+def generate_data(num_entries: int, splits: tuple[float, float, float], problem_type: Optional[ptype] = None, use_delta: Optional[bool] = None) -> list:
     """
     Generate data and split it into training, testing, and evaluation sets.
 
@@ -191,7 +192,14 @@ def generate_data(problem_type: ptype, use_delta: bool, num_entries: int, splits
     
     for i, left, right, split in zip(range(3), split_indices, split_indices[1:], split_names):
         hours_split = dict(list(hours_dict.items())[left:right])
-        output = hours_prompts.generate_prompts(hours_split, problem_type, use_delta, 3, 5, (right - left) * 10)
+        output = hours_prompts.generate_prompts(
+            hours_split, 
+            prompt_type=problem_type, 
+            use_delta=use_delta, 
+            min_entries=5, 
+            max_entries=10, 
+            num_trials=(right - left) * 10
+        )
         outputs[i] = output.copy()
         with open(f'{cur_path}/prompts_{split}.json', 'w', encoding='utf-8') as file:
             json.dump([row.to_dict_presentable() for row in output], file, indent=4, ensure_ascii=False)
@@ -216,5 +224,5 @@ def clean_data():
                     jsonl_file.write(f'{json.dumps(line, ensure_ascii=False)}\n')
 
 if __name__ == "__main__":
-    generate_data(ptype.TO_LIST, False, 64000, (0.8, 0.1, 0.1))
+    generate_data(64000, (0.8, 0.1, 0.1))
     clean_data()
