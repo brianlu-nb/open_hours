@@ -48,7 +48,7 @@ elif [ "${job}" == "llama3_multitask" ]; then
   --model_name_or_path meta-llama/Meta-Llama-3-8B-Instruct \
   --output_dir exp/llama3_open_hours \
   --do_train \
-  --num_train_epochs 2 \
+  --num_train_epochs 3 \
   --learning_rate 5e-6 \
   --dataset open_hours_dataset \
   --train_file /root/brianlu/test_hours/data/Current_Run_2024_07_12_23_54_43/train.jsonl \
@@ -70,7 +70,7 @@ elif [ "${job}" == "llama3_multitask" ]; then
   --save_total_limit 1 \
   --overwrite_output_dir \
   --evaluation_strategy steps \
-  --eval_steps 50 \
+  --eval_steps 100 \
   --shuffle_ref \
   --deepspeed ./configs/ds_2_hf_offload.json
 elif [ "${job}" == "llama2_content_quality" ]; then

@@ -84,7 +84,7 @@ Please output in the following json format:
     "name": "Restaurand Name",
     "time": "%Y-%m-%d %I:%M%p",
     "day_of_week": "%a",
-    "opening_hours": "%I:%M%p-%I:%M%p"/"%I:%M%p-%I:%M%p, %I:%M%p-%I:%M%p"/"Closed"
+    "opening_hours": "%I:%M%p-%I:%M%p"/"%I:%M%p-%I:%M%p, %I:%M%p-%I:%M%p"/"Closed",
     "is_open": true/false
 }}
 Please give your response below:
@@ -109,16 +109,8 @@ Please output in the following json format:
 {{
     "time": "%Y-%m-%d %I:%M%p",
     "day_of_week": "%a",
-    "opening_hours": {{
-        "Restaurant Name 1": "%I:%M%p-%I:%M%p",
-        "Restaurant Name 2": "%I:%M%p-%I:%M%p, %I:%M%p-%I:%M%p",
-        "Restaurant Name 3": "Closed",
-        ...
-    }},
-    "is_open": {{
-        "Restaurant Name 1": true/false,
-        ...
-    }}
+    "opening_hours": "%I:%M%p-%I:%M%p"/"%I:%M%p-%I:%M%p, %I:%M%p-%I:%M%p"/"Closed",
+    "is_open": true/false
 }}
 Please give your response below:
 ''')
