@@ -12,8 +12,8 @@ from hours_prompts import PromptType as ptype
 from typing import Optional
 
 # Constants
-PROMPTS_FILE_PATH = 'test_hours/hours_prompts.json'
-DATA_DIR = 'test_hours/data'
+PROMPTS_FILE_PATH = 'open_hours/hours_prompts.json'
+DATA_DIR = 'open_hours/data'
 
 # Load environment variables and initialize OpenAI client
 load_dotenv()
@@ -21,7 +21,7 @@ client = OpenAI()
 
 def current_path() -> str:
     """
-    Get the current path in the 'test_hours/data' directory that starts with 'C'.
+    Get the current path in the 'open_hours/data' directory that starts with 'C'.
     
     Returns:
         str: The full path of the current directory starting with 'C'. Returns an empty string if not found.
@@ -180,12 +180,14 @@ def generate_data(num_entries: int, splits: tuple[float, float, float], problem_
 
     cur_path = current_path()
     if cur_path:
-        shutil.move(cur_path, f"test_hours/data/{cur_path.split('Current_')[1]}")
+        shutil.move(cur_path, f"open_hours/data/{cur_path.split('Current_')[1]}")
 
-    cur_path = f'test_hours/data/Current_Run_{datetime.now():%Y_%m_%d_%H_%M_%S}'
+    cur_path = f'open_hours/data/Current_Run_{datetime.now():%Y_%m_%d_%H_%M_%S}'
     os.mkdir(cur_path)
     
     hours_dict = generate_hours(num_entries // 10)
+    with open(f'{cur_path}/hours.json', 'r') as file:
+        hours_dict = json.load(file)
     split_indices = [int(len(hours_dict) * sum(splits[:i])) for i in range(len(splits) + 1)]
     split_names = ['train', 'test', 'eval']
     outputs = ['', '', '']

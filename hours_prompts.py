@@ -4,7 +4,7 @@ from enum import Enum
 from typing import Optional, Literal
 import numpy as np
 
-PROMPTS_FILE_PATH = 'test_hours/hours_prompts.json'
+PROMPTS_FILE_PATH = 'open_hours/hours_prompts.json'
 
 class NoValidPromptsError(Exception):
     pass
@@ -542,9 +542,21 @@ def generate_prompts(hours_data: dict, prompt_type: Optional[PromptType] = None,
     prompt_list = []
     for _ in range(num_trials):
         data = get_data(hours_data, min_entries, max_entries)
-        if random_prompt_type:
+        
+        if random_prompt_type and random_delta:
+            types = [
+                # (PromptType.TO_BOOL, False),
+                # (PromptType.TO_HOURS, False),
+                # (PromptType.TO_LIST, False),
+                # (PromptType.TO_BOOL, True),
+                # (PromptType.TO_HOURS, True),
+                (PromptType.TO_LIST, True),
+            ]
+            prompt_type, use_delta = types[np.random.randint(0, len(types))]
+        elif random_prompt_type:
             prompt_type = list(PromptType)[np.random.randint(0, 3)]
-        if random_delta:
+        elif random_delta:
             use_delta = np.random.rand() < 0.5
+                    
         prompt_list.append(Prompt(data, prompt_type, use_delta))
     return prompt_list

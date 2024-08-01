@@ -1,4 +1,5 @@
-from hours_prompts import PromptType as ptype
+from multipledispatch import dispatch
+from open_hours.hours_prompts import PromptType as ptype
 
 template_to_list = (
 '''Given a list of weekly restaurant hours and some user inquiry including an exact date and time, determine whether each of the restaurants are open then.
@@ -163,6 +164,8 @@ Please output in the following json format:
 Please give your response below:
 ''')
 
+system_prompt = "You are a time management assistant performing time related tasks."
+
 templates = {
     ptype.TO_BOOL: template_to_bool,
     ptype.TO_HOURS: template_to_hours,
@@ -174,5 +177,33 @@ templates_timed = {
     ptype.TO_HOURS: template_to_hours_timed,
     ptype.TO_LIST: template_to_list_timed
 }
+
+format_llama = (
+'''<|start_header_id|>system<|end_header_id|>
+
+{system_prompt}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+{user_prompt}<|eot_id|><|start_header_id|>assisstant<|end_header_id|>
+
+''')
+
+@dispatch(str, str)
+def to_llama_format(system_prompt: str, user_prompt: str) -> str:
+    return format_llama.format(system_prompt = system_prompt, user_prompt = user_prompt)
+
+@dispatch(dict)
+def to_llama_format(prompt: dict) -> str:
+    if prompt['use_delta']:
+        user_prompt_template = templates_timed[prompt['problem_type']]
+    else:
+        user_prompt_template = templates[prompt['problem_type']]
+    user_prompt = user_prompt_template.format(
+            opening_hours=prompt['opening_hours'],
+            today=prompt['today'],
+            user_prompt=prompt['user_prompt'],
+    )  
+    return format_llama.format(system_prompt = system_prompt, user_prompt = user_prompt)
+
+
 
 # print(template_to_bool.format(opening_hours=1, today=2, user_prompt=3))
