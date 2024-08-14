@@ -1,5 +1,5 @@
 from multipledispatch import dispatch
-from open_hours.hours_prompts import PromptType as ptype
+from hours_prompts import PromptType as ptype
 
 template_to_list = (
 '''Given a list of weekly restaurant hours and some user inquiry including an exact date and time, determine whether each of the restaurants are open then.
@@ -205,5 +205,5 @@ def to_llama_format(prompt: dict) -> str:
     return format_llama.format(system_prompt = system_prompt, user_prompt = user_prompt)
 
 
-
-# print(template_to_bool.format(opening_hours=1, today=2, user_prompt=3))
+if __name__ == '__main__':
+    print(template_to_bool.format(opening_hours=1, today=2, user_prompt=3))
