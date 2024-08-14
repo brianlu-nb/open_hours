@@ -1,6 +1,5 @@
 from torch.utils.data import Dataset
 from datetime import datetime
-from open_hours.prompt_templates import to_llama_format
 import json
 import random
 import sys
@@ -12,7 +11,7 @@ EOT = "<|eot_id|>"
 
 
 def process_dialog_to_single_turn(data, tokenizer):
-    prompt = to_llama_format(data)
+    prompt = prompt_templates.to_llama_format(data)
     output = json.dumps(data["expected_response"], indent=4)
     return process_dialog([prompt, output], tokenizer, min_turn_idx=0)
 
@@ -84,6 +83,7 @@ class OpenHoursDataset(Dataset):
         
 if __name__ == "__main__":
     from transformers import AutoTokenizer
+    import open_hours.prompt_templates
     tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3-8B")
     
     from dataclasses import dataclass
