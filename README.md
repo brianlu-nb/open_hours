@@ -28,3 +28,7 @@ Hours data are randomly pulled from a json file after generation to create promp
 3. Given a date and a time, return whether each of the restaurants are open in the form of a dictionary (TO_LIST)
 
 Each problem's time information can be directly given as a date and time, or the date can be given in relative terms (i.e. "tomorrow" after giving a date).
+
+## Global Variables
+
+The [hours_inference](hours_inference.py) script includes global variables ```USE_GPT```, which allows for OpenAI integration so long as the environmental variable is set (currently ```true```), and ```USE_DEBUG```, which displays evaluated statistics on inferences as given by [hours_debug.py](hours_debug.py).
