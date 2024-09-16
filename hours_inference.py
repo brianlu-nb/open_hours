@@ -12,7 +12,7 @@ from hours_debug import Report
 import prompt_templates
 
 USE_GPT = True
-DEBUG = True
+DEBUG = False
 
 load_dotenv()
 API_KEY = os.getenv('OPENAI_API_KEY')
